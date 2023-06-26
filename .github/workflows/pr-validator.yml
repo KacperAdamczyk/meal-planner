@@ -2,25 +2,25 @@ name: PR Validator
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-      name: Checkout
-    - uses: pnpm/action-setup@v2
-      name: Install pnpm
-      with:
-        version: latest
-    - uses: actions/setup-node@v3
-      name: Install Node.js
-      with:
-        node-version: 20.x
-        cache: 'pnpm'
-    - run: pnpm install --frozen-lockfile
-    - run: pnpm run lint
-    - run: pnpm run check-format
+      - uses: actions/checkout@v3
+        name: Checkout
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: latest
+      - uses: actions/setup-node@v3
+        name: Install Node.js
+        with:
+          node-version: 20.x
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint
+      - run: pnpm run check-format
