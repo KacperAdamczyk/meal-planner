@@ -8,4 +8,5 @@ export const env = createEnv({
     SUPABASE_ANON_KEY: z.string().min(1),
   },
   experimental__runtimeEnv: {},
+  skipValidation: process.env.CI === 'true',
 });
