@@ -1,44 +1,58 @@
-import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
-import { revalidatePath } from 'next/cache';
-import { cookies } from 'next/headers';
+import { Provider } from '@supabase/supabase-js';
 import { redirect } from 'next/navigation';
 import { env } from '@/env.js';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { serverActionDb } from '@/db/supabase';
+import { Button } from '@/components/ui/button';
 
 export default async function Login() {
-  const handleSignIn = async () => {
+  const handleSignIn = async (formData: FormData) => {
     'use server';
+    const provider = formData.get('provider');
 
-    const supabase = createServerActionClient(
-      { cookies },
-      {
-        supabaseUrl: env.SUPABASE_URL,
-        supabaseKey: env.SUPABASE_ANON_KEY,
-      },
-    );
+    if (typeof provider !== 'string') {
+      throw new Error('Provider is not a string');
+    }
+
+    const supabase = serverActionDb();
     const {
       data: { url },
     } = await supabase.auth.signInWithOAuth({
-      provider: 'discord',
+      provider: provider as Provider,
       options: { redirectTo: `${env.BASE_URL}/auth/callback` },
     });
-    console.log('signed in', url);
 
     if (url) {
       redirect(url);
     }
   };
 
-  const handleSignOut = async () => {
-    'use server';
-    const supabase = createServerActionClient({ cookies });
-    await supabase.auth.signOut();
-    revalidatePath('/');
-  };
-
   return (
-    <form>
-      <button formAction={handleSignIn}>Sign in</button>
-      <button formAction={handleSignOut}>Sign out</button>
-    </form>
+    <div className="flex flex-col items-center justify-center">
+      <Card className="mt-10 w-2/12">
+        <CardHeader>
+          <CardTitle>Login</CardTitle>
+          <CardDescription>Select login provider</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form action={handleSignIn}>
+            <Button
+              name="provider"
+              value="discord"
+              type="submit"
+              className="w-full bg-[#7289da]"
+            >
+              Discord
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

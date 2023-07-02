@@ -4,6 +4,7 @@ import './env.js';
 const nextConfig = {
   experimental: {
     serverActions: true,
+    typedRoutes: true,
   },
 };
 
