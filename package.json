@@ -26,7 +26,7 @@
     "encoding": "^0.1.13",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
-    "lucide-react": "^0.261.0",
+    "lucide-react": "^0.262.0",
     "next": "13.4.10",
     "postcss": "8.4.26",
     "postgres": "^3.3.5",
