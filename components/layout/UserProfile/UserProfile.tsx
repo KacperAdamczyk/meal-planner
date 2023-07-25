@@ -1,8 +1,9 @@
 import { FC } from 'react';
-import { serverActionDb, serverComponentDb } from '@/db/supabase';
 import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { LogOut } from 'lucide-react';
+import { serverComponentDb } from '@/db/supabase/serverComponentDb';
+import { serverActionDb } from '@/db/supabase/serverActionDb';
 
 export const UserProfile: FC = async () => {
   const supabase = serverComponentDb();

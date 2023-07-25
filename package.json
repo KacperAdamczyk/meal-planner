@@ -48,7 +48,6 @@
     "shadcn-ui": "^0.3.0"
   },
   "prettier": {
-    "singleQuote": true,
-    "trailingComma": "all"
+    "singleQuote": true
   }
 }

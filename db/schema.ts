@@ -8,7 +8,7 @@ export const users = authSchema.table('users', {
 });
 
 export const pilots = pgTable('planes', {
-  id: uuid('id').primaryKey(),
+  id: uuid('id').primaryKey().defaultRandom(),
   name: text('name').notNull(),
   createdBy: uuid('created_by')
     .references(() => users.id)
@@ -16,7 +16,7 @@ export const pilots = pgTable('planes', {
 });
 
 export const profiles = pgTable('profiles', {
-  id: uuid('id').primaryKey(),
+  id: uuid('id').primaryKey().defaultRandom(),
   name: text('name').notNull(),
   userId: uuid('user_id')
     .references(() => users.id)

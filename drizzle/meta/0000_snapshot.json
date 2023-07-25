@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "51a96274-8da7-4a18-9564-c28f82d930d6",
+  "id": "e8cb87b5-89d3-446c-ad64-fddb9db187b3",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "planes": {
@@ -12,7 +12,8 @@
           "name": "id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "name": {
           "name": "name",
@@ -54,7 +55,8 @@
           "name": "id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "name": {
           "name": "name",
