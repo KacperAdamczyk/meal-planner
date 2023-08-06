@@ -39,8 +39,8 @@ dependencies:
     specifier: ^2.0.0
     version: 2.0.0
   drizzle-orm:
-    specifier: ^0.27.0
-    version: 0.27.0(postgres@3.3.5)
+    specifier: ^0.28.0
+    version: 0.28.0(postgres@3.3.5)
   encoding:
     specifier: ^0.1.13
     version: 0.1.13
@@ -1874,8 +1874,8 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.27.0(postgres@3.3.5):
-    resolution: {integrity: sha512-LGiJ0icB+wQwgbSCOvAjONY8Ec6G/EDzQQP5PmUaQYeI9OqgpVKHC2T1fFIbvk5dabWsbokJ5NOciVAxriStig==}
+  /drizzle-orm@0.28.0(postgres@3.3.5):
+    resolution: {integrity: sha512-iNNNtWM6YwXWI5vAkgFx+FPtZvo/ZnLh8uZV1e7+Alhan5ZS0q3tqbGFP8uCMngW+hNbJqsaHsxPw6AN87urmw==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
