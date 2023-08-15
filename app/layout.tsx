@@ -11,8 +11,8 @@ const notoSans = Noto_Sans({
 });
 
 export const metadata = {
-  title: 'Logbook',
-  description: 'Pilot Logbook',
+  title: 'Meal planner',
+  description: 'Meal planner',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
