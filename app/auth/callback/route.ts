@@ -1,5 +1,5 @@
-import { type NextRequest, NextResponse } from 'next/server';
 import { routeHandlerDb } from '@/db/supabase/routeHandlerDb';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET({ nextUrl }: NextRequest) {
   const code = nextUrl.searchParams.get('code');
