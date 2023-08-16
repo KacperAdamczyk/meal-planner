@@ -1,54 +1,11 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "e8cb87b5-89d3-446c-ad64-fddb9db187b3",
+  "id": "5574d323-4805-48a2-877d-9fd685777ab9",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
-    "planes": {
-      "name": "planes",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
-        },
-        "name": {
-          "name": "name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created_by": {
-          "name": "created_by",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "planes_created_by_users_id_fk": {
-          "name": "planes_created_by_users_id_fk",
-          "tableFrom": "planes",
-          "tableTo": "users",
-          "columnsFrom": [
-            "created_by"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "profiles": {
-      "name": "profiles",
+    "calendars": {
+      "name": "calendars",
       "schema": "",
       "columns": {
         "id": {
@@ -73,9 +30,9 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "profiles_user_id_users_id_fk": {
-          "name": "profiles_user_id_users_id_fk",
-          "tableFrom": "profiles",
+        "calendars_user_id_users_id_fk": {
+          "name": "calendars_user_id_users_id_fk",
+          "tableFrom": "calendars",
           "tableTo": "users",
           "columnsFrom": [
             "user_id"
@@ -87,6 +44,84 @@
           "onUpdate": "no action"
         }
       },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "shared_calendars": {
+      "name": "shared_calendars",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "calendar_id": {
+          "name": "calendar_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "shared_calendars_calendar_id_calendars_id_fk": {
+          "name": "shared_calendars_calendar_id_calendars_id_fk",
+          "tableFrom": "shared_calendars",
+          "tableTo": "calendars",
+          "columnsFrom": [
+            "calendar_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "shared_calendars_user_id_users_id_fk": {
+          "name": "shared_calendars_user_id_users_id_fk",
+          "tableFrom": "shared_calendars",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "users": {
+      "name": "users",
+      "schema": "auth",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     }

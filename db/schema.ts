@@ -7,17 +7,19 @@ export const users = authSchema.table('users', {
   email: varchar('email'),
 });
 
-export const pilots = pgTable('planes', {
+export const calendars = pgTable('calendars', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: text('name').notNull(),
-  createdBy: uuid('created_by')
+  userId: uuid('user_id')
     .references(() => users.id)
     .notNull(),
 });
 
-export const profiles = pgTable('profiles', {
+export const sharedCalendars = pgTable('shared_calendars', {
   id: uuid('id').primaryKey().defaultRandom(),
-  name: text('name').notNull(),
+  calendarId: uuid('calendar_id')
+    .references(() => calendars.id)
+    .notNull(),
   userId: uuid('user_id')
     .references(() => users.id)
     .notNull(),
