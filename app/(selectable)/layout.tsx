@@ -7,7 +7,7 @@ export default function Layout({ children }: PropsWithChildren) {
       <div className="m-4 flex justify-center">
         <CalendarSelector />
       </div>
-      <div>{children}</div>
+      <div className="m-auto max-w-7xl">{children}</div>
     </section>
   );
 }

@@ -6,7 +6,7 @@ import { serverComponentDb } from '@/db/supabase/serverComponentDb';
 import { serverActionDb } from '@/db/supabase/serverActionDb';
 import { ModeToggle } from '@/components/composite/ModeToggle';
 
-export const UserProfile: FC = async () => {
+export const UserOptions: FC = async () => {
   const supabase = serverComponentDb();
   const {
     data: { user },
@@ -20,16 +20,16 @@ export const UserProfile: FC = async () => {
     redirect('/login');
   };
 
-  if (!user) {
-    return null;
-  }
-
   return (
     <form action={handleSignOut} className="flex items-center gap-x-0.5">
-      <span className="hidden px-2 text-xs sm:inline">{user.email}</span>
-      <Button variant="outline" size="icon" type="submit">
-        <LogOut className="h-4 w-4" />
-      </Button>
+      {!!user && (
+        <>
+          <span className="hidden px-2 text-xs sm:inline">{user.email}</span>
+          <Button variant="outline" size="icon" type="submit">
+            <LogOut className="h-4 w-4" />
+          </Button>
+        </>
+      )}
       <ModeToggle />
     </form>
   );

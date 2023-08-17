@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from 'react';
-import { UserProfile } from '@/components/layout/UserProfile/UserProfile';
+import { UserOptions } from '@/components/layout/UserOptions/UserOptions';
 import { Soup } from 'lucide-react';
 
 export const Header: FC<PropsWithChildren> = async () => (
@@ -9,7 +9,7 @@ export const Header: FC<PropsWithChildren> = async () => (
         <span>Meal Planner</span>
         <Soup />
       </div>
-      <UserProfile />
+      <UserOptions />
     </div>
   </header>
 );
