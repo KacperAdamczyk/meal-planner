@@ -3,13 +3,18 @@ import { createCalendarAction } from '@/actions/createCalendarAction';
 import { InputField } from '@/components/composite/fields';
 import { Button } from '@/components/ui/button';
 import { CreateCalendar } from '@/schemas/createCalendarSchema';
+import { revalidatePath } from 'next/cache';
 import { useRouter } from 'next/navigation';
 import { FC, useMemo, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 
 export const CalendarForm: FC = () => {
   const router = useRouter();
-  const { register, handleSubmit } = useForm<CreateCalendar>({
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<CreateCalendar>({
     defaultValues: {
       name: '',
       shared: [],
@@ -24,6 +29,7 @@ export const CalendarForm: FC = () => {
           const calendar = await createCalendarAction(data);
 
           router.push(`/${calendar.id}`);
+          revalidatePath('/[calendarId]');
         }),
       ),
     [handleSubmit, router],
@@ -36,7 +42,7 @@ export const CalendarForm: FC = () => {
         placeholder="Calendar name"
         {...register('name')}
       />
-      <Button type="submit" disabled={isPending}>
+      <Button type="submit" disabled={isSubmitting}>
         Create
       </Button>
     </form>

@@ -1,26 +1,49 @@
 'use client';
 
-import { Combobox } from '@/components/composite/Combobox';
+import { Combobox, ComboboxOption } from '@/components/composite/Combobox';
 import { Button } from '@/components/ui/button';
+import { Calendar } from '@/db/schema';
 import { Plus } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 
-export const CalendarSelector: FC = () => {
+interface Props {
+  selectedCalendarId?: string;
+  calendars: Calendar[];
+}
+
+export const CalendarSelector: FC<Props> = ({
+  selectedCalendarId,
+  calendars,
+}) => {
   const router = useRouter();
+
   const onClick = useCallback(() => {
     router.push('/new');
   }, [router]);
 
+  const onChange = useCallback(
+    (id: string | undefined) => {
+      if (id) {
+        router.push(`/${id}`);
+      } else {
+        router.push('/');
+      }
+    },
+    [router],
+  );
+
+  const options = useMemo<ComboboxOption[]>(
+    () => calendars.map(({ id, name }) => ({ label: name, value: id })),
+    [calendars],
+  );
+
   return (
     <div className="flex gap-2 align-middle">
       <Combobox
-        options={
-          [
-            // { label: 'Test', value: 'test' },
-            // { label: 'Test2', value: 'test2' },
-          ]
-        }
+        value={selectedCalendarId}
+        onChange={onChange}
+        options={options}
         placeholder="Select calendar"
         inputPlaceholder="Search for calendar"
         notFoundText="Calendar not found"

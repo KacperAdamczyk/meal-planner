@@ -18,13 +18,15 @@ import {
 } from '@/components/ui/popover';
 import { useState } from 'react';
 
-interface ComboboxOption {
+export interface ComboboxOption {
   label: string;
   value: string;
   icon?: LucideIcon;
 }
 
-interface ComboboxProps {
+export interface ComboboxProps {
+  value: string | undefined;
+  onChange: (value: string | undefined) => void;
   options: ComboboxOption[];
   placeholder: string;
   inputPlaceholder: string;
@@ -33,6 +35,8 @@ interface ComboboxProps {
 }
 
 export function Combobox({
+  value,
+  onChange,
   options,
   placeholder,
   inputPlaceholder,
@@ -40,7 +44,6 @@ export function Combobox({
   emptyText,
 }: ComboboxProps) {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState('');
   const selectedOption = options.find((option) => option.value === value);
 
   return (
@@ -65,8 +68,9 @@ export function Combobox({
               options.map((option) => (
                 <CommandItem
                   key={option.value}
+                  value={option.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? '' : currentValue);
+                    onChange(currentValue === value ? undefined : currentValue);
                     setOpen(false);
                   }}
                 >

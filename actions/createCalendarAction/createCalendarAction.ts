@@ -1,6 +1,6 @@
 'use server';
 
-import { createCalendar } from '@/db/actions/createCalendar/createCalendar';
+import { createCalendar } from '@/db/actions/createCalendar';
 import { Calendar } from '@/db/schema';
 import { getUser, serverActionDb } from '@/db/supabase';
 import {
