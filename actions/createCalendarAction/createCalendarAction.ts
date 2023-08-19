@@ -7,7 +7,6 @@ import {
   CreateCalendar,
   createCalendarSchema,
 } from '@/schemas/createCalendarSchema';
-import { FieldValues } from 'react-hook-form';
 
 export const createCalendarAction = async (
   data: CreateCalendar,

@@ -31,6 +31,8 @@ export const sharedCalendars = pgTable('shared_calendars', {
     .notNull(),
 });
 
+export type SharedCalendar = InferModel<typeof sharedCalendars>;
+
 export const mealTypes = pgTable('meal_types', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: text('name').notNull(),

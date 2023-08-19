@@ -14,7 +14,7 @@ export default async function Layout({
   children,
 }: PropsWithChildren<Props>) {
   const user = await getUser(serverComponentDb);
-  const calendars = await getUserCalendars(user);
+  const { calendars, sharedCalendars } = await getUserCalendars(user);
 
   return (
     <section>

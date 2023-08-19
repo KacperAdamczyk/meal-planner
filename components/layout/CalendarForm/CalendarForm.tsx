@@ -16,6 +16,12 @@ import { FormProvider, useForm } from 'react-hook-form';
 const mapUser: MultiselectFieldProps<CreateCalendar, 'shared'>['map'] = (
   value,
 ) => ({ userId: value });
+const columns: MultiselectFieldProps<CreateCalendar, 'shared'>['columns'] = [
+  {
+    label: 'User',
+    key: 'userId',
+  },
+];
 
 interface Props {
   sharableUsers: User[];
@@ -76,6 +82,7 @@ export const CalendarForm: FC<Props> = ({ sharableUsers }) => {
           placeholder="Select user"
           options={options}
           map={mapUser}
+          columns={columns}
         />
         <Button type="submit" disabled={isSubmitting}>
           Create

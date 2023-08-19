@@ -1,10 +1,16 @@
 import { db } from '@/db';
-import { Calendar, User, calendars, mealTypes } from '@/db/schema';
+import {
+  Calendar,
+  User,
+  calendars,
+  mealTypes,
+  sharedCalendars,
+} from '@/db/schema';
 import { CreateCalendar } from '@/schemas/createCalendarSchema';
 
 export const createCalendar = (
   user: User,
-  { name }: CreateCalendar,
+  { name, shared }: CreateCalendar,
 ): Promise<Calendar> => {
   return db.transaction(async (tx) => {
     const [calendar] = await tx
@@ -14,6 +20,12 @@ export const createCalendar = (
         userId: user.id,
       })
       .returning();
+
+    await tx
+      .insert(sharedCalendars)
+      .values(
+        shared.map(({ userId }) => ({ calendarId: calendar.id, userId })),
+      );
 
     await tx.insert(mealTypes).values([
       { name: 'Breakfast', calendarId: calendar.id },
