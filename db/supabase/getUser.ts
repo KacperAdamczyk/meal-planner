@@ -12,13 +12,16 @@ type Handler =
 
 export const getUser = async (handler: Handler): Promise<User> => {
   const {
-    data: { user },
+    data: { session },
     error,
-  } = await handler().auth.getUser();
+  } = await handler().auth.getSession();
 
-  if (error || !user) {
+  if (error || !session?.user) {
     throw error;
   }
 
-  return user as User;
+  return {
+    ...session.user,
+    email: session.user.email ?? null,
+  };
 };

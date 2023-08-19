@@ -1,26 +1,41 @@
 'use client';
 import { createCalendarAction } from '@/actions/createCalendarAction';
-import { InputField } from '@/components/composite/fields';
+import { InputField } from '@/components/fields';
+import {
+  MultiselectField,
+  MultiselectFieldProps,
+} from '@/components/fields/MultiselectField';
 import { Button } from '@/components/ui/button';
+import { User } from '@/db/schema';
 import { CreateCalendar } from '@/schemas/createCalendarSchema';
 import { revalidatePath } from 'next/cache';
 import { useRouter } from 'next/navigation';
 import { FC, useMemo, useTransition } from 'react';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 
-export const CalendarForm: FC = () => {
+const mapUser: MultiselectFieldProps<CreateCalendar, 'shared'>['map'] = (
+  value,
+) => ({ userId: value });
+
+interface Props {
+  sharableUsers: User[];
+}
+
+export const CalendarForm: FC<Props> = ({ sharableUsers }) => {
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = useForm<CreateCalendar>({
+  const form = useForm<CreateCalendar>({
     defaultValues: {
       name: '',
       shared: [],
     },
   });
-  const [isPending, startTransition] = useTransition();
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = form;
+
+  const [, startTransition] = useTransition();
 
   const onSubmit = useMemo(
     () =>
@@ -35,16 +50,37 @@ export const CalendarForm: FC = () => {
     [handleSubmit, router],
   );
 
+  const options = useMemo(
+    () =>
+      sharableUsers.map((user) => ({
+        label: user.email ?? user.id,
+        value: user.id,
+      })),
+    [sharableUsers],
+  );
+
   return (
-    <form onSubmit={onSubmit}>
-      <InputField
-        label="Name"
-        placeholder="Calendar name"
-        {...register('name')}
-      />
-      <Button type="submit" disabled={isSubmitting}>
-        Create
-      </Button>
-    </form>
+    <FormProvider {...form}>
+      <form onSubmit={onSubmit}>
+        <InputField
+          label="Name"
+          placeholder="Calendar name"
+          register={register('name')}
+        />
+        <MultiselectField<CreateCalendar, 'shared'>
+          name="shared"
+          label="Shared to"
+          emptyText="No users"
+          inputPlaceholder="Select user"
+          notFoundText="User not found"
+          placeholder="Select user"
+          options={options}
+          map={mapUser}
+        />
+        <Button type="submit" disabled={isSubmitting}>
+          Create
+        </Button>
+      </form>
+    </FormProvider>
   );
 };

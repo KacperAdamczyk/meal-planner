@@ -5,7 +5,7 @@ const authSchema = pgSchema('auth');
 
 export const users = authSchema.table('users', {
   id: uuid('id').primaryKey(),
-  email: varchar('email').notNull(),
+  email: varchar('email'),
 });
 
 export type User = InferModel<typeof users>;

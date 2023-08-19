@@ -1,6 +1,5 @@
 import { db } from '@/db';
 import { Calendar, User, calendars, mealTypes } from '@/db/schema';
-import { serverActionDb } from '@/db/supabase';
 import { CreateCalendar } from '@/schemas/createCalendarSchema';
 
 export const createCalendar = (
