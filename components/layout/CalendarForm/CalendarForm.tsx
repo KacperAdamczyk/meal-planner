@@ -1,10 +1,7 @@
 'use client';
 import { createCalendarAction } from '@/actions/createCalendarAction';
 import { InputField } from '@/components/fields';
-import {
-  MultiselectField,
-  MultiselectFieldProps,
-} from '@/components/fields/MultiselectField';
+import { MultiselectField } from '@/components/fields/MultiselectField';
 import { Button } from '@/components/ui/button';
 import { User } from '@/db/schema';
 import { CreateCalendar } from '@/schemas/createCalendarSchema';
@@ -12,16 +9,6 @@ import { revalidatePath } from 'next/cache';
 import { useRouter } from 'next/navigation';
 import { FC, useMemo, useTransition } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-
-const mapUser: MultiselectFieldProps<CreateCalendar, 'shared'>['map'] = (
-  value,
-) => ({ userId: value });
-const columns: MultiselectFieldProps<CreateCalendar, 'shared'>['columns'] = [
-  {
-    label: 'User',
-    key: 'userId',
-  },
-];
 
 interface Props {
   sharableUsers: User[];
@@ -49,8 +36,8 @@ export const CalendarForm: FC<Props> = ({ sharableUsers }) => {
         startTransition(async () => {
           const calendar = await createCalendarAction(data);
 
-          router.push(`/${calendar.id}`);
           revalidatePath('/[calendarId]');
+          router.push(`/${calendar.id}`);
         }),
       ),
     [handleSubmit, router],
@@ -67,7 +54,7 @@ export const CalendarForm: FC<Props> = ({ sharableUsers }) => {
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="flex flex-col gap-4">
         <InputField
           label="Name"
           placeholder="Calendar name"
@@ -77,12 +64,12 @@ export const CalendarForm: FC<Props> = ({ sharableUsers }) => {
           name="shared"
           label="Shared to"
           emptyText="No users"
-          inputPlaceholder="Select user"
+          inputPlaceholder="Find user"
           notFoundText="User not found"
           placeholder="Select user"
           options={options}
-          map={mapUser}
-          columns={columns}
+          valueKey="userId"
+          valueLabel="User"
         />
         <Button type="submit" disabled={isSubmitting}>
           Create

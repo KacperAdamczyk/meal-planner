@@ -11,8 +11,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Delete, Trash2 } from 'lucide-react';
-import { ReactNode, useCallback } from 'react';
+import { Trash2 } from 'lucide-react';
+import { ReactNode, useCallback, useMemo } from 'react';
 import {
   FieldArray,
   FieldArrayPath,
@@ -27,8 +27,8 @@ export interface MultiselectFieldProps<
 > extends Omit<FieldProps, 'placeholder'>,
     Omit<ComboboxProps, 'value' | 'onChange'> {
   name: Name;
-  map: (value: string) => FieldArray<Values, Name>;
-  columns: { label: string; key: keyof FieldArray<Values, Name> }[];
+  valueKey: keyof FieldArrayWithId<Values, Name>;
+  valueLabel: string;
 }
 
 export const MultiselectField = <
@@ -37,8 +37,9 @@ export const MultiselectField = <
 >({
   name,
   label,
-  map,
-  columns,
+  valueKey,
+  valueLabel,
+  options,
   ...props
 }: MultiselectFieldProps<Values, Name>): ReactNode => {
   const { fields, append, remove } = useFieldArray<Values, Name>({ name });
@@ -46,48 +47,63 @@ export const MultiselectField = <
   const onChange = useCallback<ComboboxProps['onChange']>(
     (value) => {
       if (value) {
-        append(map(value));
+        append({ [valueKey]: value } as FieldArray<Values, Name>);
       }
     },
-    [append, map],
+    [append, valueKey],
+  );
+
+  const extendedOptions = useMemo(
+    () =>
+      options.map((option) => ({
+        ...option,
+        disabled: !!fields.find((field) => field[valueKey] === option.value),
+      })),
+    [fields, options, valueKey],
   );
 
   return (
-    <div className="rounded border border-input p-2">
+    <div>
       <Label htmlFor={name}>{label}</Label>
-      <Combobox value={undefined} onChange={onChange} {...props} />
-      <Table>
-        {!fields.length && <TableCaption>No option selected</TableCaption>}
-        <TableHeader>
-          {!!fields.length && (
-            <TableRow>
-              {columns.map(({ label, key }) => (
-                <TableHead key={key.toString()}>{label}</TableHead>
-              ))}
-              <TableHead>Actions</TableHead>
-            </TableRow>
-          )}
-        </TableHeader>
-        <TableBody>
-          {fields.map((field, index) => (
-            <TableRow key={field.id}>
-              {columns.map(({ key }) => (
-                <TableCell key={key.toString()}>
-                  {field[key] as ReactNode}
+      <div className="flex flex-col items-center rounded border border-input p-2">
+        <Combobox
+          value={undefined}
+          onChange={onChange}
+          options={extendedOptions}
+          {...props}
+        />
+        <Table>
+          {!fields.length && <TableCaption>No option selected</TableCaption>}
+          <TableHeader>
+            {!!fields.length && (
+              <TableRow>
+                <TableHead>{valueLabel}</TableHead>
+                <TableHead className="text-end">Actions</TableHead>
+              </TableRow>
+            )}
+          </TableHeader>
+          <TableBody>
+            {fields.map((field, index) => (
+              <TableRow key={field.id}>
+                <TableCell>
+                  {
+                    options.find((option) => option.value === field[valueKey])
+                      ?.label
+                  }
                 </TableCell>
-              ))}
-              <TableCell>
-                <Button variant="outline" size="icon" type="button">
-                  <Trash2
-                    className="h-4 w-4 text-red-500"
-                    onClick={() => remove(index)}
-                  />
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+                <TableCell className="text-end">
+                  <Button variant="outline" size="icon" type="button">
+                    <Trash2
+                      className="h-4 w-4 text-red-500"
+                      onClick={() => remove(index)}
+                    />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 };

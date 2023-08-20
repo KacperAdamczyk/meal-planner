@@ -22,6 +22,7 @@ export interface ComboboxOption {
   label: string;
   value: string;
   icon?: LucideIcon;
+  disabled?: boolean;
 }
 
 export interface ComboboxProps {
@@ -69,6 +70,8 @@ export function Combobox({
                 <CommandItem
                   key={option.value}
                   value={option.value}
+                  disabled={option.disabled}
+                  data-disabled={option.disabled ? 'true' : undefined}
                   onSelect={(currentValue) => {
                     onChange(currentValue === value ? undefined : currentValue);
                     setOpen(false);
@@ -81,7 +84,7 @@ export function Combobox({
                     )}
                   />
                   {option.label}
-                  {option.icon && <option.icon className="ml-2 h-4 w-4" />}
+                  {!!option.icon && <option.icon className="ml-2 h-4 w-4" />}
                 </CommandItem>
               ))
             ) : (

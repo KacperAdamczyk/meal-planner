@@ -22,6 +22,7 @@ export default async function Layout({
         <CalendarSelector
           selectedCalendarId={calendarId}
           calendars={calendars}
+          sharedCalendars={sharedCalendars}
         />
       </div>
       <div className="m-auto max-w-7xl">{children}</div>

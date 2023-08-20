@@ -11,12 +11,15 @@ const caveat = Caveat({
 
 export default async function Home() {
   const user = await getUser(serverComponentDb);
-  const { calendars } = await getUserCalendars(user);
+  const { calendars, sharedCalendars } = await getUserCalendars(user);
 
   return (
     <section>
-      <div className="m-4 flex justify-center">
-        <CalendarSelector calendars={calendars} />
+      <div className="flex justify-center">
+        <CalendarSelector
+          calendars={calendars}
+          sharedCalendars={sharedCalendars}
+        />
       </div>
       <div>
         <div

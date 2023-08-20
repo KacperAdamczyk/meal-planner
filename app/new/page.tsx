@@ -6,5 +6,9 @@ export default async function New() {
   const user = await getUser(serverComponentDb);
   const sharableUsers = await getSharableUsers(user);
 
-  return <CalendarForm sharableUsers={sharableUsers} />;
+  return (
+    <div className="mx-auto max-w-lg">
+      <CalendarForm sharableUsers={sharableUsers} />
+    </div>
+  );
 }

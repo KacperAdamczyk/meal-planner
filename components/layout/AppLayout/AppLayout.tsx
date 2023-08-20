@@ -6,6 +6,6 @@ export const AppLayout: FC<PropsWithChildren> = ({ children }) => (
     <section>
       <Header />
     </section>
-    <section className="m-auto max-w-7xl">{children}</section>
+    <section className="mx-auto my-4 max-w-7xl">{children}</section>
   </main>
 );

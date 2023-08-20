@@ -8,20 +8,28 @@ import {
 } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
+export type UserCalendar = Pick<Calendar, 'id' | 'name'>;
 interface GetUserCalendarsResult {
-  calendars: Calendar[];
-  sharedCalendars: SharedCalendar[];
+  calendars: UserCalendar[];
+  sharedCalendars: UserCalendar[];
 }
 
 export const getUserCalendars = async (
   user: User,
 ): Promise<GetUserCalendarsResult> => ({
   calendars: await db
-    .select()
+    .select({
+      id: calendars.id,
+      name: calendars.name,
+    })
     .from(calendars)
     .where(eq(calendars.userId, user.id)),
   sharedCalendars: await db
-    .select()
+    .select({
+      id: calendars.id,
+      name: calendars.name,
+    })
     .from(sharedCalendars)
-    .where(eq(sharedCalendars.userId, user.id)),
+    .where(eq(sharedCalendars.userId, user.id))
+    .innerJoin(calendars, eq(sharedCalendars.calendarId, calendars.id)),
 });

@@ -2,19 +2,22 @@
 
 import { Combobox, ComboboxOption } from '@/components/composite/Combobox';
 import { Button } from '@/components/ui/button';
-import { Calendar } from '@/db/schema';
-import { Plus } from 'lucide-react';
+import { UserCalendar } from '@/db/actions/getUserCalendars';
+import { Calendar, SharedCalendar } from '@/db/schema';
+import { Plus, Share2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { FC, useCallback, useMemo } from 'react';
 
 interface Props {
   selectedCalendarId?: string;
-  calendars: Calendar[];
+  calendars: UserCalendar[];
+  sharedCalendars: UserCalendar[];
 }
 
 export const CalendarSelector: FC<Props> = ({
   selectedCalendarId,
   calendars,
+  sharedCalendars,
 }) => {
   const router = useRouter();
 
@@ -34,8 +37,15 @@ export const CalendarSelector: FC<Props> = ({
   );
 
   const options = useMemo<ComboboxOption[]>(
-    () => calendars.map(({ id, name }) => ({ label: name, value: id })),
-    [calendars],
+    () => [
+      ...calendars.map(({ id, name }) => ({ label: name, value: id })),
+      ...sharedCalendars.map(({ id, name }) => ({
+        label: name,
+        value: id,
+        icon: Share2,
+      })),
+    ],
+    [calendars, sharedCalendars],
   );
 
   return (

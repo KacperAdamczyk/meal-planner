@@ -19,7 +19,6 @@ export const calendars = pgTable('calendars', {
 });
 
 export type Calendar = InferModel<typeof calendars>;
-export type NewCalendar = InferModel<typeof calendars, 'insert'>;
 
 export const sharedCalendars = pgTable('shared_calendars', {
   id: uuid('id').primaryKey().defaultRandom(),
