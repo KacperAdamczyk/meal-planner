@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/card';
 import { serverActionDb } from '@/db/supabase';
 import { Button } from '@/components/ui/button';
+import { headers } from 'next/headers';
 
 export default function Login() {
   const handleSignIn = async (formData: FormData) => {
@@ -20,12 +21,18 @@ export default function Login() {
       throw new Error('Provider is not a string');
     }
 
+    const origin = headers().get('origin');
+
+    if (!origin) {
+      throw new Error('Missing origin header');
+    }
+
     const supabase = serverActionDb();
     const {
       data: { url },
     } = await supabase.auth.signInWithOAuth({
       provider: provider as Provider,
-      options: { redirectTo: `${env.BASE_URL}/auth/callback` },
+      options: { redirectTo: new URL('/auth/callback', origin).toString() },
     });
 
     if (url) {
