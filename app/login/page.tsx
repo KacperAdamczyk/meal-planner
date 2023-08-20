@@ -26,7 +26,6 @@ export default function Login() {
     if (!origin) {
       throw new Error('Missing origin header');
     }
-    console.log('origin', origin, new URL('/auth/callback', origin).toString());
 
     const supabase = serverActionDb();
     const {
