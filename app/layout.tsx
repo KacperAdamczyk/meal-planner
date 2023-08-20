@@ -1,7 +1,8 @@
 import { Noto_Sans } from 'next/font/google';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { cn } from '@/lib/utils';
-import { ReactNode } from 'react';
+import { ThemeProvider } from '@/components/layout/ThemeProvider';
+import { PropsWithChildren } from 'react';
 
 import './globals.css';
 
@@ -11,15 +12,17 @@ const notoSans = Noto_Sans({
 });
 
 export const metadata = {
-  title: 'Meal planner',
-  description: 'Meal planner',
+  title: 'Meal Planner',
+  description: 'Meal Planner',
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
-      <body className={cn(notoSans.className, 'dark')}>
-        <AppLayout>{children}</AppLayout>
+      <body className={cn(notoSans.className, 'min-w-[300px]')}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <AppLayout>{children}</AppLayout>
+        </ThemeProvider>
       </body>
     </html>
   );

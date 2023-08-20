@@ -11,7 +11,7 @@ import {
 import { serverActionDb } from '@/db/supabase';
 import { Button } from '@/components/ui/button';
 
-export default async function Login() {
+export default function Login() {
   const handleSignIn = async (formData: FormData) => {
     'use server';
     const provider = formData.get('provider');

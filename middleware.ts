@@ -20,6 +20,7 @@ export async function middleware(request: NextRequest) {
 
   return response;
 }
+
 export const config = {
   matcher: [
     '/((?!login|auth/callback|_next/static|_next/image|favicon.ico).*)',

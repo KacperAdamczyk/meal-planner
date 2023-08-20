@@ -1,4 +1,5 @@
 import { pgSchema, uuid, varchar, pgTable, text } from 'drizzle-orm/pg-core';
+import { InferModel } from 'drizzle-orm';
 
 const authSchema = pgSchema('auth');
 
@@ -7,18 +8,34 @@ export const users = authSchema.table('users', {
   email: varchar('email'),
 });
 
-export const pilots = pgTable('planes', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  name: text('name').notNull(),
-  createdBy: uuid('created_by')
-    .references(() => users.id)
-    .notNull(),
-});
+export type User = InferModel<typeof users>;
 
-export const profiles = pgTable('profiles', {
+export const calendars = pgTable('calendars', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: text('name').notNull(),
   userId: uuid('user_id')
     .references(() => users.id)
+    .notNull(),
+});
+
+export type Calendar = InferModel<typeof calendars>;
+
+export const sharedCalendars = pgTable('shared_calendars', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  calendarId: uuid('calendar_id')
+    .references(() => calendars.id)
+    .notNull(),
+  userId: uuid('user_id')
+    .references(() => users.id)
+    .notNull(),
+});
+
+export type SharedCalendar = InferModel<typeof sharedCalendars>;
+
+export const mealTypes = pgTable('meal_types', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  name: text('name').notNull(),
+  calendarId: uuid('calendar_id')
+    .references(() => calendars.id)
     .notNull(),
 });

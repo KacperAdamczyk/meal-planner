@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "5574d323-4805-48a2-877d-9fd685777ab9",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "1d63b2e5-1056-482c-82d0-a9662ab6b2cd",
+  "prevId": "5574d323-4805-48a2-877d-9fd685777ab9",
   "tables": {
     "calendars": {
       "name": "calendars",
@@ -36,6 +36,49 @@
           "tableTo": "users",
           "columnsFrom": [
             "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "meal_types": {
+      "name": "meal_types",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "calendar_id": {
+          "name": "calendar_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "meal_types_calendar_id_calendars_id_fk": {
+          "name": "meal_types_calendar_id_calendars_id_fk",
+          "tableFrom": "meal_types",
+          "tableTo": "calendars",
+          "columnsFrom": [
+            "calendar_id"
           ],
           "columnsTo": [
             "id"
@@ -117,7 +160,7 @@
           "name": "email",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
