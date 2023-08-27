@@ -9,23 +9,25 @@ interface Props {
   };
 }
 
-export default async function Layout({
+const Layout = async ({
   params: { calendarId },
   children,
-}: PropsWithChildren<Props>) {
+}: PropsWithChildren<Props>) => {
   const user = await getUser(serverComponentDb);
   const { calendars, sharedCalendars } = await getUserCalendars(user);
 
   return (
     <section>
-      <div className="m-4 flex justify-center">
+      <div className="flex justify-center">
         <CalendarSelector
           selectedCalendarId={calendarId}
           calendars={calendars}
           sharedCalendars={sharedCalendars}
         />
       </div>
-      <div className="m-auto max-w-7xl">{children}</div>
+      <div>{children}</div>
     </section>
   );
-}
+};
+
+export default Layout;
