@@ -48,7 +48,7 @@ export default function Login() {
           <CardDescription>Select login provider</CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={handleSignIn}>
+          <form action={handleSignIn} className="flex flex-col gap-2">
             <Button
               name="provider"
               value="discord"
@@ -56,6 +56,14 @@ export default function Login() {
               className="w-full bg-[#7289da]"
             >
               Discord
+            </Button>
+            <Button
+              name="provider"
+              value="github"
+              type="submit"
+              className="w-full"
+            >
+              Github
             </Button>
           </form>
         </CardContent>
