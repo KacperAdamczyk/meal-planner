@@ -1,0 +1,50 @@
+import { Button } from '@/components/ui/button';
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { Wheat } from 'lucide-react';
+import Link from 'next/link';
+import { FC } from 'react';
+
+interface Props {
+  calendarId: string;
+  meals: any[]; // TODO fix
+}
+
+export const MealsList: FC<Props> = ({ calendarId, meals }) => {
+  return (
+    <div>
+      <div className="flex gap-2 align-middle">
+        <h2 className="text-2xl">Meals</h2>
+        <Button asChild variant="outline">
+          <Link href={`/${calendarId}/meals/new`}>
+            New Meal <Wheat className="ml-2 h-4 w-4" />
+          </Link>
+        </Button>
+      </div>
+      <Table className="mt-2">
+        <TableCaption>A list of meals</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Name</TableHead>
+            <TableHead>Default type</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {meals.map((meal) => (
+            <TableRow key={meal.id}>
+              <TableCell>{meal.name}</TableCell>
+              <TableCell>{meal.defaultMealType}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+  );
+};

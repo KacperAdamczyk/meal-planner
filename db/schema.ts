@@ -39,3 +39,14 @@ export const mealTypes = pgTable('meal_types', {
     .references(() => calendars.id)
     .notNull(),
 });
+
+export const meals = pgTable('meals', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  name: text('name').notNull(),
+  calendarId: uuid('calendar_id')
+    .references(() => calendars.id)
+    .notNull(),
+  defaultMealTypeId: uuid('default_meal_type_id').references(
+    () => mealTypes.id,
+  ),
+});
