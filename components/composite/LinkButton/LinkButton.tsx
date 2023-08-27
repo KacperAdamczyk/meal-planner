@@ -1,9 +1,8 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import Link, { LinkProps } from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FC, PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
 interface Props<RouteType> {
   href: LinkProps<RouteType>['href'];
