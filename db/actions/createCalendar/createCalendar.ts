@@ -21,11 +21,13 @@ export const createCalendar = (
       })
       .returning();
 
-    await tx
-      .insert(sharedCalendars)
-      .values(
-        shared.map(({ userId }) => ({ calendarId: calendar.id, userId })),
-      );
+    if (shared.length) {
+      await tx
+        .insert(sharedCalendars)
+        .values(
+          shared.map(({ userId }) => ({ calendarId: calendar.id, userId })),
+        );
+    }
 
     await tx.insert(mealTypes).values([
       { name: 'Breakfast', calendarId: calendar.id },

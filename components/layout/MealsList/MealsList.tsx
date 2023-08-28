@@ -8,13 +8,14 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { GetMealResult } from '@/db/actions/getMeals';
 import { Wheat } from 'lucide-react';
 import Link from 'next/link';
 import { FC } from 'react';
 
 interface Props {
   calendarId: string;
-  meals: any[]; // TODO fix
+  meals: GetMealResult;
 }
 
 export const MealsList: FC<Props> = ({ calendarId, meals }) => {
@@ -40,7 +41,7 @@ export const MealsList: FC<Props> = ({ calendarId, meals }) => {
           {meals.map((meal) => (
             <TableRow key={meal.id}>
               <TableCell>{meal.name}</TableCell>
-              <TableCell>{meal.defaultMealType}</TableCell>
+              <TableCell>{meal.defaultMealType ?? '-'}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -1,5 +1,6 @@
 import { User } from '@/db/schema';
 import { getUser, serverActionDb } from '@/db/supabase';
+import { revalidatePath } from 'next/cache';
 import { ZodSchema, z } from 'zod';
 
 export const createServerAction =
@@ -10,10 +11,17 @@ export const createServerAction =
       data: z.infer<Schema>,
       ...params: Params
     ) => Promise<Return>,
+    path?: string,
   ): ((data: z.infer<Schema>, ...params: Params) => Promise<Return>) =>
   async (data, ...params) => {
     const validatedData = schema.parse(data);
     const user = await getUser(serverActionDb);
 
-    return action(user, validatedData, ...params);
+    const result = await action(user, validatedData, ...params);
+
+    if (path) {
+      revalidatePath(path);
+    }
+
+    return result;
   };

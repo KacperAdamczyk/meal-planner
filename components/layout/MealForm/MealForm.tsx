@@ -5,7 +5,6 @@ import { InputField, SelectField } from '@/components/fields';
 import { Button } from '@/components/ui/button';
 import { MealType } from '@/db/schema';
 import { CreateMeal } from '@/schemas/createMealSchema';
-import { revalidatePath } from 'next/cache';
 import { useParams, useRouter } from 'next/navigation';
 import { FC, useMemo, useTransition } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -16,6 +15,7 @@ interface Props {
 
 export const MealForm: FC<Props> = ({ mealTypes }) => {
   const params = useParams();
+  const calendarId = params.calendarId.toString();
   const router = useRouter();
   const form = useForm<CreateMeal>({
     defaultValues: {
@@ -35,15 +35,12 @@ export const MealForm: FC<Props> = ({ mealTypes }) => {
     () =>
       handleSubmit(async (data) =>
         startTransition(async () => {
-          const calendar = await createMealAction(
-            data,
-            params.calendarId.toString(),
-          );
-          // revalidatePath('/[calendarId]/meals');
-          router.push(`/${calendar.id}`);
+          await createMealAction(data, calendarId);
+
+          router.push(`/${calendarId}/meals`);
         }),
       ),
-    [handleSubmit, params.calendarId, router],
+    [calendarId, handleSubmit, router],
   );
 
   const options = useMemo<ComboboxOption[]>(
