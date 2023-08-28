@@ -1,7 +1,7 @@
 import { db } from '@/db';
-import { Meal, User, calendars, meals } from '@/db/schema';
+import { Meal, User, calendars, meals, sharedCalendars } from '@/db/schema';
 import { CreateMeal } from '@/schemas/createMealSchema';
-import { and, eq } from 'drizzle-orm';
+import { and, eq, or } from 'drizzle-orm';
 
 export const createMeal = async (
   user: User,
@@ -9,9 +9,17 @@ export const createMeal = async (
   calendarId: string,
 ): Promise<Meal> => {
   const [calendar] = await db
-    .select()
+    .select({
+      id: calendars.id,
+    })
     .from(calendars)
-    .where(and(eq(calendars.id, calendarId), eq(calendars.userId, user.id)));
+    .leftJoin(sharedCalendars, eq(calendars.id, sharedCalendars.calendarId))
+    .where(
+      and(
+        eq(calendars.id, calendarId),
+        or(eq(calendars.userId, user.id), eq(sharedCalendars.userId, user.id)),
+      ),
+    );
 
   if (!calendar) {
     throw new Error('Calendar not found');

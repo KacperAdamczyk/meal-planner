@@ -1,6 +1,13 @@
 import { db } from '@/db';
-import { Meal, User, calendars, mealTypes, meals } from '@/db/schema';
-import { and, eq } from 'drizzle-orm';
+import {
+  Meal,
+  User,
+  calendars,
+  mealTypes,
+  meals,
+  sharedCalendars,
+} from '@/db/schema';
+import { and, eq, or } from 'drizzle-orm';
 
 export type GetMealResult = {
   id: string;
@@ -19,6 +26,12 @@ export const getMeals = (
       defaultMealType: mealTypes.name,
     })
     .from(calendars)
-    .where(and(eq(calendars.id, calendarId), eq(calendars.userId, user.id)))
+    .leftJoin(sharedCalendars, eq(calendars.id, sharedCalendars.calendarId))
+    .where(
+      and(
+        eq(calendars.id, calendarId),
+        or(eq(calendars.userId, user.id), eq(sharedCalendars.userId, user.id)),
+      ),
+    )
     .innerJoin(meals, eq(meals.calendarId, calendars.id))
     .leftJoin(mealTypes, eq(mealTypes.id, meals.defaultMealTypeId));
