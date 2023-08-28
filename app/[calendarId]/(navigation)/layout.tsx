@@ -10,7 +10,7 @@ const Layout: FC<PropsWithChildren<{ params: { calendarId: string } }>> = ({
       <div className="mt-2 flex justify-center">
         <Navigation calendarId={calendarId} />
       </div>
-      <div>{children}</div>
+      <div className="mt-2">{children}</div>
     </div>
   );
 };

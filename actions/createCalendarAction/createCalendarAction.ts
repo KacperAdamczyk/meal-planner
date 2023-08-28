@@ -1,18 +1,11 @@
 'use server';
 
+import { createServerAction } from '@/actions/helpers';
 import { createCalendar } from '@/db/actions/createCalendar';
-import { Calendar } from '@/db/schema';
-import { getUser, serverActionDb } from '@/db/supabase';
-import {
-  CreateCalendar,
+import { createCalendarSchema } from '@/schemas/createCalendarSchema';
+
+export const createCalendarAction = createServerAction(
   createCalendarSchema,
-} from '@/schemas/createCalendarSchema';
-
-export const createCalendarAction = async (
-  data: CreateCalendar,
-): Promise<Calendar> => {
-  const user = await getUser(serverActionDb);
-  const validatedData = createCalendarSchema.parse(data);
-
-  return createCalendar(user, validatedData);
-};
+  createCalendar,
+  '/[calendarId]',
+);

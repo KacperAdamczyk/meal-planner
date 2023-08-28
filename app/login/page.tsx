@@ -63,7 +63,7 @@ export default function Login() {
               type="submit"
               className="w-full"
             >
-              Github
+              GitHub
             </Button>
           </form>
         </CardContent>

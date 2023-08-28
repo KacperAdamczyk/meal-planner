@@ -16,7 +16,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { useState } from 'react';
+import { ForwardedRef, forwardRef, useState } from 'react';
 
 export interface ComboboxOption {
   label: string;
@@ -35,15 +35,18 @@ export interface ComboboxProps {
   emptyText: string;
 }
 
-export function Combobox({
-  value,
-  onChange,
-  options,
-  placeholder,
-  inputPlaceholder,
-  notFoundText,
-  emptyText,
-}: ComboboxProps) {
+function ComboboxComponent(
+  {
+    value,
+    onChange,
+    options,
+    placeholder,
+    inputPlaceholder,
+    notFoundText,
+    emptyText,
+  }: ComboboxProps,
+  ref: ForwardedRef<HTMLDivElement>,
+) {
   const [open, setOpen] = useState(false);
   const selectedOption = options.find((option) => option.value === value);
 
@@ -68,6 +71,7 @@ export function Combobox({
             {options.length ? (
               options.map((option) => (
                 <CommandItem
+                  ref={ref}
                   key={option.value}
                   value={option.value}
                   disabled={option.disabled}
@@ -98,3 +102,7 @@ export function Combobox({
     </Popover>
   );
 }
+
+export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(
+  ComboboxComponent,
+);

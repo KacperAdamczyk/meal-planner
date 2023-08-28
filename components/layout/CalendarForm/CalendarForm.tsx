@@ -5,7 +5,6 @@ import { MultiselectField } from '@/components/fields/MultiselectField';
 import { Button } from '@/components/ui/button';
 import { User } from '@/db/schema';
 import { CreateCalendar } from '@/schemas/createCalendarSchema';
-import { revalidatePath } from 'next/cache';
 import { useRouter } from 'next/navigation';
 import { FC, useMemo, useTransition } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -36,7 +35,6 @@ export const CalendarForm: FC<Props> = ({ sharableUsers }) => {
         startTransition(async () => {
           const calendar = await createCalendarAction(data);
 
-          revalidatePath('/[calendarId]');
           router.push(`/${calendar.id}`);
         }),
       ),
