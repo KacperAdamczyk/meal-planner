@@ -40,6 +40,8 @@ export const mealTypes = pgTable('meal_types', {
     .notNull(),
 });
 
+export type MealType = InferModel<typeof mealTypes>;
+
 export const meals = pgTable('meals', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: text('name').notNull(),
@@ -50,3 +52,5 @@ export const meals = pgTable('meals', {
     () => mealTypes.id,
   ),
 });
+
+export type Meal = InferModel<typeof meals>;
