@@ -63,9 +63,6 @@ export const MealForm: FC<Props> = ({ mealTypes }) => {
         <SelectField
           name="defaultMealType"
           options={options}
-          emptyText="No meal types"
-          inputPlaceholder="Select meal type"
-          notFoundText="Meal type not found"
           placeholder="Meal type"
           label="Meal type"
         />

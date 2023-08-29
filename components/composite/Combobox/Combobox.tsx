@@ -30,21 +30,10 @@ export interface ComboboxProps {
   onChange: (value: string | undefined) => void;
   options: ComboboxOption[];
   placeholder: string;
-  inputPlaceholder: string;
-  notFoundText: string;
-  emptyText: string;
 }
 
 function ComboboxComponent(
-  {
-    value,
-    onChange,
-    options,
-    placeholder,
-    inputPlaceholder,
-    notFoundText,
-    emptyText,
-  }: ComboboxProps,
+  { value, onChange, options, placeholder }: ComboboxProps,
   ref: ForwardedRef<HTMLDivElement>,
 ) {
   const [open, setOpen] = useState(false);
@@ -68,8 +57,8 @@ function ComboboxComponent(
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder={inputPlaceholder} />
-          {!!options.length && <CommandEmpty>{notFoundText}</CommandEmpty>}
+          <CommandInput placeholder="Search" />
+          {!!options.length && <CommandEmpty>Not found</CommandEmpty>}
           <CommandGroup>
             {options.length ? (
               options.map((option) => (
@@ -96,7 +85,7 @@ function ComboboxComponent(
               ))
             ) : (
               <div className="m-1 text-center text-sm text-gray-500">
-                {emptyText}
+                No items
               </div>
             )}
           </CommandGroup>
