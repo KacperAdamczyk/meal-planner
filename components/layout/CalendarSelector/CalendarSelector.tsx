@@ -3,7 +3,6 @@
 import { Combobox, ComboboxOption } from '@/components/composite/Combobox';
 import { Button } from '@/components/ui/button';
 import { UserCalendar } from '@/db/actions/getUserCalendars';
-import { Calendar, SharedCalendar } from '@/db/schema';
 import { Plus, Share2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { FC, useCallback, useMemo } from 'react';
@@ -55,9 +54,6 @@ export const CalendarSelector: FC<Props> = ({
         onChange={onChange}
         options={options}
         placeholder="Select calendar"
-        inputPlaceholder="Search for calendar"
-        notFoundText="Calendar not found"
-        emptyText="No calendars"
       />
       <Button variant="outline" size="icon" onClick={onClick}>
         <Plus className="h-4 w-4" />

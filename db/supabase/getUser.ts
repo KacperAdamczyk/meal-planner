@@ -4,13 +4,14 @@ import {
   serverActionDb,
   serverComponentDb,
 } from '@/db/supabase';
+import { cache } from 'react';
 
 type Handler =
   | typeof routeHandlerDb
   | typeof serverActionDb
   | typeof serverComponentDb;
 
-export const getUser = async (handler: Handler): Promise<User> => {
+export const getUser = cache(async (handler: Handler): Promise<User> => {
   const {
     data: { session },
     error,
@@ -24,4 +25,4 @@ export const getUser = async (handler: Handler): Promise<User> => {
     ...session.user,
     email: session.user.email ?? null,
   };
-};
+});

@@ -6,5 +6,7 @@ import { createMealSchema } from '@/schemas/createMealSchema';
 export const createMealAction = createServerAction(
   createMealSchema,
   createMeal,
-  '/[calendarId]/meals',
+  {
+    tag: 'meals',
+  },
 );

@@ -61,9 +61,6 @@ export const CalendarForm: FC<Props> = ({ sharableUsers }) => {
         <MultiselectField<CreateCalendar, 'shared'>
           name="shared"
           label="Shared to"
-          emptyText="No users"
-          inputPlaceholder="Find user"
-          notFoundText="User not found"
           placeholder="Select user"
           options={options}
           valueKey="userId"

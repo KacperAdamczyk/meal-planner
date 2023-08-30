@@ -3,6 +3,7 @@ import { getUserCalendars } from '@/db/actions/getUserCalendars';
 import { getUser, serverComponentDb } from '@/db/supabase';
 import { cn } from '@/lib/utils';
 import { CornerRightUp } from 'lucide-react';
+import { unstable_cache } from 'next/cache';
 import { Caveat } from 'next/font/google';
 
 const caveat = Caveat({
@@ -11,7 +12,10 @@ const caveat = Caveat({
 
 export default async function Home() {
   const user = await getUser(serverComponentDb);
-  const { calendars, sharedCalendars } = await getUserCalendars(user);
+  const { calendars, sharedCalendars } = await unstable_cache(
+    getUserCalendars,
+    [user.id],
+  )(user);
 
   return (
     <section>
