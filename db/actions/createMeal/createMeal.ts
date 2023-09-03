@@ -1,7 +1,8 @@
 import { db } from '@/db';
+import { getCalendarHelper } from '@/db/actions/helpers';
 import { Meal, User, calendars, meals, sharedCalendars } from '@/db/schema';
 import { CreateMeal } from '@/schemas/createMealSchema';
-import { and, eq, or } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 
 export const createMeal = async (
   user: User,
@@ -14,12 +15,7 @@ export const createMeal = async (
     })
     .from(calendars)
     .leftJoin(sharedCalendars, eq(calendars.id, sharedCalendars.calendarId))
-    .where(
-      and(
-        eq(calendars.id, calendarId),
-        or(eq(calendars.userId, user.id), eq(sharedCalendars.userId, user.id)),
-      ),
-    );
+    .where(getCalendarHelper(user, calendarId));
 
   if (!calendar) {
     throw new Error('Calendar not found');

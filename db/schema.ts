@@ -72,7 +72,9 @@ export const dayMeals = pgTable(
   'day_meals',
   {
     date: date('date').notNull(),
-    calendarId: uuid('calendar_id').notNull(),
+    calendarId: uuid('calendar_id')
+      .references(() => calendars.id)
+      .notNull(),
     mealId: uuid('meal_id')
       .references(() => meals.id)
       .notNull(),

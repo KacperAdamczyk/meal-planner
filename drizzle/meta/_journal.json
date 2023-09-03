@@ -43,6 +43,13 @@
       "when": 1693515826112,
       "tag": "0005_funny_talisman",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1693518390100,
+      "tag": "0006_moaning_medusa",
+      "breakpoints": true
     }
   ]
 }

@@ -1,11 +1,16 @@
 'use client';
 import { Calendar } from '@/components/ui/calendar';
+import { DayMeal } from '@/db/schema';
 import { formatISO, parseISO } from 'date-fns';
 import { useParams, useRouter } from 'next/navigation';
 import { FC, useCallback } from 'react';
 import { SelectSingleEventHandler } from 'react-day-picker';
 
-export const Dashboard: FC = () => {
+interface Props {
+  days: DayMeal[];
+}
+
+export const Dashboard: FC<Props> = () => {
   const params = useParams();
   const router = useRouter();
 
