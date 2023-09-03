@@ -15,12 +15,14 @@ export const getMonthBoundary = (
   const date = set(new Date(), {
     month,
     year,
+    date: 1,
+    hours: 0,
   });
   const monthStart = startOfMonth(date);
   const monthEnd = endOfMonth(date);
 
   const offsetMonthStart = sub(monthStart, { days: getDay(monthStart) });
-  const offsetMonthEnd = add(monthEnd, { days: getDay(monthEnd) });
+  const offsetMonthEnd = add(monthEnd, { days: 6 - getDay(monthEnd) });
 
   const offsetMonthStartISO = formatISO(offsetMonthStart, {
     representation: 'date',

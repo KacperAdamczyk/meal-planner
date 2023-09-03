@@ -1,3 +1,4 @@
 {
-  "exportall.config.folderListener": ["/components/fields"]
+  "exportall.config.folderListener": ["/components/fields"],
+  "testing.automaticallyOpenPeekView": "never"
 }
