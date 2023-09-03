@@ -1,4 +1,5 @@
 import { db } from '@/db';
+import { getCalendarHelper } from '@/db/actions/helpers';
 import {
   MealType,
   User,
@@ -6,7 +7,7 @@ import {
   mealTypes,
   sharedCalendars,
 } from '@/db/schema';
-import { and, eq, or } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 
 export const getMealTypes = (
   user: User,
@@ -20,10 +21,5 @@ export const getMealTypes = (
     })
     .from(calendars)
     .leftJoin(sharedCalendars, eq(calendars.id, sharedCalendars.calendarId))
-    .where(
-      and(
-        eq(calendars.id, calendarId),
-        or(eq(calendars.userId, user.id), eq(sharedCalendars.userId, user.id)),
-      ),
-    )
+    .where(getCalendarHelper(user, calendarId))
     .innerJoin(mealTypes, eq(mealTypes.calendarId, calendars.id));
