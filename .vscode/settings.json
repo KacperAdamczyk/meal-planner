@@ -1,4 +1,5 @@
 {
   "exportall.config.folderListener": ["/components/fields"],
-  "testing.automaticallyOpenPeekView": "never"
+  "testing.automaticallyOpenPeekView": "never",
+  "vitest.commandLine": "pnpm test --"
 }

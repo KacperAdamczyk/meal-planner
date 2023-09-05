@@ -1,6 +1,8 @@
 import { CalendarSelector } from '@/components/layout/CalendarSelector';
+import { getCalendar } from '@/db/actions/getCalendar';
 import { getUserCalendars } from '@/db/actions/getUserCalendars';
 import { getUser, serverComponentDb } from '@/db/supabase';
+import { notFound } from 'next/navigation';
 import { PropsWithChildren } from 'react';
 
 interface Props {
@@ -15,6 +17,11 @@ const Layout = async ({
 }: PropsWithChildren<Props>) => {
   const user = await getUser(serverComponentDb);
   const { calendars, sharedCalendars } = await getUserCalendars(user);
+  const calendar = await getCalendar(user, calendarId);
+
+  if (!calendar) {
+    notFound();
+  }
 
   return (
     <section>

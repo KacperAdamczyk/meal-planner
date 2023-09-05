@@ -1,7 +1,10 @@
-import { Dashboard } from '@/components/layout/Dashboard';
+import { DashboardCalendar } from '@/components/layout/DashboardCalendar';
+import { SelectedDay } from '@/components/layout/SelectedDay';
 import { getDays } from '@/db/actions/getDays';
+import { getMealTypes } from '@/db/actions/getMealTypes';
+import { groupMealsByDay } from '@/db/actions/helpers/groupMealsByDay';
 import { getUser, serverComponentDb } from '@/db/supabase';
-import { getMonth, getYear, parse, parseISO } from 'date-fns';
+import { getMonth, getYear, isSameDay, parseISO } from 'date-fns';
 import { FC } from 'react';
 
 const Date: FC<{ params: { calendarId: string; date: string } }> = async ({
@@ -15,12 +18,17 @@ const Date: FC<{ params: { calendarId: string; date: string } }> = async ({
     getYear(selectedDate),
     calendarId,
   );
+  const mealTypes = await getMealTypes(user, calendarId);
+  const groupedDays = groupMealsByDay(days);
 
-  console.log('days', days);
+  const selectedDay = groupedDays.find(({ date }) =>
+    isSameDay(date, selectedDate),
+  );
 
   return (
     <div>
-      <Dashboard days={days} />
+      <DashboardCalendar groupedDays={groupedDays} mealTypes={mealTypes} />
+      <SelectedDay day={selectedDay} />
     </div>
   );
 };
