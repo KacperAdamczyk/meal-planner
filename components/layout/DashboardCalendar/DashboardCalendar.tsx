@@ -1,53 +1,52 @@
-'use client';
-import { Calendar } from '@/components/ui/calendar';
-import { GroupedMealsByDay } from '@/db/actions/helpers/groupMealsByDay';
-import { DayMeal, MealType } from '@/db/schema';
-import { formatISO, parseISO } from 'date-fns';
-import { useParams, useRouter } from 'next/navigation';
-import { FC, useCallback } from 'react';
-import { SelectSingleEventHandler } from 'react-day-picker';
+import { MonthCalendar } from '@/components/layout/MonthCalendar';
+import { getDays } from '@/db/actions/getDays';
+import { getMealTypes } from '@/db/actions/getMealTypes';
+import { groupMealsByDay } from '@/db/actions/helpers/groupMealsByDay';
+import { getUser, serverComponentDb } from '@/db/supabase';
+import { getMonth, getYear, parseISO } from 'date-fns';
+import { FC } from 'react';
 
 interface Props {
-  groupedDays: GroupedMealsByDay[];
-  mealTypes: MealType[];
+  calendarId: string;
+  date: string;
+  month?: string;
 }
 
-export const DashboardCalendar: FC<Props> = ({ groupedDays, mealTypes }) => {
-  const params = useParams();
-  const router = useRouter();
+export const DashboardCalendar: FC<Props> = async ({
+  calendarId,
+  date,
+  month,
+}) => {
+  const dateToLoad = parseISO(month ?? date);
 
-  const selectedDate = parseISO(params.date.toString());
+  const user = await getUser(serverComponentDb);
+  const [days, mealTypes] = await Promise.all([
+    getDays(user, getMonth(dateToLoad), getYear(dateToLoad), calendarId),
+    getMealTypes(user, calendarId),
+  ]);
+
+  const groupedDays = groupMealsByDay(days);
   const fullDates = groupedDays
-    .filter(({ types }) => types.length === mealTypes.length)
+    .filter(
+      ({ meals }) =>
+        new Set(meals.map(({ mealTypeId }) => mealTypeId)).size ===
+        mealTypes.length,
+    )
     .map(({ date }) => date);
   const partialDates = groupedDays
-    .filter(({ types }) => types.length > 0 && types.length < mealTypes.length)
+    .filter(({ meals }) => {
+      const size = new Set(meals.map(({ mealTypeId }) => mealTypeId)).size;
+
+      return size > 0 && size < mealTypes.length;
+    })
     .map(({ date }) => date);
 
-  const onCalendarChange = useCallback<SelectSingleEventHandler>(
-    (day) => {
-      if (day) {
-        router.push(
-          `/${params.calendarId}/${formatISO(day, { representation: 'date' })}`,
-        );
-      }
-    },
-    [params.calendarId, router],
-  );
-
   return (
-    <Calendar
-      mode="single"
-      selected={selectedDate}
-      onSelect={onCalendarChange}
-      modifiers={{
-        full: fullDates,
-        partial: partialDates,
-      }}
-      modifiersClassNames={{
-        full: 'border-2 border-green-500',
-        partial: 'border-2 border-yellow-500',
-      }}
+    <MonthCalendar
+      calendarId={calendarId}
+      date={date}
+      fullDates={fullDates}
+      partialDates={partialDates}
     />
   );
 };
