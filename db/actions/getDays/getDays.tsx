@@ -8,16 +8,28 @@ import {
   dayMeals,
   sharedCalendars,
 } from '@/db/schema';
-import { parseISO } from 'date-fns';
+import { endOfDay, formatISO, parseISO, set, startOfDay } from 'date-fns';
 import { between, eq } from 'drizzle-orm';
 
 export const getDays = async (
   user: User,
-  month: number,
-  year: number,
   calendarId: string,
+  year: number,
+  month: number,
+  date?: number,
 ): Promise<DayMeal[]> => {
-  const [monthStartISO, monthEndISO] = getMonthBoundary(month, year);
+  const [monthStartISO, monthEndISO] = date
+    ? [
+        formatISO(
+          set(new Date(), {
+            date,
+            month,
+            year,
+          }),
+          { representation: 'date' },
+        ),
+      ]
+    : getMonthBoundary(month, year);
 
   return db
     .select({
@@ -31,6 +43,10 @@ export const getDays = async (
     .where(getCalendarHelper(user, calendarId))
     .innerJoin(dayMeals, eq(dayMeals.calendarId, calendars.id))
     .where(
-      between(dayMeals.date, parseISO(monthStartISO), parseISO(monthEndISO)),
+      between(
+        dayMeals.date,
+        startOfDay(parseISO(monthStartISO)),
+        endOfDay(parseISO(monthEndISO ?? monthStartISO)),
+      ),
     );
 };

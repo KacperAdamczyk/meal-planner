@@ -33,7 +33,7 @@ export const MealForm: FC<Props> = ({ mealTypes }) => {
 
   const onSubmit = useMemo(
     () =>
-      handleSubmit(async (data) =>
+      handleSubmit((data) =>
         startTransition(async () => {
           await createMealAction(data, calendarId);
 

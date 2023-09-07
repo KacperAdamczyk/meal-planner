@@ -1,4 +1,4 @@
-import { MonthCalendar } from '@/components/layout/MonthCalendar';
+import { MonthCalendar } from '@/components/layout/DashboardCalendar/MonthCalendar';
 import { getDays } from '@/db/actions/getDays';
 import { getMealTypes } from '@/db/actions/getMealTypes';
 import { groupMealsByDay } from '@/db/actions/helpers/groupMealsByDay';
@@ -21,25 +21,23 @@ export const DashboardCalendar: FC<Props> = async ({
 
   const user = await getUser(serverComponentDb);
   const [days, mealTypes] = await Promise.all([
-    getDays(user, getMonth(dateToLoad), getYear(dateToLoad), calendarId),
+    getDays(user, calendarId, getYear(dateToLoad), getMonth(dateToLoad)),
     getMealTypes(user, calendarId),
   ]);
 
   const groupedDays = groupMealsByDay(days);
-  const fullDates = groupedDays
-    .filter(
-      ({ meals }) =>
-        new Set(meals.map(({ mealTypeId }) => mealTypeId)).size ===
-        mealTypes.length,
-    )
-    .map(({ date }) => date);
-  const partialDates = groupedDays
-    .filter(({ meals }) => {
-      const size = new Set(meals.map(({ mealTypeId }) => mealTypeId)).size;
 
-      return size > 0 && size < mealTypes.length;
-    })
-    .map(({ date }) => date);
+  const fullDates: Date[] = [];
+  const partialDates: Date[] = [];
+  for (const { date, meals } of groupedDays) {
+    const mealTypeIds = new Set(meals.map(({ mealTypeId }) => mealTypeId));
+
+    if (mealTypeIds.size === mealTypes.length) {
+      fullDates.push(date);
+    } else {
+      partialDates.push(date);
+    }
+  }
 
   return (
     <MonthCalendar

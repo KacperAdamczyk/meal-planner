@@ -16,8 +16,10 @@ const Layout = async ({
   children,
 }: PropsWithChildren<Props>) => {
   const user = await getUser(serverComponentDb);
-  const { calendars, sharedCalendars } = await getUserCalendars(user);
-  const calendar = await getCalendar(user, calendarId);
+  const [{ calendars, sharedCalendars }, calendar] = await Promise.all([
+    getUserCalendars(user),
+    getCalendar(user, calendarId),
+  ]);
 
   if (!calendar) {
     notFound();
