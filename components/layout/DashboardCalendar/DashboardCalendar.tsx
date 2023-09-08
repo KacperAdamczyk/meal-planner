@@ -27,8 +27,8 @@ export const DashboardCalendar: FC<Props> = async ({
 
   const groupedDays = groupMealsByDay(days);
 
-  const fullDates: Date[] = [];
-  const partialDates: Date[] = [];
+  const fullDates: string[] = [];
+  const partialDates: string[] = [];
   for (const { date, meals } of groupedDays) {
     const mealTypeIds = new Set(meals.map(({ mealTypeId }) => mealTypeId));
 
@@ -38,6 +38,8 @@ export const DashboardCalendar: FC<Props> = async ({
       partialDates.push(date);
     }
   }
+
+  console.log({ fullDates, partialDates });
 
   return (
     <MonthCalendar

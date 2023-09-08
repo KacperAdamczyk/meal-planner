@@ -8,8 +8,8 @@ import {
   meals,
   sharedCalendars,
 } from '@/db/schema';
-import { endOfDay, set, startOfDay, sub } from 'date-fns';
-import { between, eq } from 'drizzle-orm';
+import { formatISO, set } from 'date-fns';
+import { eq } from 'drizzle-orm';
 
 export interface DayMealWithName extends DayMeal {
   name: string;
@@ -22,21 +22,11 @@ export const getDayMeals = async (
   month: number,
   date: number,
 ): Promise<DayMealWithName[]> => {
-  const day = sub(
-    set(new Date(), {
-      year,
-      month,
-      date,
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-      milliseconds: 0,
-    }),
-    {
-      minutes: new Date().getTimezoneOffset(),
-    },
-  );
-  console.log({ day }, new Date().getTimezoneOffset());
+  const day = set(new Date(), {
+    year,
+    month,
+    date,
+  });
 
   return db
     .select({
@@ -50,6 +40,6 @@ export const getDayMeals = async (
     .leftJoin(sharedCalendars, eq(calendars.id, sharedCalendars.calendarId))
     .where(getCalendarHelper(user, calendarId))
     .innerJoin(dayMeals, eq(dayMeals.calendarId, calendars.id))
-    .where(eq(dayMeals.date, day))
+    .where(eq(dayMeals.date, formatISO(day, { representation: 'date' })))
     .innerJoin(meals, eq(meals.id, dayMeals.mealId));
 };

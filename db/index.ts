@@ -1,7 +1,7 @@
-import postgres from 'postgres';
-import { drizzle } from 'drizzle-orm/postgres-js';
+import { Pool } from 'pg';
+import { drizzle } from 'drizzle-orm/node-postgres';
 import { env } from '@/env';
 
-const client = postgres(env.DATABASE_URL);
-export const db = drizzle(client, { logger: true });
+const pool = new Pool({ connectionString: env.DATABASE_URL });
+export const db = drizzle(pool, { logger: true });
 export type Db = typeof db;

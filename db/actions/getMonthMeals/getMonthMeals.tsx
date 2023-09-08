@@ -30,11 +30,5 @@ export const getMonthMeals = async (
     .leftJoin(sharedCalendars, eq(calendars.id, sharedCalendars.calendarId))
     .where(getCalendarHelper(user, calendarId))
     .innerJoin(dayMeals, eq(dayMeals.calendarId, calendars.id))
-    .where(
-      between(
-        dayMeals.date,
-        startOfDay(parseISO(monthStartISO)),
-        endOfDay(parseISO(monthEndISO)),
-      ),
-    );
+    .where(between(dayMeals.date, monthStartISO, monthEndISO));
 };

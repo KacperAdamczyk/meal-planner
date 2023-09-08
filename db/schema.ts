@@ -71,7 +71,7 @@ export type Meal = InferSelectModel<typeof meals>;
 export const dayMeals = pgTable(
   'day_meals',
   {
-    date: date('date', { mode: 'date' }).notNull(),
+    date: date('date').notNull(),
     calendarId: uuid('calendar_id')
       .references(() => calendars.id)
       .notNull(),

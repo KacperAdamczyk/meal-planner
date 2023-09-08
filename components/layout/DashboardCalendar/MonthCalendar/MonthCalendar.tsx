@@ -12,8 +12,8 @@ import {
 interface Props {
   calendarId: string;
   date: string;
-  fullDates: Date[];
-  partialDates: Date[];
+  fullDates: string[];
+  partialDates: string[];
 }
 
 export const MonthCalendar: FC<Props> = ({
@@ -59,8 +59,8 @@ export const MonthCalendar: FC<Props> = ({
       month={month}
       onMonthChange={onMonthChange}
       modifiers={{
-        full: fullDates,
-        partial: partialDates,
+        full: fullDates.map((date) => parseISO(date)),
+        partial: partialDates.map((date) => parseISO(date)),
       }}
       modifiersClassNames={{
         full: 'border-2 border-green-500',
