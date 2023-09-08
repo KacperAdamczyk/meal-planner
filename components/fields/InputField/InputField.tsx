@@ -1,6 +1,6 @@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { FC, ForwardRefRenderFunction, forwardRef } from 'react';
+import { FC } from 'react';
 import { RegisterFieldProps } from '../FieldProps';
 
 export const InputField: FC<RegisterFieldProps> = ({

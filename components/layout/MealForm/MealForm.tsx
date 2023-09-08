@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 'use client';
 import { createMealAction } from '@/actions/createMealAction/createMealAction';
 import { ComboboxOption } from '@/components/composite/Combobox';

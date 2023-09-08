@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 'use client';
 import { createCalendarAction } from '@/actions/createCalendarAction';
 import { InputField } from '@/components/fields';
@@ -31,13 +32,13 @@ export const CalendarForm: FC<Props> = ({ sharableUsers }) => {
 
   const onSubmit = useMemo(
     () =>
-      handleSubmit(async (data) =>
+      handleSubmit((data) => {
         startTransition(async () => {
           const calendar = await createCalendarAction(data);
 
           router.push(`/${calendar.id}`);
-        }),
-      ),
+        });
+      }),
     [handleSubmit, router],
   );
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { FC } from 'react';
 import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
