@@ -33,13 +33,13 @@ export const MealForm: FC<Props> = ({ mealTypes }) => {
 
   const onSubmit = useMemo(
     () =>
-      handleSubmit((data) =>
+      handleSubmit((data) => {
         startTransition(async () => {
           await createMealAction(data, calendarId);
 
           router.push(`/${calendarId}/meals`);
-        }),
-      ),
+        });
+      }),
     [calendarId, handleSubmit, router],
   );
 

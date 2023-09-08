@@ -1,10 +1,12 @@
 import { getCalendar } from '@/db/actions/getCalendar';
-import { getDays } from '@/db/actions/getDays';
 import { getMealTypes } from '@/db/actions/getMealTypes';
+import { groupMealsByType } from '@/db/actions/helpers/groupMealsByType';
 import { getUser, serverComponentDb } from '@/db/supabase';
 import { getDate, getMonth, getYear, parseISO } from 'date-fns';
 import { notFound } from 'next/navigation';
 import { FC } from 'react';
+import { getDayMeals } from '@/db/actions/getDayMeals';
+import { MealGroup } from '@/components/layout/MealGroup';
 
 interface Props {
   calendarId: string;
@@ -21,7 +23,7 @@ export const SelectedDay: FC<Props> = async ({ calendarId, date }) => {
   }
 
   const [dayMeals, mealTypes] = await Promise.all([
-    getDays(
+    getDayMeals(
       user,
       calendarId,
       getYear(currentDate),
@@ -31,11 +33,15 @@ export const SelectedDay: FC<Props> = async ({ calendarId, date }) => {
     getMealTypes(user, calendarId),
   ]);
 
-  console.log({ mealTypes, dayMeals });
+  const groupedMeals = groupMealsByType(dayMeals, mealTypes).at(0);
 
   return (
     <div className="m-2 w-full rounded border-2 border-secondary p-4">
-      {date ? <div>{date}</div> : <div>Select a day</div>}
+      {groupedMeals ? (
+        <MealGroup groupedMeals={groupedMeals} />
+      ) : (
+        <p className="text-center">No meals for this day</p>
+      )}
     </div>
   );
 };

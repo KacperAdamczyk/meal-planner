@@ -1,5 +1,5 @@
 import { MonthCalendar } from '@/components/layout/DashboardCalendar/MonthCalendar';
-import { getDays } from '@/db/actions/getDays';
+import { getMonthMeals } from '@/db/actions/getMonthMeals';
 import { getMealTypes } from '@/db/actions/getMealTypes';
 import { groupMealsByDay } from '@/db/actions/helpers/groupMealsByDay';
 import { getUser, serverComponentDb } from '@/db/supabase';
@@ -21,7 +21,7 @@ export const DashboardCalendar: FC<Props> = async ({
 
   const user = await getUser(serverComponentDb);
   const [days, mealTypes] = await Promise.all([
-    getDays(user, calendarId, getYear(dateToLoad), getMonth(dateToLoad)),
+    getMonthMeals(user, calendarId, getYear(dateToLoad), getMonth(dateToLoad)),
     getMealTypes(user, calendarId),
   ]);
 

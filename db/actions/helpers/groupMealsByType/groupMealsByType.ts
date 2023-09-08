@@ -1,15 +1,15 @@
-import { DayMeal, MealType } from '@/db/schema';
+import { MealType } from '@/db/schema';
 
-export interface GroupedMealsByType {
+export interface GroupedMealsByType<Meal> {
   type: string;
-  meals: DayMeal[];
+  meals: Meal[];
 }
 
-export const groupMealsByType = (
-  meals: DayMeal[],
+export const groupMealsByType = <Meal extends { mealTypeId: string }>(
+  meals: Meal[],
   mealTypes?: MealType[],
-): GroupedMealsByType[] => {
-  const typesMap = new Map<string, GroupedMealsByType>();
+): GroupedMealsByType<Meal>[] => {
+  const typesMap = new Map<string, GroupedMealsByType<Meal>>();
 
   for (const meal of meals) {
     const current = typesMap.get(meal.mealTypeId);
