@@ -22,6 +22,6 @@ jobs:
           node-version: 20.x
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run lint
-      - run: pnpm run format:check
-      - run: pnpm run test:ci
+      - run: pnpm format:check
+      - run: pnpm turbo lint
+      - run: pnpm turbo test:ci
