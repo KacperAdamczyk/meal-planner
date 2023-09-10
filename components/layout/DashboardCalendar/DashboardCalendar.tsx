@@ -39,8 +39,6 @@ export const DashboardCalendar: FC<Props> = async ({
     }
   }
 
-  console.log({ fullDates, partialDates });
-
   return (
     <MonthCalendar
       calendarId={calendarId}
