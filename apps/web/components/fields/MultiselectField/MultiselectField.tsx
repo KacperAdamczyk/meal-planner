@@ -65,7 +65,7 @@ export const MultiselectField = <
   return (
     <div>
       <Label htmlFor={name}>{label}</Label>
-      <div className="flex flex-col items-center rounded border border-input p-2">
+      <div className="border-input flex flex-col items-center rounded border p-2">
         <Combobox
           value={undefined}
           onChange={onChange}

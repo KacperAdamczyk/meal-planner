@@ -34,12 +34,8 @@
           "name": "calendars_user_id_users_id_fk",
           "tableFrom": "calendars",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -77,12 +73,8 @@
           "name": "meal_types_calendar_id_calendars_id_fk",
           "tableFrom": "meal_types",
           "tableTo": "calendars",
-          "columnsFrom": [
-            "calendar_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["calendar_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -126,12 +118,8 @@
           "name": "meals_calendar_id_calendars_id_fk",
           "tableFrom": "meals",
           "tableTo": "calendars",
-          "columnsFrom": [
-            "calendar_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["calendar_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -139,12 +127,8 @@
           "name": "meals_default_meal_type_id_meal_types_id_fk",
           "tableFrom": "meals",
           "tableTo": "meal_types",
-          "columnsFrom": [
-            "default_meal_type_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["default_meal_type_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -182,12 +166,8 @@
           "name": "shared_calendars_calendar_id_calendars_id_fk",
           "tableFrom": "shared_calendars",
           "tableTo": "calendars",
-          "columnsFrom": [
-            "calendar_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["calendar_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -195,12 +175,8 @@
           "name": "shared_calendars_user_id_users_id_fk",
           "tableFrom": "shared_calendars",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }

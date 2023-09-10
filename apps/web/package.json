@@ -10,9 +10,7 @@
     "lint": "next lint",
     "type-check": "tsc --noEmit --project .",
     "test": "vitest",
-    "test:ci": "vitest run",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "test:ci": "vitest run"
   },
   "dependencies": {
     "@hookform/error-message": "^2.0.1",

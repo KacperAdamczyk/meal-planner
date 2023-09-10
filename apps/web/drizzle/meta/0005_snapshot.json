@@ -34,12 +34,8 @@
           "name": "calendars_user_id_users_id_fk",
           "tableFrom": "calendars",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -82,12 +78,8 @@
           "name": "day_meals_meal_id_meals_id_fk",
           "tableFrom": "day_meals",
           "tableTo": "meals",
-          "columnsFrom": [
-            "meal_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["meal_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -95,12 +87,8 @@
           "name": "day_meals_meal_type_id_meal_types_id_fk",
           "tableFrom": "day_meals",
           "tableTo": "meal_types",
-          "columnsFrom": [
-            "meal_type_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["meal_type_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -108,12 +96,7 @@
       "compositePrimaryKeys": {
         "day_meals_date_calendar_id_meal_id_meal_type_id": {
           "name": "day_meals_date_calendar_id_meal_id_meal_type_id",
-          "columns": [
-            "date",
-            "calendar_id",
-            "meal_id",
-            "meal_type_id"
-          ]
+          "columns": ["date", "calendar_id", "meal_id", "meal_type_id"]
         }
       },
       "uniqueConstraints": {}
@@ -148,12 +131,8 @@
           "name": "meal_types_calendar_id_calendars_id_fk",
           "tableFrom": "meal_types",
           "tableTo": "calendars",
-          "columnsFrom": [
-            "calendar_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["calendar_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -197,12 +176,8 @@
           "name": "meals_calendar_id_calendars_id_fk",
           "tableFrom": "meals",
           "tableTo": "calendars",
-          "columnsFrom": [
-            "calendar_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["calendar_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -210,12 +185,8 @@
           "name": "meals_default_meal_type_id_meal_types_id_fk",
           "tableFrom": "meals",
           "tableTo": "meal_types",
-          "columnsFrom": [
-            "default_meal_type_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["default_meal_type_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -246,12 +217,8 @@
           "name": "shared_calendars_calendar_id_calendars_id_fk",
           "tableFrom": "shared_calendars",
           "tableTo": "calendars",
-          "columnsFrom": [
-            "calendar_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["calendar_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -259,12 +226,8 @@
           "name": "shared_calendars_user_id_users_id_fk",
           "tableFrom": "shared_calendars",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -272,10 +235,7 @@
       "compositePrimaryKeys": {
         "shared_calendars_calendar_id_user_id": {
           "name": "shared_calendars_calendar_id_user_id",
-          "columns": [
-            "calendar_id",
-            "user_id"
-          ]
+          "columns": ["calendar_id", "user_id"]
         }
       },
       "uniqueConstraints": {}

@@ -34,12 +34,8 @@
           "name": "calendars_user_id_users_id_fk",
           "tableFrom": "calendars",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -77,12 +73,8 @@
           "name": "shared_calendars_calendar_id_calendars_id_fk",
           "tableFrom": "shared_calendars",
           "tableTo": "calendars",
-          "columnsFrom": [
-            "calendar_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["calendar_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -90,12 +82,8 @@
           "name": "shared_calendars_user_id_users_id_fk",
           "tableFrom": "shared_calendars",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }

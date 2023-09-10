@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const MealGroupItem: FC<Props> = ({ id, name }) => (
-  <div key={id} className="rounded bg-secondary p-2">
+  <div key={id} className="bg-secondary rounded p-2">
     {name}
   </div>
 );
