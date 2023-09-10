@@ -95,7 +95,9 @@ export const MultiselectField = <
                   <Button variant="outline" size="icon" type="button">
                     <Trash2
                       className="h-4 w-4 text-red-500"
-                      onClick={() => remove(index)}
+                      onClick={() => {
+                        remove(index);
+                      }}
                     />
                   </Button>
                 </TableCell>

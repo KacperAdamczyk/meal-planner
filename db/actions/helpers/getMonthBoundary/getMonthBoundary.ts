@@ -1,28 +1,19 @@
-import {
-  add,
-  endOfMonth,
-  formatISO,
-  getDay,
-  set,
-  startOfMonth,
-  sub,
-} from 'date-fns';
+import { endOfMonth, formatISO, set, setDay, startOfMonth } from 'date-fns';
 
 export const getMonthBoundary = (
   month: number,
   year: number,
 ): [string, string] => {
-  const date = set(new Date(), {
+  const utcDate = set(new Date(), {
     month,
     year,
-    date: 1,
-    hours: 0,
   });
-  const monthStart = startOfMonth(date);
-  const monthEnd = endOfMonth(date);
 
-  const offsetMonthStart = sub(monthStart, { days: getDay(monthStart) });
-  const offsetMonthEnd = add(monthEnd, { days: 6 - getDay(monthEnd) });
+  const monthStart = startOfMonth(utcDate);
+  const monthEnd = endOfMonth(utcDate);
+
+  const offsetMonthStart = setDay(monthStart, 0);
+  const offsetMonthEnd = setDay(monthEnd, 6);
 
   const offsetMonthStartISO = formatISO(offsetMonthStart, {
     representation: 'date',

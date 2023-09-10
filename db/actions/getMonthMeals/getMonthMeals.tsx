@@ -10,11 +10,11 @@ import {
 } from '@/db/schema';
 import { between, eq } from 'drizzle-orm';
 
-export const getDays = async (
+export const getMonthMeals = async (
   user: User,
-  month: number,
-  year: number,
   calendarId: string,
+  year: number,
+  month: number,
 ): Promise<DayMeal[]> => {
   const [monthStartISO, monthEndISO] = getMonthBoundary(month, year);
 

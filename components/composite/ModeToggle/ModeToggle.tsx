@@ -30,13 +30,25 @@ export function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme(Theme.Light)}>
+        <DropdownMenuItem
+          onClick={() => {
+            setTheme(Theme.Light);
+          }}
+        >
           Light {theme === Theme.Light && <Check className="ml-2" />}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme(Theme.Dark)}>
+        <DropdownMenuItem
+          onClick={() => {
+            setTheme(Theme.Dark);
+          }}
+        >
           Dark {theme === Theme.Dark && <Check className="ml-2" />}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme(Theme.System)}>
+        <DropdownMenuItem
+          onClick={() => {
+            setTheme(Theme.System);
+          }}
+        >
           System {theme === Theme.System && <Check className="ml-2" />}
         </DropdownMenuItem>
       </DropdownMenuContent>

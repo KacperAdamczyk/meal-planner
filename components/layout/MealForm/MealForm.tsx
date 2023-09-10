@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 'use client';
 import { createMealAction } from '@/actions/createMealAction/createMealAction';
 import { ComboboxOption } from '@/components/composite/Combobox';
@@ -33,13 +34,13 @@ export const MealForm: FC<Props> = ({ mealTypes }) => {
 
   const onSubmit = useMemo(
     () =>
-      handleSubmit(async (data) =>
+      handleSubmit((data) => {
         startTransition(async () => {
           await createMealAction(data, calendarId);
 
           router.push(`/${calendarId}/meals`);
-        }),
-      ),
+        });
+      }),
     [calendarId, handleSubmit, router],
   );
 
