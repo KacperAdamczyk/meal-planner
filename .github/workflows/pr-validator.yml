@@ -16,9 +16,10 @@ jobs:
         name: Install pnpm
         with:
           version: latest
-          standalone: true
       - uses: oven-sh/setup-bun@v1
         name: Install Bun
+        with:
+          version: latest
       - run: pnpm install --frozen-lockfile
       - run: bun run lint
       - run: bun run format:check
