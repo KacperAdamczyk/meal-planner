@@ -1,7 +1,7 @@
 import { CalendarSelector } from '@/components/layout/CalendarSelector';
 import { getUserCalendars } from '@/db/actions/getUserCalendars';
 import { getUser, serverComponentDb } from '@/db/supabase';
-import { cn } from '@/lib/utils';
+import { cn } from 'ui';
 import { CornerRightUp } from 'lucide-react';
 import { unstable_cache } from 'next/cache';
 import { Caveat } from 'next/font/google';

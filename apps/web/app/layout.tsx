@@ -1,6 +1,6 @@
 import { Noto_Sans } from 'next/font/google';
 import { AppLayout } from '@/components/layout/AppLayout';
-import { cn } from '@/lib/utils';
+import { cn } from 'ui';
 import { ThemeProvider } from '@/components/layout/ThemeProvider';
 import { PropsWithChildren } from 'react';
 

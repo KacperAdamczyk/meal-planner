@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { FC } from 'react';
 import { redirect } from 'next/navigation';
-import { Button } from '@/components/ui/button';
 import { LogOut } from 'lucide-react';
 import { serverComponentDb } from '@/db/supabase/serverComponentDb';
 import { serverActionDb } from '@/db/supabase/serverActionDb';
-import { ModeToggle } from '@/components/composite/ModeToggle';
+import { Button, ModeToggle } from 'ui';
 
 export const UserOptions: FC = async () => {
   const supabase = serverComponentDb();

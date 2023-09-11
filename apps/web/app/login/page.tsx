@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Provider } from '@supabase/supabase-js';
 import { redirect } from 'next/navigation';
+import { serverActionDb } from '@/db/supabase';
+import { headers } from 'next/headers';
 import {
   Card,
-  CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { serverActionDb } from '@/db/supabase';
-import { Button } from '@/components/ui/button';
-import { headers } from 'next/headers';
+  CardDescription,
+  CardContent,
+  Button,
+} from 'ui';
 
 export default function Login() {
   const handleSignIn = async (formData: FormData) => {

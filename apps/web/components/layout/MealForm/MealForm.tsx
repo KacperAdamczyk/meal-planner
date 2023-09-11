@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 'use client';
 import { createMealAction } from '@/actions/createMealAction/createMealAction';
-import { ComboboxOption } from '@/components/composite/Combobox';
-import { InputField, SelectField } from '@/components/fields';
-import { Button } from '@/components/ui/button';
+import { Button, ComboboxOption, InputField, SelectField } from 'ui';
 import { MealType } from '@/db/schema';
 import { CreateMeal } from '@/schemas/createMealSchema';
 import { useParams, useRouter } from 'next/navigation';

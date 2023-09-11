@@ -1,11 +1,10 @@
 'use client';
 
-import { Combobox, ComboboxOption } from '@/components/composite/Combobox';
-import { Button } from '@/components/ui/button';
 import { UserCalendar } from '@/db/actions/getUserCalendars';
 import { Plus, Share2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { FC, useCallback, useMemo } from 'react';
+import { Button, Combobox, ComboboxOption } from 'ui';
 
 interface Props {
   selectedCalendarId?: string;

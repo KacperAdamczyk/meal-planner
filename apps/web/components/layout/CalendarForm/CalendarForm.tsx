@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 'use client';
 import { createCalendarAction } from '@/actions/createCalendarAction';
-import { InputField } from '@/components/fields';
-import { MultiselectField } from '@/components/fields/MultiselectField';
-import { Button } from '@/components/ui/button';
+import { Button, InputField, MultiselectField } from 'ui';
 import { User } from '@/db/schema';
 import { CreateCalendar } from '@/schemas/createCalendarSchema';
 import { useRouter } from 'next/navigation';

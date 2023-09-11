@@ -1,13 +1,13 @@
 'use client';
 
-import { Calendar } from '@/components/ui/calendar';
 import { formatISO, parseISO } from 'date-fns';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FC, useCallback } from 'react';
 import {
-  MonthChangeEventHandler,
+  Calendar,
   SelectSingleEventHandler,
-} from 'react-day-picker';
+  MonthChangeEventHandler,
+} from 'ui';
 
 interface Props {
   calendarId: string;

@@ -1,5 +1,5 @@
 'use client';
-import { LinkButton } from '@/components/composite/LinkButton';
+import { LinkButton } from 'ui';
 import { FC } from 'react';
 
 interface Props {
