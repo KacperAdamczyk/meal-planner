@@ -1,5 +1,4 @@
 import { getMonthBoundary } from '@/db/actions/helpers/getMonthBoundary';
-// import { describe, expect, test } from 'vitest';
 import { describe, test, expect } from 'bun:test';
 
 describe('getMonthBoundary', () => {
