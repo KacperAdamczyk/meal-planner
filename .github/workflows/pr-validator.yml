@@ -15,11 +15,11 @@ jobs:
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         with:
-          bun-version: latest
+          version: latest
       - uses: oven-sh/setup-bun@v1
         name: Install Bun
         with:
-          version: latest
+          bun-version: latest
       - run: pnpm install --frozen-lockfile
       - run: bun run lint
       - run: bun run format:check
