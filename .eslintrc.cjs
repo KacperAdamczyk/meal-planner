@@ -13,5 +13,5 @@ module.exports = {
     project: true,
     tsconfigRootDir: __dirname,
   },
-  ignorePatterns: ['components/ui/**/*', 'tsconfig.json'],
+  ignorePatterns: ['components/ui/**/*', 'tsconfig.json', '*.cjs', '*.mjs'],
 };
