@@ -36,7 +36,7 @@ export const SelectedDay: FC<Props> = async ({ calendarId, date }) => {
   const groupedMeals = groupMealsByType(dayMeals, mealTypes).at(0);
 
   return (
-    <div className="m-2 w-full rounded border-2 border-secondary p-4">
+    <div className="min-w-full rounded border-2 border-secondary p-4">
       {groupedMeals ? (
         <MealGroup groupedMeals={groupedMeals} />
       ) : (
