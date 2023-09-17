@@ -8,14 +8,14 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { GetMealResult } from '@/db/actions/getMeals';
+import { GetMealsResult } from '@/db/actions/getMeals';
 import { Wheat } from 'lucide-react';
 import Link from 'next/link';
 import { FC } from 'react';
 
 interface Props {
   calendarId: string;
-  meals: GetMealResult;
+  meals: GetMealsResult;
 }
 
 export const MealsList: FC<Props> = ({ calendarId, meals }) => {
