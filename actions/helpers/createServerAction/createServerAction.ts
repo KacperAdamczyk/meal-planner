@@ -1,4 +1,3 @@
-'use server';
 import { User } from '@/db/schema';
 import { getUser, serverActionDb } from '@/db/supabase';
 import { revalidatePath, revalidateTag } from 'next/cache';

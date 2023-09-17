@@ -15,7 +15,7 @@ import { FC } from 'react';
 
 interface Props {
   calendarId: string;
-  meals: GetMealsResult;
+  meals: GetMealsResult[];
 }
 
 export const MealsList: FC<Props> = ({ calendarId, meals }) => {
