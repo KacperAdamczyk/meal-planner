@@ -4,7 +4,7 @@ import { revalidatePath, revalidateTag } from 'next/cache';
 import { ZodSchema, z } from 'zod';
 
 export const createServerAction =
-  <Schema extends ZodSchema, Params extends any[], Return>(
+  <Schema extends ZodSchema, Params extends unknown[], Return>(
     schema: Schema,
     action: (
       user: User,

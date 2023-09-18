@@ -1,6 +1,7 @@
 import { db } from '@/db';
 import { getCalendarHelper } from '@/db/actions/helpers';
 import {
+  Meal,
   User,
   calendars,
   mealTypes,
@@ -9,20 +10,20 @@ import {
 } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
-export type GetMealResult = {
-  id: string;
-  name: string;
+export interface GetMealsResult extends Meal {
   defaultMealType: string | null;
-}[];
+}
 
 export const getMeals = (
   user: User,
   calendarId: string,
-): Promise<GetMealResult> =>
+): Promise<GetMealsResult[]> =>
   db
     .select({
       id: meals.id,
       name: meals.name,
+      calendarId: meals.calendarId,
+      defaultMealTypeId: mealTypes.id,
       defaultMealType: mealTypes.name,
     })
     .from(calendars)

@@ -7,16 +7,17 @@ export const getCalendar = async (
   user: User,
   calendarId: string,
 ): Promise<Calendar | undefined> => {
-  const calendar = await db
-    .select({
-      id: calendars.id,
-      name: calendars.name,
-      userId: calendars.userId,
-    })
-    .from(calendars)
-    .leftJoin(sharedCalendars, eq(sharedCalendars.calendarId, calendars.id))
-    .where(getCalendarHelper(user, calendarId))
-    .then((calendars) => calendars.at(0));
+  const calendar = (
+    await db
+      .select({
+        id: calendars.id,
+        name: calendars.name,
+        userId: calendars.userId,
+      })
+      .from(calendars)
+      .leftJoin(sharedCalendars, eq(sharedCalendars.calendarId, calendars.id))
+      .where(getCalendarHelper(user, calendarId))
+  ).at(0);
 
   return calendar;
 };
