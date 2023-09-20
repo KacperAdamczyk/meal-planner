@@ -12,6 +12,34 @@ const config: StorybookConfig = {
     '@storybook/addon-essentials',
     '@storybook/addon-onboarding',
     '@storybook/addon-interactions',
+    '@storybook/addon-styling-webpack',
+    {
+      name: '@storybook/addon-styling-webpack',
+
+      options: {
+        rules: [
+          {
+            test: /\.css$/,
+            sideEffects: true,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('css-loader'),
+                options: {
+                  importLoaders: 1,
+                },
+              },
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  implementation: require.resolve('postcss'),
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
   ],
   framework: {
     name: '@storybook/nextjs',
@@ -33,11 +61,6 @@ const config: StorybookConfig = {
         }),
       ];
     }
-
-    return config;
-  },
-  babel: (config) => {
-    console.log(config.plugins, config.presets);
 
     return config;
   },
