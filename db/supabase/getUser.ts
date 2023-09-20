@@ -17,8 +17,8 @@ export const getUser = cache(async (handler: Handler): Promise<User> => {
     error,
   } = await handler().auth.getSession();
 
-  if (error || !session?.user) {
-    throw error;
+  if (error ?? !session?.user) {
+    throw new Error(error?.message ?? 'Not authenticated');
   }
 
   return {

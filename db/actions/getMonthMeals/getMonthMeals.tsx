@@ -8,7 +8,7 @@ import {
   dayMeals,
   sharedCalendars,
 } from '@/db/schema';
-import { between, eq } from 'drizzle-orm';
+import { and, between, eq } from 'drizzle-orm';
 
 export const getMonthMeals = async (
   user: User,
@@ -29,5 +29,10 @@ export const getMonthMeals = async (
     .leftJoin(sharedCalendars, eq(calendars.id, sharedCalendars.calendarId))
     .where(getCalendarHelper(user, calendarId))
     .innerJoin(dayMeals, eq(dayMeals.calendarId, calendars.id))
-    .where(between(dayMeals.date, monthStartISO, monthEndISO));
+    .where(
+      and(
+        eq(dayMeals.calendarId, calendarId),
+        between(dayMeals.date, monthStartISO, monthEndISO),
+      ),
+    );
 };
