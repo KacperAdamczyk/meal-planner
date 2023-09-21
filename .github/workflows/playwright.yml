@@ -1,27 +1,31 @@
 name: Playwright Tests
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
 jobs:
-  test:
-    timeout-minutes: 60
+  playwright:
+    name: 'Playwright Tests'
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 18
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
-    - uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      - uses: actions/checkout@v4
+        name: Checkout
+      - uses: oven-sh/setup-bun@v1
+        name: Install Bun
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Waiting for Vercel Preview
+        uses: patrickedqvist/wait-for-vercel-preview@v1
+        id: waitForPreview
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          max_timeout: 60
+      - name: Run your tests
+        run: bun playwright test
+        env:
+          E2E_BASE_URL: ${{ steps.waitForPreview.outputs.url }}
