@@ -13,19 +13,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         name: Checkout
-      - uses: oven-sh/setup-bun@v1
-        name: Install Bun
+      # - uses: oven-sh/setup-bun@v1
+      #   name: Install Bun
+      #   with:
+      #     bun-version: latest
+      - uses: actions/setup-node@v3
         with:
-          bun-version: latest
+          node-version: 18
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        # run: bun install --frozen-lockfile
+        run: npm install
       - name: Waiting for Vercel Preview
         uses: patrickedqvist/wait-for-vercel-preview@v1
         id: waitForPreview
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           max_timeout: 60
-      - name: Run your tests
-        run: bun playwright test
+      - name: Run tests
+        run: npm run test:e2e
         env:
           E2E_BASE_URL: ${{ steps.waitForPreview.outputs.url }}
