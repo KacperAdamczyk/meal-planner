@@ -6,6 +6,7 @@ export const env = createEnv({
     DATABASE_URL: z.string().url().min(1),
     SUPABASE_URL: z.string().url().min(1),
     SUPABASE_ANON_KEY: z.string().min(1),
+    DEV_CREDENTIALS_LOGIN: z.enum(['true', 'false']).default('false'),
   },
   experimental__runtimeEnv: {},
   skipValidation: process.env.CI === 'true',

@@ -11,9 +11,37 @@ import {
 import { serverActionDb } from '@/db/supabase';
 import { Button } from '@/components/ui/button';
 import { headers } from 'next/headers';
+import { env } from '@/env';
+import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
 
 export default function Login() {
-  const handleSignIn = async (formData: FormData) => {
+  const handleCredentialsSignIn = async (formData: FormData) => {
+    'use server';
+    const email = formData.get('email');
+    const password = formData.get('password');
+
+    if (typeof email !== 'string' || typeof password !== 'string') {
+      throw new Error('Email or password is not a string');
+    }
+
+    const supabase = serverActionDb();
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      console.error(error);
+    }
+
+    if (data.user) {
+      redirect('/');
+    }
+  };
+
+  const handleOauthSignIn = async (formData: FormData) => {
     'use server';
     const provider = formData.get('provider');
 
@@ -30,10 +58,15 @@ export default function Login() {
     const supabase = serverActionDb();
     const {
       data: { url },
+      error,
     } = await supabase.auth.signInWithOAuth({
       provider: provider as Provider,
       options: { redirectTo: new URL('/auth/callback', origin).toString() },
     });
+
+    if (error) {
+      console.error(error);
+    }
 
     if (url) {
       redirect(url);
@@ -42,13 +75,36 @@ export default function Login() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <Card className="mt-10 w-2/12">
+      <Card className="mt-10 w-4/12">
         <CardHeader>
           <CardTitle>Login</CardTitle>
           <CardDescription>Select login provider</CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={handleSignIn} className="flex flex-col gap-2">
+          {env.DEV_CREDENTIALS_LOGIN === 'true' && (
+            <>
+              <form
+                action={handleCredentialsSignIn}
+                className="flex flex-col gap-2"
+              >
+                <Input
+                  name="email"
+                  type="email"
+                  placeholder="Email"
+                  className="w-full"
+                />
+                <Input
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  className="w-full"
+                />
+                <Button type="submit">Login with credentials</Button>
+              </form>
+              <Separator className="my-4" />
+            </>
+          )}
+          <form action={handleOauthSignIn} className="flex flex-col gap-2">
             <Button
               name="provider"
               value="discord"
