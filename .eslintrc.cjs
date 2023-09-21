@@ -7,6 +7,7 @@ module.exports = {
     'plugin:@typescript-eslint/strict-type-checked',
     'plugin:tailwindcss/recommended',
     'prettier',
+    'plugin:storybook/recommended',
   ],
   plugins: ['@typescript-eslint'],
   parserOptions: {
