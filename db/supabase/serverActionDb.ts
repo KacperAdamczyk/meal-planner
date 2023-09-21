@@ -3,9 +3,11 @@ import { cookies } from 'next/headers';
 import { env } from '@/env';
 
 export const serverActionDb = () => {
+  const cookiesStore = cookies();
+
   return createServerActionClient(
     {
-      cookies,
+      cookies: () => cookiesStore,
     },
     {
       supabaseUrl: env.SUPABASE_URL,

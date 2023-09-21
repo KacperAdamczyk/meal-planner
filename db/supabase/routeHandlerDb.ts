@@ -3,9 +3,11 @@ import { cookies } from 'next/headers';
 import { env } from '@/env';
 
 export const routeHandlerDb = () => {
+  const cookiesStore = cookies();
+
   return createRouteHandlerClient(
     {
-      cookies,
+      cookies: () => cookiesStore,
     },
     {
       supabaseUrl: env.SUPABASE_URL,

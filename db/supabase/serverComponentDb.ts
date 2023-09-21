@@ -2,13 +2,16 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { env } from '@/env';
 
-export const serverComponentDb = () =>
-  createServerComponentClient(
+export const serverComponentDb = () => {
+  const cookiesStore = cookies();
+
+  return createServerComponentClient(
     {
-      cookies,
+      cookies: () => cookiesStore,
     },
     {
       supabaseUrl: env.SUPABASE_URL,
       supabaseKey: env.SUPABASE_ANON_KEY,
     },
   );
+};
