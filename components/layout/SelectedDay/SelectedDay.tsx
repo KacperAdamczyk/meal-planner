@@ -6,7 +6,7 @@ import { getDate, getMonth, getYear, parseISO } from 'date-fns';
 import { notFound } from 'next/navigation';
 import { FC } from 'react';
 import { getDayMeals } from '@/db/actions/getDayMeals';
-import { MealGroup } from '@/components/layout/MealGroup';
+import { MealGroup } from '@/components/custom/MealGroup';
 
 interface Props {
   calendarId: string;
@@ -35,13 +35,5 @@ export const SelectedDay: FC<Props> = async ({ calendarId, date }) => {
 
   const groupedMeals = groupMealsByType(dayMeals, mealTypes).at(0);
 
-  return (
-    <div className="min-w-full rounded border-2 border-secondary p-4">
-      {groupedMeals ? (
-        <MealGroup groupedMeals={groupedMeals} />
-      ) : (
-        <p className="text-center">No meals for this day</p>
-      )}
-    </div>
-  );
+  return <MealGroup groupedMeals={groupedMeals} />;
 };

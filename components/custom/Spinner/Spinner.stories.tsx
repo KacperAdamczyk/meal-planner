@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
   component: Spinner,
-  tags: ['docsgen'],
+  tags: ['autodocs'],
 } satisfies Meta<typeof Spinner>;
 
 export default meta;
