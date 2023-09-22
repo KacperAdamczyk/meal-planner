@@ -1,14 +1,10 @@
-import { CalendarForm } from '@/components/layout/CalendarForm';
-import { getSharableUsers } from '@/db/actions/getSharableUsers';
-import { getUser, serverComponentDb } from '@/db/supabase';
+import { CreateCalendarForm } from '@/components/layout/CreateCalendarForm';
+import { FC } from 'react';
 
-export default async function New() {
-  const user = await getUser(serverComponentDb);
-  const sharableUsers = await getSharableUsers(user);
+const NewCalendar: FC = () => (
+  <div className="mx-auto max-w-3xl">
+    <CreateCalendarForm />
+  </div>
+);
 
-  return (
-    <div className="mx-auto max-w-lg">
-      <CalendarForm sharableUsers={sharableUsers} />
-    </div>
-  );
-}
+export default NewCalendar;

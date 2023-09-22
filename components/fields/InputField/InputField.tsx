@@ -1,7 +1,8 @@
+import { RegisterFieldProps } from '@/components/fields';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { FC } from 'react';
-import { RegisterFieldProps } from '../FieldProps';
+import { ErrorMessage } from '@hookform/error-message';
 
 export const InputField: FC<RegisterFieldProps> = ({
   label,
@@ -15,6 +16,10 @@ export const InputField: FC<RegisterFieldProps> = ({
         id={register.name}
         placeholder={placeholder ?? register.name}
         {...register}
+      />
+      <ErrorMessage
+        name={register.name}
+        render={({ message }) => <p className="text-red-500">{message}</p>}
       />
     </div>
   );

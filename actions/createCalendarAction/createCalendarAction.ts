@@ -2,10 +2,10 @@
 
 import { createServerAction } from '@/actions/helpers';
 import { createCalendar } from '@/db/actions/createCalendar';
-import { createCalendarSchema } from '@/schemas/createCalendarSchema';
+import { calendarSchema } from '@/schemas/calendarSchema';
 
 export const createCalendarAction = createServerAction(
-  createCalendarSchema,
+  calendarSchema,
   createCalendar,
   {
     tag: 'calendars',
