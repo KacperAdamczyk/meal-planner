@@ -33,7 +33,7 @@ export const CalendarForm: FC<Props> = ({
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting, isValid },
+    formState: { isSubmitting },
   } = form;
 
   const [, startTransition] = useTransition();
@@ -75,7 +75,7 @@ export const CalendarForm: FC<Props> = ({
           valueKey="userId"
           valueLabel="User"
         />
-        <Button type="submit" disabled={isSubmitting || !isValid}>
+        <Button type="submit" disabled={isSubmitting}>
           Create
         </Button>
       </form>
