@@ -15,8 +15,7 @@ interface Props {
 }
 
 export const MealForm: FC<Props> = ({ mealTypes }) => {
-  const params = useParams();
-  const calendarId = params.calendarId.toString();
+  const { calendarId } = useParams<{ calendarId: string }>();
   const router = useRouter();
   const form = useForm<CreateMeal>({
     defaultValues: {

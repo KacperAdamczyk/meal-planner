@@ -6,18 +6,21 @@ import { MultiselectField } from '@/components/fields/MultiselectField';
 import { Button } from '@/components/ui/button';
 import { User } from '@/db/schema';
 import { calendarSchema, CalendarSchema } from '@/schemas/calendarSchema';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { FC, useMemo, useTransition } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { updateCalendarAction } from '@/actions/updateCalendarAction';
 
 interface Props {
+  edit?: boolean;
   sharableUsers: User[];
   defaultValues?: CalendarSchema;
-  action: typeof createCalendarAction;
+  action: typeof createCalendarAction | typeof updateCalendarAction;
 }
 
 export const CalendarForm: FC<Props> = ({
+  edit = false,
   sharableUsers,
   defaultValues = {
     name: '',
@@ -26,6 +29,7 @@ export const CalendarForm: FC<Props> = ({
   action,
 }) => {
   const router = useRouter();
+  const { calendarId } = useParams<{ calendarId: string }>();
   const form = useForm<CalendarSchema>({
     defaultValues,
     resolver: zodResolver(calendarSchema),
@@ -42,12 +46,12 @@ export const CalendarForm: FC<Props> = ({
     () =>
       handleSubmit((data) => {
         startTransition(async () => {
-          const calendar = await action(data);
+          const calendar = await action(data, calendarId);
 
           router.push(`/${calendar.id}`);
         });
       }),
-    [action, handleSubmit, router],
+    [action, handleSubmit, calendarId, router],
   );
 
   const options = useMemo(
@@ -76,7 +80,7 @@ export const CalendarForm: FC<Props> = ({
           valueLabel="User"
         />
         <Button type="submit" disabled={isSubmitting}>
-          Create
+          {edit ? 'Update' : 'Create'}
         </Button>
       </form>
     </FormProvider>

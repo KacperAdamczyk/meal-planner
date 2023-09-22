@@ -1,4 +1,4 @@
-import { createCalendarAction } from '@/actions/createCalendarAction';
+import { updateCalendarAction } from '@/actions/updateCalendarAction';
 import { CalendarForm } from '@/components/layout/CalendarForm';
 import { getCalendar } from '@/db/actions/getCalendar';
 import { getCalendarShares } from '@/db/actions/getCalendarShares';
@@ -29,7 +29,8 @@ export const EditCalendarForm: FC<Props> = async ({ calendarId }) => {
     <>
       <h1 className="text-2xl">New calendar</h1>
       <CalendarForm
-        action={createCalendarAction}
+        edit
+        action={updateCalendarAction}
         sharableUsers={sharableUsers}
         defaultValues={{
           name: calendar.name,

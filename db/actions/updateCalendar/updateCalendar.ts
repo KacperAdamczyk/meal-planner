@@ -5,8 +5,8 @@ import { eq, inArray } from 'drizzle-orm';
 
 export const updateCalendar = async (
   user: User,
-  calendarId: string,
   { name, shared }: CalendarSchema,
+  calendarId: string,
 ) => {
   const calendar = (
     await db.select().from(calendars).where(eq(calendars.id, calendarId))
