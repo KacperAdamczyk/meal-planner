@@ -6,7 +6,7 @@ import {
   mealTypes,
   sharedCalendars,
 } from '@/db/schema';
-import { CalendarSchema } from '@/schemas/createCalendarSchema';
+import { CalendarSchema } from '@/schemas/calendarSchema';
 
 export const createCalendar = (
   user: User,
