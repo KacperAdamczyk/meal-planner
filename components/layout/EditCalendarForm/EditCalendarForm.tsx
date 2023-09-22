@@ -3,6 +3,7 @@ import { CalendarForm } from '@/components/layout/CalendarForm';
 import { getCalendar } from '@/db/actions/getCalendar';
 import { getCalendarShares } from '@/db/actions/getCalendarShares';
 import { getSharableUsers } from '@/db/actions/getSharableUsers';
+import { getUser as getOwner } from '@/db/actions/getUser';
 import { getUser, serverComponentDb } from '@/db/supabase';
 import { notFound } from 'next/navigation';
 import { FC } from 'react';
@@ -13,23 +14,33 @@ interface Props {
 
 export const EditCalendarForm: FC<Props> = async ({ calendarId }) => {
   const user = await getUser(serverComponentDb);
-  const [sharableUsers, calendar, shares] = await Promise.all([
-    getSharableUsers(user, true),
+  const [calendar, shares, sharableUsers] = await Promise.all([
     getCalendar(user, calendarId),
     getCalendarShares(calendarId),
+    getSharableUsers(user, true),
   ]);
 
   if (!calendar) {
     notFound();
   }
 
-  const isOwner = calendar.userId === user.id;
+  const owner = await getOwner(calendar.userId);
+
+  const isOwner = owner?.id === user.id;
 
   return (
     <>
-      <h1 className="text-2xl">New calendar</h1>
+      <h1 className="text-2xl">
+        Edit <span className="italic">{calendar.name}</span>
+      </h1>
+      {!isOwner && (
+        <h3 className="text-sm">
+          Owned by: <span className="italic">{owner?.email}</span>
+        </h3>
+      )}
       <CalendarForm
         edit
+        readOnly
         action={updateCalendarAction}
         sharableUsers={sharableUsers}
         defaultValues={{

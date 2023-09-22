@@ -14,6 +14,7 @@ import { updateCalendarAction } from '@/actions/updateCalendarAction';
 
 interface Props {
   edit?: boolean;
+  readOnly?: boolean;
   sharableUsers: User[];
   defaultValues?: CalendarSchema;
   action: typeof createCalendarAction | typeof updateCalendarAction;

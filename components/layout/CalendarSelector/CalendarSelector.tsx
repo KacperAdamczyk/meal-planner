@@ -59,9 +59,11 @@ export const CalendarSelector: FC<Props> = ({
         options={options}
         placeholder="Select calendar"
       />
-      <Button variant="outline" size="icon" onClick={onEditClick}>
-        <Settings className="h-4 w-4" />
-      </Button>
+      {!!selectedCalendarId && (
+        <Button variant="outline" size="icon" onClick={onEditClick}>
+          <Settings className="h-4 w-4" />
+        </Button>
+      )}
       <Button variant="outline" size="icon" onClick={onNewClick}>
         <Plus className="h-4 w-4" />
       </Button>
