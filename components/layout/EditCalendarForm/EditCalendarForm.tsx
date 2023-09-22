@@ -14,7 +14,7 @@ interface Props {
 export const EditCalendarForm: FC<Props> = async ({ calendarId }) => {
   const user = await getUser(serverComponentDb);
   const [sharableUsers, calendar, shares] = await Promise.all([
-    getSharableUsers(user),
+    getSharableUsers(user, true),
     getCalendar(user, calendarId),
     getCalendarShares(calendarId),
   ]);

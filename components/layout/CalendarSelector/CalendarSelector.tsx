@@ -3,7 +3,7 @@
 import { Combobox, ComboboxOption } from '@/components/composite/Combobox';
 import { Button } from '@/components/ui/button';
 import { UserCalendar } from '@/db/actions/getUserCalendars';
-import { Plus, Share2 } from 'lucide-react';
+import { Plus, Share2, Settings } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { FC, useCallback, useMemo } from 'react';
 
@@ -20,7 +20,11 @@ export const CalendarSelector: FC<Props> = ({
 }) => {
   const router = useRouter();
 
-  const onClick = useCallback(() => {
+  const onEditClick = useCallback(() => {
+    router.push(`/${selectedCalendarId}/edit`);
+  }, [router, selectedCalendarId]);
+
+  const onNewClick = useCallback(() => {
     router.push('/new');
   }, [router]);
 
@@ -55,7 +59,10 @@ export const CalendarSelector: FC<Props> = ({
         options={options}
         placeholder="Select calendar"
       />
-      <Button variant="outline" size="icon" onClick={onClick}>
+      <Button variant="outline" size="icon" onClick={onEditClick}>
+        <Settings className="h-4 w-4" />
+      </Button>
+      <Button variant="outline" size="icon" onClick={onNewClick}>
         <Plus className="h-4 w-4" />
       </Button>
     </div>
