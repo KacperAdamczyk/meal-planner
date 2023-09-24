@@ -1,4 +1,5 @@
 import { updateCalendarAction } from '@/actions/updateCalendarAction';
+import { Header } from '@/components/custom/Header';
 import { CalendarForm } from '@/components/layout/CalendarForm';
 import { getCalendar } from '@/db/actions/getCalendar';
 import { getCalendarShares } from '@/db/actions/getCalendarShares';
@@ -30,14 +31,12 @@ export const EditCalendarForm: FC<Props> = async ({ calendarId }) => {
 
   return (
     <>
-      <h1 className="text-2xl">
-        Edit <span className="italic">{calendar.name}</span>
-      </h1>
-      {!isOwner && (
-        <h3 className="text-sm">
-          Owned by: <span className="italic">{owner?.email}</span>
-        </h3>
-      )}
+      <Header
+        header="Edit"
+        headerItalic={calendar.name}
+        subHeader={isOwner ? undefined : 'Owned by:'}
+        subHeaderItalic={isOwner ? undefined : owner?.email ?? owner?.id}
+      />
       <CalendarForm
         edit
         readOnly

@@ -1,4 +1,5 @@
 import { createCalendarAction } from '@/actions/createCalendarAction';
+import { Header } from '@/components/custom/Header';
 import { CalendarForm } from '@/components/layout/CalendarForm';
 import { getSharableUsers } from '@/db/actions/getSharableUsers';
 import { getUser, serverComponentDb } from '@/db/supabase';
@@ -10,7 +11,7 @@ export const CreateCalendarForm: FC = async () => {
 
   return (
     <>
-      <h1 className="text-2xl">New calendar</h1>
+      <Header header="Create" headerItalic="Calendar" />
       <CalendarForm
         action={createCalendarAction}
         sharableUsers={sharableUsers}
