@@ -1,9 +1,9 @@
 'use client';
 
 import { Combobox, ComboboxOption } from '@/components/composite/Combobox';
-import { Button } from '@/components/ui/button';
+import { LinkButton } from '@/components/composite/LinkButton';
 import { UserCalendar } from '@/db/actions/getUserCalendars';
-import { Plus, Share2, Settings } from 'lucide-react';
+import { Plus, Share2, Eye } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { FC, useCallback, useMemo } from 'react';
 
@@ -19,14 +19,6 @@ export const CalendarSelector: FC<Props> = ({
   sharedCalendars,
 }) => {
   const router = useRouter();
-
-  const onEditClick = useCallback(() => {
-    router.push(`/${selectedCalendarId}/edit`);
-  }, [router, selectedCalendarId]);
-
-  const onNewClick = useCallback(() => {
-    router.push('/new');
-  }, [router]);
 
   const onChange = useCallback(
     (id: string | undefined) => {
@@ -60,13 +52,17 @@ export const CalendarSelector: FC<Props> = ({
         placeholder="Select calendar"
       />
       {!!selectedCalendarId && (
-        <Button variant="outline" size="icon" onClick={onEditClick}>
-          <Settings className="h-4 w-4" />
-        </Button>
+        <LinkButton
+          href={`/${selectedCalendarId}/details`}
+          variant="outline"
+          size="icon"
+        >
+          <Eye className="h-4 w-4" />
+        </LinkButton>
       )}
-      <Button variant="outline" size="icon" onClick={onNewClick}>
+      <LinkButton href="/new" variant="outline" size="icon">
         <Plus className="h-4 w-4" />
-      </Button>
+      </LinkButton>
     </div>
   );
 };

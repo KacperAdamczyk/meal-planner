@@ -15,5 +15,6 @@ export const Default: Story = {
     headerItalic: 'Italic',
     subHeader: 'Sub Header',
     subHeaderItalic: 'Italic',
+    children: <div className="border border-red-500 p-2">Actions</div>,
   },
 };
