@@ -5,22 +5,35 @@ import { InputField } from '@/components/fields';
 import { MultiselectField } from '@/components/fields/MultiselectField';
 import { Button } from '@/components/ui/button';
 import { User } from '@/db/schema';
-import { CreateCalendar } from '@/schemas/createCalendarSchema';
-import { useRouter } from 'next/navigation';
+import { calendarSchema, CalendarSchema } from '@/schemas/calendarSchema';
+import { useParams, useRouter } from 'next/navigation';
 import { FC, useMemo, useTransition } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { updateCalendarAction } from '@/actions/updateCalendarAction';
 
 interface Props {
+  edit?: boolean;
+  readOnly?: boolean;
   sharableUsers: User[];
+  defaultValues?: CalendarSchema;
+  action: typeof createCalendarAction | typeof updateCalendarAction;
 }
 
-export const CalendarForm: FC<Props> = ({ sharableUsers }) => {
+export const CalendarForm: FC<Props> = ({
+  edit = false,
+  sharableUsers,
+  defaultValues = {
+    name: '',
+    shared: [],
+  },
+  action,
+}) => {
   const router = useRouter();
-  const form = useForm<CreateCalendar>({
-    defaultValues: {
-      name: '',
-      shared: [],
-    },
+  const { calendarId } = useParams<{ calendarId: string }>();
+  const form = useForm<CalendarSchema>({
+    defaultValues,
+    resolver: zodResolver(calendarSchema),
   });
   const {
     register,
@@ -34,12 +47,12 @@ export const CalendarForm: FC<Props> = ({ sharableUsers }) => {
     () =>
       handleSubmit((data) => {
         startTransition(async () => {
-          const calendar = await createCalendarAction(data);
+          const calendar = await action(data, calendarId);
 
           router.push(`/${calendar.id}`);
         });
       }),
-    [handleSubmit, router],
+    [action, handleSubmit, calendarId, router],
   );
 
   const options = useMemo(
@@ -55,11 +68,11 @@ export const CalendarForm: FC<Props> = ({ sharableUsers }) => {
     <FormProvider {...form}>
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
         <InputField
-          label="Name"
+          label="Name *"
           placeholder="Calendar name"
           register={register('name')}
         />
-        <MultiselectField<CreateCalendar, 'shared'>
+        <MultiselectField<CalendarSchema, 'shared'>
           name="shared"
           label="Shared to"
           placeholder="Select user"
@@ -68,7 +81,7 @@ export const CalendarForm: FC<Props> = ({ sharableUsers }) => {
           valueLabel="User"
         />
         <Button type="submit" disabled={isSubmitting}>
-          Create
+          {edit ? 'Update' : 'Create'}
         </Button>
       </form>
     </FormProvider>

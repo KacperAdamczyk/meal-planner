@@ -17,9 +17,10 @@ interface Props {
 }
 
 export const DayMealForm: FC<Props> = ({ meals, mealTypes }) => {
-  const params = useParams();
-  const calendarId = params.calendarId.toString();
-  const date = params.date.toString();
+  const { date, calendarId } = useParams<{
+    date: string;
+    calendarId: string;
+  }>();
   const router = useRouter();
   const form = useForm<CreateDayMeal>({
     defaultValues: {

@@ -6,11 +6,11 @@ import {
   mealTypes,
   sharedCalendars,
 } from '@/db/schema';
-import { CreateCalendar } from '@/schemas/createCalendarSchema';
+import { CalendarSchema } from '@/schemas/calendarSchema';
 
 export const createCalendar = (
   user: User,
-  { name, shared }: CreateCalendar,
+  { name, shared }: CalendarSchema,
 ): Promise<Calendar> => {
   return db.transaction(async (tx) => {
     const [calendar] = await tx

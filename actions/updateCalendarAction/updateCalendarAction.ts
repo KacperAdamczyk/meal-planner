@@ -1,12 +1,12 @@
 'use server';
 
 import { createServerAction } from '@/actions/helpers';
-import { createCalendar } from '@/db/actions/createCalendar';
+import { updateCalendar } from '@/db/actions/updateCalendar';
 import { calendarSchema } from '@/schemas/calendarSchema';
 
-export const createCalendarAction = createServerAction(
+export const updateCalendarAction = createServerAction(
   calendarSchema,
-  createCalendar,
+  updateCalendar,
   {
     tag: 'calendars',
   },

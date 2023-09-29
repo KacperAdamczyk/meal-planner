@@ -15,6 +15,7 @@ export default async function Home() {
   const { calendars, sharedCalendars } = await unstable_cache(
     getUserCalendars,
     [user.id],
+    { tags: ['calendars'] },
   )(user);
 
   return (

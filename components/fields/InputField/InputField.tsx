@@ -1,7 +1,8 @@
+import { RegisterFieldProps } from '@/components/fields';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { FC } from 'react';
-import { RegisterFieldProps } from '../FieldProps';
+import { FieldErrorMessage } from '@/components/fields/FieldErrorMessage';
 
 export const InputField: FC<RegisterFieldProps> = ({
   label,
@@ -16,6 +17,7 @@ export const InputField: FC<RegisterFieldProps> = ({
         placeholder={placeholder ?? register.name}
         {...register}
       />
+      <FieldErrorMessage name={register.name} />
     </div>
   );
 };
