@@ -1,11 +1,5 @@
 import { db } from '@/db';
-import {
-  Calendar,
-  SharedCalendar,
-  User,
-  calendars,
-  sharedCalendars,
-} from '@/db/schema';
+import { Calendar, User, calendars, sharedCalendars } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
 export type UserCalendar = Pick<Calendar, 'id' | 'name'>;

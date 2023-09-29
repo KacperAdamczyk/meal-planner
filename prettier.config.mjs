@@ -1,6 +1,5 @@
 const config = {
   singleQuote: true,
-  endOfLine: 'auto',
   plugins: ['prettier-plugin-tailwindcss'],
   tailwindFunctions: ['cn'],
   overrides: [
