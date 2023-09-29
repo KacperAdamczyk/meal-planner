@@ -36,7 +36,6 @@ export const CalendarForm: FC<Props> = ({
     resolver: zodResolver(calendarSchema),
   });
   const {
-    register,
     handleSubmit,
     formState: { isSubmitting },
   } = form;
@@ -68,9 +67,10 @@ export const CalendarForm: FC<Props> = ({
     <FormProvider {...form}>
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
         <InputField
-          label="Name *"
+          name="name"
+          label="Name"
           placeholder="Calendar name"
-          register={register('name')}
+          required
         />
         <MultiselectField<CalendarSchema, 'shared'>
           name="shared"
@@ -80,7 +80,7 @@ export const CalendarForm: FC<Props> = ({
           valueKey="userId"
           valueLabel="User"
         />
-        <Button type="submit" disabled={isSubmitting}>
+        <Button type="submit" variant="outline" disabled={isSubmitting}>
           {edit ? 'Update' : 'Create'}
         </Button>
       </form>

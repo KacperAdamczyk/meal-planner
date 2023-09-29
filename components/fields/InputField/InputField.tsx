@@ -1,23 +1,21 @@
-import { RegisterFieldProps } from '@/components/fields';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+'use client';
 import { FC } from 'react';
-import { FieldErrorMessage } from '@/components/fields/FieldErrorMessage';
+import { TextInput, TextInputProps } from '@mantine/core';
+import { useController } from 'react-hook-form';
 
-export const InputField: FC<RegisterFieldProps> = ({
-  label,
-  placeholder,
-  register,
-}) => {
+interface Props extends TextInputProps {
+  name: string;
+}
+
+export const InputField: FC<Props> = (props) => {
+  const {
+    field,
+    fieldState: { error },
+  } = useController(props);
+
   return (
     <div>
-      <Label>{label}</Label>
-      <Input
-        id={register.name}
-        placeholder={placeholder ?? register.name}
-        {...register}
-      />
-      <FieldErrorMessage name={register.name} />
+      <TextInput {...props} {...field} error={error?.message} />
     </div>
   );
 };

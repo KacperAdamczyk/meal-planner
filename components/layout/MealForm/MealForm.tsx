@@ -24,7 +24,6 @@ export const MealForm: FC<Props> = ({ mealTypes }) => {
     },
   });
   const {
-    register,
     handleSubmit,
     formState: { isSubmitting },
   } = form;
@@ -55,11 +54,7 @@ export const MealForm: FC<Props> = ({ mealTypes }) => {
   return (
     <FormProvider {...form}>
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
-        <InputField
-          label="Name"
-          placeholder="Meal name"
-          register={register('name')}
-        />
+        <InputField name="name" label="Name" placeholder="Meal name" required />
         <SelectField
           name="defaultMealType"
           options={options}
