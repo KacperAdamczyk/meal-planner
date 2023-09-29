@@ -105,18 +105,18 @@ export default function Login() {
           )}
           <form action={handleOauthSignIn} className="flex flex-col gap-2">
             <Button
+              type="submit"
               name="provider"
               value="discord"
-              type="submit"
               color="#7289da"
               className="w-full"
             >
               Discord
             </Button>
             <Button
+              type="submit"
               name="provider"
               value="github"
-              type="submit"
               className="w-full"
               color="gray"
             >
