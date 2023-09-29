@@ -3,10 +3,10 @@
 import { createDayMealAction } from '@/actions/createDayMealAction';
 import { ComboboxOption } from '@/components/composite/Combobox';
 import { SelectField } from '@/components/fields';
-import { Button } from '@/components/ui/button';
 import { GetMealsResult } from '@/db/actions/getMeals';
 import { MealType } from '@/db/schema';
 import { CreateDayMeal } from '@/schemas/createDayMealSchema';
+import { Button } from '@mantine/core';
 import { useParams, useRouter } from 'next/navigation';
 import { FC, useMemo, useTransition } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';

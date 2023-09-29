@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { FC } from 'react';
 import { redirect } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { LogOut } from 'lucide-react';
 import { serverComponentDb } from '@/db/supabase/serverComponentDb';
 import { serverActionDb } from '@/db/supabase/serverActionDb';
 import { ModeToggle } from '@/components/composite/ModeToggle';
+import { ActionIcon } from '@mantine/core';
+import { IconLogout } from '@tabler/icons-react';
 
 export const UserOptions: FC = async () => {
   const supabase = serverComponentDb();
@@ -26,9 +26,9 @@ export const UserOptions: FC = async () => {
       {!!user && (
         <>
           <span className="hidden px-2 text-xs sm:inline">{user.email}</span>
-          <Button variant="outline" size="icon" type="submit">
-            <LogOut className="h-4 w-4" />
-          </Button>
+          <ActionIcon variant="outline" size="lg" type="submit">
+            <IconLogout className="h-4 w-4" />
+          </ActionIcon>
         </>
       )}
       <ModeToggle />

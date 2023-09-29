@@ -9,11 +9,11 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { serverActionDb } from '@/db/supabase';
-import { Button } from '@/components/ui/button';
 import { headers } from 'next/headers';
 import { env } from '@/env';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
+import { Button } from '@mantine/core';
 
 export default function Login() {
   const handleCredentialsSignIn = async (formData: FormData) => {
@@ -109,7 +109,8 @@ export default function Login() {
               name="provider"
               value="discord"
               type="submit"
-              className="w-full bg-[#7289da]"
+              color="#7289da"
+              className="w-full"
             >
               Discord
             </Button>
@@ -118,6 +119,7 @@ export default function Login() {
               value="github"
               type="submit"
               className="w-full"
+              color="gray"
             >
               GitHub
             </Button>

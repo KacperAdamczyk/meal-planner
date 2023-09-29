@@ -3,9 +3,9 @@
 import { createMealAction } from '@/actions/createMealAction/createMealAction';
 import { ComboboxOption } from '@/components/composite/Combobox';
 import { InputField, SelectField } from '@/components/fields';
-import { Button } from '@/components/ui/button';
 import { MealType } from '@/db/schema';
 import { CreateMeal } from '@/schemas/createMealSchema';
+import { Button } from '@mantine/core';
 import { useParams, useRouter } from 'next/navigation';
 import { FC, useMemo, useTransition } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';

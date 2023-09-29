@@ -3,7 +3,7 @@
 import { Combobox, ComboboxOption } from '@/components/composite/Combobox';
 import { LinkButton } from '@/components/composite/LinkButton';
 import { UserCalendar } from '@/db/actions/getUserCalendars';
-import { Plus, Share2, Eye } from 'lucide-react';
+import { Plus, Share2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { FC, useCallback, useMemo } from 'react';
 
@@ -51,16 +51,7 @@ export const CalendarSelector: FC<Props> = ({
         options={options}
         placeholder="Select calendar"
       />
-      {!!selectedCalendarId && (
-        <LinkButton
-          href={`/${selectedCalendarId}/details`}
-          variant="outline"
-          size="icon"
-        >
-          <Eye className="h-4 w-4" />
-        </LinkButton>
-      )}
-      <LinkButton href="/new" variant="outline" size="icon">
+      <LinkButton variant="outline" size="icon" href={'/new'}>
         <Plus className="h-4 w-4" />
       </LinkButton>
     </div>

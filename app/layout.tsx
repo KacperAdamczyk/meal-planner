@@ -1,7 +1,6 @@
 import { Noto_Sans } from 'next/font/google';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { cn } from '@/lib/utils';
-import { ThemeProvider } from '@/components/layout/ThemeProvider';
 import { PropsWithChildren } from 'react';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 
@@ -25,10 +24,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <ColorSchemeScript />
       </head>
       <body className={cn(notoSans.className, 'min-w-[300px]')}>
-        <MantineProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <AppLayout>{children}</AppLayout>
-          </ThemeProvider>
+        <MantineProvider defaultColorScheme="dark">
+          <AppLayout>{children}</AppLayout>
         </MantineProvider>
       </body>
     </html>

@@ -1,5 +1,5 @@
 'use client';
-import { Button, ButtonProps } from '@/components/ui/button';
+import { Button, ButtonProps } from '@mantine/core';
 import Link, { LinkProps } from 'next/link';
 import { usePathname } from 'next/navigation';
 import { PropsWithChildren } from 'react';
@@ -26,12 +26,13 @@ export const LinkButton = <RouteType,>({
 
   return (
     <Button
-      asChild
       variant={variant ?? (active ? 'default' : 'ghost')}
+      component={Link<RouteType>}
+      href={href}
       size={size}
       disabled={disabled}
     >
-      {disabled ? <span>{children}</span> : <Link href={href}>{children}</Link>}
+      {children}
     </Button>
   );
 };

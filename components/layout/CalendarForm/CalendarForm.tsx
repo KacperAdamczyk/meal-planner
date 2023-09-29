@@ -3,10 +3,10 @@
 import { createCalendarAction } from '@/actions/createCalendarAction';
 import { InputField } from '@/components/fields';
 import { MultiselectField } from '@/components/fields/MultiselectField';
-import { Button } from '@/components/ui/button';
 import { User } from '@/db/schema';
 import { calendarSchema, CalendarSchema } from '@/schemas/calendarSchema';
 import { useParams, useRouter } from 'next/navigation';
+import { Button } from '@mantine/core';
 import { FC, useMemo, useTransition } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
