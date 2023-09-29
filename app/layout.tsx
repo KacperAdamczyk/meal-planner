@@ -6,6 +6,7 @@ import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 
 import './globals.css';
 import '@mantine/core/styles.css';
+import { ThemeProvider } from '@/components/layout/ThemeProvider';
 
 const notoSans = Noto_Sans({
   subsets: ['latin'],
@@ -24,9 +25,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <ColorSchemeScript />
       </head>
       <body className={cn(notoSans.className, 'min-w-[300px]')}>
-        <MantineProvider defaultColorScheme="dark">
+        <ThemeProvider>
           <AppLayout>{children}</AppLayout>
-        </MantineProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -3,6 +3,7 @@
 import { LinkButton } from '@/components/composite/LinkButton';
 import { UserCalendar } from '@/db/actions/getUserCalendars';
 import { ComboboxData, Select, SelectProps } from '@mantine/core';
+import { IconEye } from '@tabler/icons-react';
 import { Plus, Share2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { FC, useCallback, useMemo } from 'react';
@@ -52,7 +53,12 @@ export const CalendarSelector: FC<Props> = ({
         placeholder="Select calendar"
         clearable
       />
-      <LinkButton variant="outline" size="icon" href={'/new'}>
+      {selectedCalendarId && (
+        <LinkButton size="icon" href={`/${selectedCalendarId}/details`}>
+          <IconEye className="h-4 w-4" />
+        </LinkButton>
+      )}
+      <LinkButton size="icon" href={'/new'}>
         <Plus className="h-4 w-4" />
       </LinkButton>
     </div>
