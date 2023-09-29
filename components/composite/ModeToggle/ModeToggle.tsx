@@ -1,14 +1,7 @@
 'use client';
 
 import { IconSun, IconMoon, IconCheck } from '@tabler/icons-react';
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { ActionIcon, useMantineColorScheme } from '@mantine/core';
+import { ActionIcon, Menu, useMantineColorScheme } from '@mantine/core';
 
 enum Theme {
   Light = 'light',
@@ -20,37 +13,39 @@ export function ModeToggle() {
   const { setColorScheme } = useMantineColorScheme();
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+    <Menu>
+      <Menu.Target>
         <ActionIcon variant="outline" size="lg">
           <IconSun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <IconMoon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
         </ActionIcon>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem
+      </Menu.Target>
+      <Menu.Dropdown>
+        <Menu.Item
           onClick={() => {
             setColorScheme(Theme.Light);
           }}
+          rightSection={<IconCheck className="ml-2 dark:hidden" />}
         >
-          Light <IconCheck className="ml-2 dark:hidden" />
-        </DropdownMenuItem>
-        <DropdownMenuItem
+          Light
+        </Menu.Item>
+        <Menu.Item
           onClick={() => {
             setColorScheme(Theme.Dark);
           }}
+          rightSection={<IconCheck className="ml-2 hidden dark:inline" />}
         >
-          Dark <IconCheck className="ml-2 hidden dark:inline" />
-        </DropdownMenuItem>
-        <DropdownMenuItem
+          Dark
+        </Menu.Item>
+        <Menu.Item
           onClick={() => {
             setColorScheme(Theme.Auto);
           }}
         >
           System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+        </Menu.Item>
+      </Menu.Dropdown>
+    </Menu>
   );
 }

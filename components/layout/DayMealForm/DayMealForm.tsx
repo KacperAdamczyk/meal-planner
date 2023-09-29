@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 'use client';
 import { createDayMealAction } from '@/actions/createDayMealAction';
-import { ComboboxOption } from '@/components/composite/Combobox';
 import { SelectField } from '@/components/fields';
 import { GetMealsResult } from '@/db/actions/getMeals';
 import { MealType } from '@/db/schema';
 import { CreateDayMeal } from '@/schemas/createDayMealSchema';
-import { Button } from '@mantine/core';
+import { Button, ComboboxData } from '@mantine/core';
 import { useParams, useRouter } from 'next/navigation';
 import { FC, useMemo, useTransition } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -47,7 +46,7 @@ export const DayMealForm: FC<Props> = ({ meals, mealTypes }) => {
     [calendarId, date, handleSubmit, router],
   );
 
-  const mealOptions = useMemo<ComboboxOption[]>(
+  const mealOptions = useMemo<ComboboxData>(
     () =>
       meals.map(({ id, name }) => ({
         label: name,
@@ -55,7 +54,7 @@ export const DayMealForm: FC<Props> = ({ meals, mealTypes }) => {
       })),
     [meals],
   );
-  const mealTypesOptions = useMemo<ComboboxOption[]>(
+  const mealTypesOptions = useMemo<ComboboxData>(
     () =>
       mealTypes.map(({ id, name }) => ({
         label: name,

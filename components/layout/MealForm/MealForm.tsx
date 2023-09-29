@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 'use client';
 import { createMealAction } from '@/actions/createMealAction/createMealAction';
-import { ComboboxOption } from '@/components/composite/Combobox';
 import { InputField, SelectField } from '@/components/fields';
 import { MealType } from '@/db/schema';
 import { CreateMeal } from '@/schemas/createMealSchema';
-import { Button } from '@mantine/core';
+import { Button, ComboboxData } from '@mantine/core';
 import { useParams, useRouter } from 'next/navigation';
 import { FC, useMemo, useTransition } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -42,7 +41,7 @@ export const MealForm: FC<Props> = ({ mealTypes }) => {
     [calendarId, handleSubmit, router],
   );
 
-  const options = useMemo<ComboboxOption[]>(
+  const options = useMemo<ComboboxData>(
     () =>
       mealTypes.map(({ id, name }) => ({
         label: name,

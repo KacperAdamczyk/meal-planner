@@ -1,9 +1,9 @@
 'use client';
-import { Autocomplete, AutocompleteProps } from '@mantine/core';
+import { Select, SelectProps } from '@mantine/core';
 import { FC } from 'react';
 import { useController } from 'react-hook-form';
 
-interface Props extends AutocompleteProps {
+interface Props extends SelectProps {
   name: string;
 }
 
@@ -13,5 +13,5 @@ export const SelectField: FC<Props> = (props) => {
     fieldState: { error },
   } = useController(props);
 
-  return <Autocomplete {...field} {...props} error={error?.message} />;
+  return <Select {...field} {...props} error={error?.message} />;
 };

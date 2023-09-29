@@ -11,9 +11,8 @@ import {
 import { serverActionDb } from '@/db/supabase';
 import { headers } from 'next/headers';
 import { env } from '@/env';
-import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
-import { Button } from '@mantine/core';
+import { Button, TextInput } from '@mantine/core';
 
 export default function Login() {
   const handleCredentialsSignIn = async (formData: FormData) => {
@@ -87,13 +86,13 @@ export default function Login() {
                 action={handleCredentialsSignIn}
                 className="flex flex-col gap-2"
               >
-                <Input
+                <TextInput
                   name="email"
                   type="email"
                   placeholder="Email"
                   className="w-full"
                 />
-                <Input
+                <TextInput
                   name="password"
                   type="password"
                   placeholder="Password"

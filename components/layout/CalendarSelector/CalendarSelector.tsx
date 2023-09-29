@@ -1,8 +1,8 @@
 'use client';
 
-import { Combobox, ComboboxOption } from '@/components/composite/Combobox';
 import { LinkButton } from '@/components/composite/LinkButton';
 import { UserCalendar } from '@/db/actions/getUserCalendars';
+import { ComboboxData, Select, SelectProps } from '@mantine/core';
 import { Plus, Share2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { FC, useCallback, useMemo } from 'react';
@@ -20,8 +20,8 @@ export const CalendarSelector: FC<Props> = ({
 }) => {
   const router = useRouter();
 
-  const onChange = useCallback(
-    (id: string | undefined) => {
+  const onChange = useCallback<NonNullable<SelectProps['onChange']>>(
+    (id) => {
       if (id) {
         router.push(`/${id}`);
       } else {
@@ -31,7 +31,7 @@ export const CalendarSelector: FC<Props> = ({
     [router],
   );
 
-  const options = useMemo<ComboboxOption[]>(
+  const options = useMemo<ComboboxData>(
     () => [
       ...calendars.map(({ id, name }) => ({ label: name, value: id })),
       ...sharedCalendars.map(({ id, name }) => ({
@@ -45,11 +45,12 @@ export const CalendarSelector: FC<Props> = ({
 
   return (
     <div className="flex gap-2 align-middle">
-      <Combobox
+      <Select
         value={selectedCalendarId}
         onChange={onChange}
-        options={options}
+        data={options}
         placeholder="Select calendar"
+        clearable
       />
       <LinkButton variant="outline" size="icon" href={'/new'}>
         <Plus className="h-4 w-4" />
