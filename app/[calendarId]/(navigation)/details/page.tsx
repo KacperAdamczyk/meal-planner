@@ -14,7 +14,7 @@ interface Props {
   };
 }
 
-export const ViewCalendar: FC<Props> = async ({ params: { calendarId } }) => {
+const ViewCalendar: FC<Props> = async ({ params: { calendarId } }) => {
   const user = await getUser(serverComponentDb);
   const [calendar, shares] = await Promise.all([
     getCalendar(user, calendarId),
