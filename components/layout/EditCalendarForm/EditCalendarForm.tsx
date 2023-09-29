@@ -26,6 +26,7 @@ export const EditCalendarForm: FC<Props> = async ({ calendarId }) => {
   }
 
   const owner = await getOwner(calendar.userId);
+  const shared = shares.map(({ userId }) => userId);
 
   const isOwner = owner?.id === user.id;
 
@@ -44,7 +45,7 @@ export const EditCalendarForm: FC<Props> = async ({ calendarId }) => {
         sharableUsers={sharableUsers}
         defaultValues={{
           name: calendar.name,
-          shared: shares,
+          shared,
         }}
       />
     </>

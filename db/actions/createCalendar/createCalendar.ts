@@ -24,9 +24,7 @@ export const createCalendar = (
     if (shared.length) {
       await tx
         .insert(sharedCalendars)
-        .values(
-          shared.map(({ userId }) => ({ calendarId: calendar.id, userId })),
-        );
+        .values(shared.map((userId) => ({ calendarId: calendar.id, userId })));
     }
 
     await tx.insert(mealTypes).values([

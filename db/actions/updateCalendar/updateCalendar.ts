@@ -35,27 +35,29 @@ export const updateCalendar = async (
       .where(eq(sharedCalendars.calendarId, calendarId));
 
     const toAdd = shared.filter(
-      ({ userId }) =>
+      (userId) =>
         !currentShared.some(
           ({ userId: currentUserId }) => currentUserId === userId,
         ),
     );
-    const toRemove = currentShared.filter(
-      ({ userId }) =>
-        !shared.some(({ userId: currentUserId }) => currentUserId === userId),
-    );
+    const toRemove = currentShared
+      .filter(
+        ({ userId }) =>
+          !shared.some((currentUserId) => currentUserId === userId),
+      )
+      .map(({ userId }) => userId);
 
     if (toAdd.length) {
       await tx
         .insert(sharedCalendars)
-        .values(toAdd.map(({ userId }) => ({ calendarId, userId })));
+        .values(toAdd.map((userId) => ({ calendarId, userId })));
     }
 
     if (toRemove.length) {
       await tx.delete(sharedCalendars).where(
         inArray(
           sharedCalendars.userId,
-          toRemove.map(({ userId }) => userId),
+          toRemove.map((userId) => userId),
         ),
       );
     }

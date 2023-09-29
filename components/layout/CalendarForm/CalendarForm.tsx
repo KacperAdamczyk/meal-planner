@@ -72,13 +72,11 @@ export const CalendarForm: FC<Props> = ({
           placeholder="Calendar name"
           required
         />
-        <MultiselectField<CalendarSchema, 'shared'>
+        <MultiselectField
           name="shared"
           label="Shared to"
           placeholder="Select user"
-          options={options}
-          valueKey="userId"
-          valueLabel="User"
+          data={options}
         />
         <Button type="submit" variant="outline" disabled={isSubmitting}>
           {edit ? 'Update' : 'Create'}
