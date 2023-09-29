@@ -17,7 +17,7 @@ enum Theme {
 }
 
 export function ModeToggle() {
-  const { colorScheme, setColorScheme } = useMantineColorScheme();
+  const { setColorScheme } = useMantineColorScheme();
 
   return (
     <DropdownMenu>
@@ -34,21 +34,21 @@ export function ModeToggle() {
             setColorScheme(Theme.Light);
           }}
         >
-          Light {colorScheme === Theme.Light && <IconCheck className="ml-2" />}
+          Light <IconCheck className="ml-2 dark:hidden" />
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
             setColorScheme(Theme.Dark);
           }}
         >
-          Dark {colorScheme === Theme.Dark && <IconCheck className="ml-2" />}
+          Dark <IconCheck className="ml-2 hidden dark:inline" />
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
             setColorScheme(Theme.Auto);
           }}
         >
-          System {colorScheme === Theme.Auto && <IconCheck className="ml-2" />}
+          System
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
