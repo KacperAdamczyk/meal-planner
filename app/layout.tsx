@@ -3,7 +3,9 @@ import { AppLayout } from '@/components/layout/AppLayout';
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/components/layout/ThemeProvider';
 import { PropsWithChildren } from 'react';
+import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 
+import '@mantine/core/styles.css';
 import './globals.css';
 
 const notoSans = Noto_Sans({
@@ -19,10 +21,15 @@ export const metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
+      <head>
+        <ColorSchemeScript />
+      </head>
       <body className={cn(notoSans.className, 'min-w-[300px]')}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <AppLayout>{children}</AppLayout>
-        </ThemeProvider>
+        <MantineProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <AppLayout>{children}</AppLayout>
+          </ThemeProvider>
+        </MantineProvider>
       </body>
     </html>
   );
