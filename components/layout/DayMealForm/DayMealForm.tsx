@@ -69,17 +69,17 @@ export const DayMealForm: FC<Props> = ({ meals, mealTypes }) => {
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
         <SelectField
           name="meal"
-          options={mealOptions}
+          data={mealOptions}
           placeholder="Meal"
           label="Meal"
         />
         <SelectField
           name="mealType"
-          options={mealTypesOptions}
+          data={mealTypesOptions}
           placeholder="Meal type"
           label="Meal type"
         />
-        <Button type="submit" disabled={isSubmitting}>
+        <Button type="submit" variant="outline" disabled={isSubmitting}>
           Assign
         </Button>
       </form>

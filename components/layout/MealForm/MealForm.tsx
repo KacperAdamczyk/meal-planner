@@ -57,11 +57,11 @@ export const MealForm: FC<Props> = ({ mealTypes }) => {
         <InputField name="name" label="Name" placeholder="Meal name" required />
         <SelectField
           name="defaultMealType"
-          options={options}
+          data={options}
           placeholder="Meal type"
           label="Meal type"
         />
-        <Button type="submit" disabled={isSubmitting}>
+        <Button type="submit" variant="outline" disabled={isSubmitting}>
           Create
         </Button>
       </form>

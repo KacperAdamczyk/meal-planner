@@ -13,9 +13,5 @@ export const InputField: FC<Props> = (props) => {
     fieldState: { error },
   } = useController(props);
 
-  return (
-    <div>
-      <TextInput {...props} {...field} error={error?.message} />
-    </div>
-  );
+  return <TextInput {...props} {...field} error={error?.message} />;
 };
