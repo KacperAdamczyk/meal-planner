@@ -2,7 +2,7 @@ import { Noto_Sans } from 'next/font/google';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { cn } from '@/lib/utils';
 import { PropsWithChildren } from 'react';
-import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+import { ColorSchemeScript } from '@mantine/core';
 
 import './globals.css';
 import '@mantine/core/styles.css';
