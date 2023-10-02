@@ -3,10 +3,11 @@ import { AppLayout } from '@/components/layout/AppLayout';
 import { cn } from '@/lib/utils';
 import { PropsWithChildren } from 'react';
 import { ColorSchemeScript } from '@mantine/core';
+import { ThemeProvider } from '@/components/layout/ThemeProvider';
 
 import './globals.css';
 import '@mantine/core/styles.css';
-import { ThemeProvider } from '@/components/layout/ThemeProvider';
+import '@mantine/dates/styles.css';
 
 const notoSans = Noto_Sans({
   subsets: ['latin'],
