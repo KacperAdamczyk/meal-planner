@@ -11,8 +11,7 @@ import {
 import { serverActionDb } from '@/db/supabase';
 import { headers } from 'next/headers';
 import { env } from '@/env';
-import { Separator } from '@/components/ui/separator';
-import { Button, TextInput } from '@mantine/core';
+import { Button, Divider, TextInput } from '@mantine/core';
 
 export default function Login() {
   const handleCredentialsSignIn = async (formData: FormData) => {
@@ -100,7 +99,7 @@ export default function Login() {
                 />
                 <Button type="submit">Login with credentials</Button>
               </form>
-              <Separator className="my-4" />
+              <Divider className="my-4" />
             </>
           )}
           <form action={handleOauthSignIn} className="flex flex-col gap-2">
