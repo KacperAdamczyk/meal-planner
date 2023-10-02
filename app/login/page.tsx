@@ -1,17 +1,10 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Provider } from '@supabase/supabase-js';
 import { redirect } from 'next/navigation';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
 import { serverActionDb } from '@/db/supabase';
 import { headers } from 'next/headers';
 import { env } from '@/env';
-import { Button, Divider, TextInput } from '@mantine/core';
+import { Button, Card, Divider, Text, TextInput } from '@mantine/core';
 
 export default function Login() {
   const handleCredentialsSignIn = async (formData: FormData) => {
@@ -73,12 +66,12 @@ export default function Login() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <Card className="mt-10 w-4/12">
-        <CardHeader>
-          <CardTitle>Login</CardTitle>
-          <CardDescription>Select login provider</CardDescription>
-        </CardHeader>
-        <CardContent>
+      <Card className="mt-10 w-5/12 p-4" withBorder>
+        <div className="mb-2">
+          <Text size="xl">Login</Text>
+          <Text size="sm">Select login provider</Text>
+        </div>
+        <div>
           {env.DEV_CREDENTIALS_LOGIN === 'true' && (
             <>
               <form
@@ -122,7 +115,7 @@ export default function Login() {
               GitHub
             </Button>
           </form>
-        </CardContent>
+        </div>
       </Card>
     </div>
   );
