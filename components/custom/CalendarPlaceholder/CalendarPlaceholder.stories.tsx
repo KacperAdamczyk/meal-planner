@@ -1,5 +1,5 @@
 import { CalendarPlaceholder } from '@/components/custom/CalendarPlaceholder';
-import { Calendar } from '@/components/ui/calendar';
+import { DatePicker } from '@mantine/dates';
 import { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
@@ -11,7 +11,7 @@ export default meta;
 type Story = StoryObj<typeof CalendarPlaceholder>;
 
 export const Reference: Story = {
-  render: () => <Calendar />,
+  render: () => <DatePicker />,
 };
 
 export const Default: Story = {};
