@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 'use client';
 import { createDayMealAction } from '@/actions/createDayMealAction';
-import { ComboboxOption } from '@/components/composite/Combobox';
 import { SelectField } from '@/components/fields';
-import { Button } from '@/components/ui/button';
 import { GetMealsResult } from '@/db/actions/getMeals';
 import { MealType } from '@/db/schema';
 import { CreateDayMeal } from '@/schemas/createDayMealSchema';
+import { Button, ComboboxData } from '@mantine/core';
 import { useParams, useRouter } from 'next/navigation';
 import { FC, useMemo, useTransition } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -47,7 +46,7 @@ export const DayMealForm: FC<Props> = ({ meals, mealTypes }) => {
     [calendarId, date, handleSubmit, router],
   );
 
-  const mealOptions = useMemo<ComboboxOption[]>(
+  const mealOptions = useMemo<ComboboxData>(
     () =>
       meals.map(({ id, name }) => ({
         label: name,
@@ -55,7 +54,7 @@ export const DayMealForm: FC<Props> = ({ meals, mealTypes }) => {
       })),
     [meals],
   );
-  const mealTypesOptions = useMemo<ComboboxOption[]>(
+  const mealTypesOptions = useMemo<ComboboxData>(
     () =>
       mealTypes.map(({ id, name }) => ({
         label: name,
@@ -69,17 +68,17 @@ export const DayMealForm: FC<Props> = ({ meals, mealTypes }) => {
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
         <SelectField
           name="meal"
-          options={mealOptions}
+          data={mealOptions}
           placeholder="Meal"
           label="Meal"
         />
         <SelectField
           name="mealType"
-          options={mealTypesOptions}
+          data={mealTypesOptions}
           placeholder="Meal type"
           label="Meal type"
         />
-        <Button type="submit" disabled={isSubmitting}>
+        <Button type="submit" variant="outline" disabled={isSubmitting}>
           Assign
         </Button>
       </form>

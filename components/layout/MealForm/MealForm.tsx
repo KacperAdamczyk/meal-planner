@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 'use client';
 import { createMealAction } from '@/actions/createMealAction/createMealAction';
-import { ComboboxOption } from '@/components/composite/Combobox';
 import { InputField, SelectField } from '@/components/fields';
-import { Button } from '@/components/ui/button';
 import { MealType } from '@/db/schema';
 import { CreateMeal } from '@/schemas/createMealSchema';
+import { Button, ComboboxData } from '@mantine/core';
 import { useParams, useRouter } from 'next/navigation';
 import { FC, useMemo, useTransition } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -24,7 +23,6 @@ export const MealForm: FC<Props> = ({ mealTypes }) => {
     },
   });
   const {
-    register,
     handleSubmit,
     formState: { isSubmitting },
   } = form;
@@ -43,7 +41,7 @@ export const MealForm: FC<Props> = ({ mealTypes }) => {
     [calendarId, handleSubmit, router],
   );
 
-  const options = useMemo<ComboboxOption[]>(
+  const options = useMemo<ComboboxData>(
     () =>
       mealTypes.map(({ id, name }) => ({
         label: name,
@@ -55,18 +53,14 @@ export const MealForm: FC<Props> = ({ mealTypes }) => {
   return (
     <FormProvider {...form}>
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
-        <InputField
-          label="Name"
-          placeholder="Meal name"
-          register={register('name')}
-        />
+        <InputField name="name" label="Name" placeholder="Meal name" required />
         <SelectField
           name="defaultMealType"
-          options={options}
+          data={options}
           placeholder="Meal type"
           label="Meal type"
         />
-        <Button type="submit" disabled={isSubmitting}>
+        <Button type="submit" variant="outline" disabled={isSubmitting}>
           Create
         </Button>
       </form>

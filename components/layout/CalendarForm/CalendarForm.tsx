@@ -3,10 +3,10 @@
 import { createCalendarAction } from '@/actions/createCalendarAction';
 import { InputField } from '@/components/fields';
 import { MultiselectField } from '@/components/fields/MultiselectField';
-import { Button } from '@/components/ui/button';
 import { User } from '@/db/schema';
 import { calendarSchema, CalendarSchema } from '@/schemas/calendarSchema';
 import { useParams, useRouter } from 'next/navigation';
+import { Button } from '@mantine/core';
 import { FC, useMemo, useTransition } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -36,7 +36,6 @@ export const CalendarForm: FC<Props> = ({
     resolver: zodResolver(calendarSchema),
   });
   const {
-    register,
     handleSubmit,
     formState: { isSubmitting },
   } = form;
@@ -68,19 +67,18 @@ export const CalendarForm: FC<Props> = ({
     <FormProvider {...form}>
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
         <InputField
-          label="Name *"
+          name="name"
+          label="Name"
           placeholder="Calendar name"
-          register={register('name')}
+          required
         />
-        <MultiselectField<CalendarSchema, 'shared'>
+        <MultiselectField
           name="shared"
           label="Shared to"
           placeholder="Select user"
-          options={options}
-          valueKey="userId"
-          valueLabel="User"
+          data={options}
         />
-        <Button type="submit" disabled={isSubmitting}>
+        <Button type="submit" variant="outline" disabled={isSubmitting}>
           {edit ? 'Update' : 'Create'}
         </Button>
       </form>

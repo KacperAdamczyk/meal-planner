@@ -1,4 +1,4 @@
-import { Skeleton } from '@/components/ui/skeleton';
+import { Skeleton } from '@mantine/core';
 import { FC } from 'react';
 
 interface Props {

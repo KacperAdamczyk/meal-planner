@@ -1,19 +1,10 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Provider } from '@supabase/supabase-js';
 import { redirect } from 'next/navigation';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
 import { serverActionDb } from '@/db/supabase';
-import { Button } from '@/components/ui/button';
 import { headers } from 'next/headers';
 import { env } from '@/env';
-import { Input } from '@/components/ui/input';
-import { Separator } from '@/components/ui/separator';
+import { Button, Card, Divider, Text, TextInput } from '@mantine/core';
 
 export default function Login() {
   const handleCredentialsSignIn = async (formData: FormData) => {
@@ -75,25 +66,25 @@ export default function Login() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <Card className="mt-10 w-4/12">
-        <CardHeader>
-          <CardTitle>Login</CardTitle>
-          <CardDescription>Select login provider</CardDescription>
-        </CardHeader>
-        <CardContent>
+      <Card className="mt-10 w-5/12 p-4" withBorder>
+        <div className="mb-2">
+          <Text size="xl">Login</Text>
+          <Text size="sm">Select login provider</Text>
+        </div>
+        <div>
           {env.DEV_CREDENTIALS_LOGIN === 'true' && (
             <>
               <form
                 action={handleCredentialsSignIn}
                 className="flex flex-col gap-2"
               >
-                <Input
+                <TextInput
                   name="email"
                   type="email"
                   placeholder="Email"
                   className="w-full"
                 />
-                <Input
+                <TextInput
                   name="password"
                   type="password"
                   placeholder="Password"
@@ -101,28 +92,30 @@ export default function Login() {
                 />
                 <Button type="submit">Login with credentials</Button>
               </form>
-              <Separator className="my-4" />
+              <Divider className="my-4" />
             </>
           )}
           <form action={handleOauthSignIn} className="flex flex-col gap-2">
             <Button
+              type="submit"
               name="provider"
               value="discord"
-              type="submit"
-              className="w-full bg-[#7289da]"
+              color="#7289da"
+              className="w-full"
             >
               Discord
             </Button>
             <Button
+              type="submit"
               name="provider"
               value="github"
-              type="submit"
               className="w-full"
+              color="gray"
             >
               GitHub
             </Button>
           </form>
-        </CardContent>
+        </div>
       </Card>
     </div>
   );

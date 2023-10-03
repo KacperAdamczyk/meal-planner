@@ -1,57 +1,51 @@
 'use client';
 
-import { Moon, Sun, Check } from 'lucide-react';
-import { useTheme } from 'next-themes';
-
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import { IconSun, IconMoon, IconCheck } from '@tabler/icons-react';
+import { ActionIcon, Menu, useMantineColorScheme } from '@mantine/core';
 
 enum Theme {
   Light = 'light',
   Dark = 'dark',
-  System = 'system',
+  Auto = 'auto',
 }
 
 export function ModeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { setColorScheme } = useMantineColorScheme();
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+    <Menu>
+      <Menu.Target>
+        <ActionIcon variant="outline" size="lg">
+          <IconSun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <IconMoon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem
+        </ActionIcon>
+      </Menu.Target>
+      <Menu.Dropdown>
+        <Menu.Item
           onClick={() => {
-            setTheme(Theme.Light);
+            setColorScheme(Theme.Light);
+          }}
+          rightSection={<IconCheck className="ml-2 dark:hidden" />}
+        >
+          Light
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => {
+            setColorScheme(Theme.Dark);
+          }}
+          rightSection={<IconCheck className="ml-2 hidden dark:inline" />}
+        >
+          Dark
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => {
+            setColorScheme(Theme.Auto);
           }}
         >
-          Light {theme === Theme.Light && <Check className="ml-2" />}
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => {
-            setTheme(Theme.Dark);
-          }}
-        >
-          Dark {theme === Theme.Dark && <Check className="ml-2" />}
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => {
-            setTheme(Theme.System);
-          }}
-        >
-          System {theme === Theme.System && <Check className="ml-2" />}
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+          System
+        </Menu.Item>
+      </Menu.Dropdown>
+    </Menu>
   );
 }

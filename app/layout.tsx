@@ -1,10 +1,13 @@
 import { Noto_Sans } from 'next/font/google';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { cn } from '@/lib/utils';
-import { ThemeProvider } from '@/components/layout/ThemeProvider';
 import { PropsWithChildren } from 'react';
+import { ColorSchemeScript } from '@mantine/core';
+import { ThemeProvider } from '@/components/layout/ThemeProvider';
 
 import './globals.css';
+import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
 
 const notoSans = Noto_Sans({
   subsets: ['latin'],
@@ -19,8 +22,11 @@ export const metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
+      <head>
+        <ColorSchemeScript />
+      </head>
       <body className={cn(notoSans.className, 'min-w-[300px]')}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider>
           <AppLayout>{children}</AppLayout>
         </ThemeProvider>
       </body>
