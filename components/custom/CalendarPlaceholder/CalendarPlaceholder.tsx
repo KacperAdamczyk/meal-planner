@@ -1,4 +1,4 @@
-import { LoadingOverlay,} from '@mantine/core';
+import { LoadingOverlay } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import { FC } from 'react';
 
