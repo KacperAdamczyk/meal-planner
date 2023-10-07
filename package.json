@@ -24,7 +24,7 @@
     "@supabase/supabase-js": "^2.33.2",
     "@t3-oss/env-nextjs": "^0.6.1",
     "@tabler/icons-react": "^2.37.0",
-    "@types/node": "20.7.1",
+    "@types/node": "20.8.3",
     "@types/react": "18.2.25",
     "@types/react-dom": "18.2.10",
     "autoprefixer": "10.4.16",
