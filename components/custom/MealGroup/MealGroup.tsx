@@ -9,12 +9,10 @@ interface Props {
 
 export const MealGroup: FC<Props> = ({ groupedMeals }) => {
   return (
-    <div className="border-input min-w-full rounded border-2 p-4">
+    <div className="min-w-full rounded border-2 p-4">
       {groupedMeals ? (
         <>
-          <h3 className="border-b-input border-b-2 text-xl">
-            {groupedMeals.type}
-          </h3>
+          <h3 className="border-b-2 text-xl">{groupedMeals.type}</h3>
           <div className="flex flex-col gap-2 pt-2">
             {groupedMeals.meals.map(({ name, mealId }) => (
               <MealGroupItem key={mealId} id={mealId} name={name} />
