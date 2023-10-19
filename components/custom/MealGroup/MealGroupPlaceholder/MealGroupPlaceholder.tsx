@@ -6,8 +6,8 @@ interface Props {
 }
 
 export const MealGroupPlaceholder: FC<Props> = ({ rows }) => (
-  <div className="border-input min-w-full rounded border-2 p-4">
-    <div className="border-b-input border-b-2">
+  <div className="min-w-full rounded border-2 p-4">
+    <div className="border-b-2">
       <Skeleton className="h-[30px] w-1/4 max-w-xs rounded-none" />
     </div>
     <div className="flex flex-col gap-2 pt-2">

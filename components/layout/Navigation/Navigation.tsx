@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const Navigation: FC<Props> = ({ calendarId }) => (
-  <div className="border-border flex gap-1 rounded-md border">
+  <div className="flex gap-1 rounded-md border">
     <LinkButton
       href={`/${calendarId}`}
       isActive={(pathname, href) =>
