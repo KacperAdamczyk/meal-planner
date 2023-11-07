@@ -17,7 +17,7 @@ const Date: FC<{
       </Suspense>
     </div>
     <div className="col-start-2 justify-self-end">
-      <LinkButton href={`/${calendarId}/${date}/new`}>
+      <LinkButton href={`/${calendarId}/${date}/new`} action>
         <PlusCircle />
       </LinkButton>
     </div>

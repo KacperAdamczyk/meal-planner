@@ -45,7 +45,7 @@ export const CalendarSelector: FC<Props> = ({
   );
 
   return (
-    <div className="flex gap-2 align-middle">
+    <div className="flex items-center gap-1">
       <Select
         value={selectedCalendarId}
         onChange={onChange}
@@ -54,11 +54,11 @@ export const CalendarSelector: FC<Props> = ({
         clearable
       />
       {selectedCalendarId && (
-        <LinkButton size="icon" href={`/${selectedCalendarId}/details`}>
+        <LinkButton action size="lg" href={`/${selectedCalendarId}/details`}>
           <IconEye className="h-4 w-4" />
         </LinkButton>
       )}
-      <LinkButton size="icon" href={'/new'}>
+      <LinkButton action size="lg" href={'/new'}>
         <Plus className="h-4 w-4" />
       </LinkButton>
     </div>

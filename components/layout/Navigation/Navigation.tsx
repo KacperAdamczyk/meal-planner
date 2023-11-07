@@ -1,5 +1,6 @@
 'use client';
 import { LinkButton } from '@/components/composite/LinkButton';
+import { ButtonGroup } from '@mantine/core';
 import { FC } from 'react';
 
 interface Props {
@@ -7,7 +8,7 @@ interface Props {
 }
 
 export const Navigation: FC<Props> = ({ calendarId }) => (
-  <div className="flex gap-1 rounded-md border">
+  <ButtonGroup>
     <LinkButton
       href={`/${calendarId}`}
       isActive={(pathname, href) =>
@@ -23,5 +24,5 @@ export const Navigation: FC<Props> = ({ calendarId }) => (
       Meals
     </LinkButton>
     <LinkButton href={`/${calendarId}/statistics`}>Statistics</LinkButton>
-  </div>
+  </ButtonGroup>
 );
