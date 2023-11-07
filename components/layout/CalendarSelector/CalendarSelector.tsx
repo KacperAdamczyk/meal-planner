@@ -53,11 +53,11 @@ export const CalendarSelector: FC<Props> = ({
       />
       {selectedCalendarId && (
         <LinkButton action size="lg" href={`/${selectedCalendarId}/details`}>
-          <IconEye className="h-4 w-4" />
+          <IconEye />
         </LinkButton>
       )}
       <LinkButton action size="lg" href={'/new'}>
-        <IconPlus className="h-4 w-4" />
+        <IconPlus />
       </LinkButton>
     </div>
   );

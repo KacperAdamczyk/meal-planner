@@ -42,9 +42,10 @@ const ViewCalendar: FC<Props> = async ({ params: { calendarId } }) => {
           <LinkButton
             href={`/${calendarId}/edit`}
             variant="outline"
-            size="icon"
+            size="lg"
+            action
           >
-            <IconPencil className="h-4 w-4" />
+            <IconPencil />
           </LinkButton>
         )}
       </Header>

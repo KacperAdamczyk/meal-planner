@@ -27,7 +27,7 @@ export const UserOptions: FC = async () => {
         <>
           <span className="hidden px-2 text-xs sm:inline">{user.email}</span>
           <ActionIcon variant="outline" size="lg" type="submit">
-            <IconLogout className="h-4 w-4" />
+            <IconLogout />
           </ActionIcon>
         </>
       )}
