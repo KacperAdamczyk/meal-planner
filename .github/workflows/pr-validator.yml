@@ -16,15 +16,11 @@ jobs:
         name: Install Node.js
         with:
           node-version: 21
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        with:
-          version: latest
-          run_install: true
       - uses: oven-sh/setup-bun@v1
         name: Install Bun
         with:
           bun-version: latest
-      - run: pnpm lint
-      - run: pnpm format:check
+      - run: bun install
+      - run: bun lint
+      - run: bun format:check
       - run: bun test
