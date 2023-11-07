@@ -2,7 +2,7 @@ import { CalendarSelector } from '@/components/layout/CalendarSelector';
 import { getUserCalendars } from '@/db/actions/getUserCalendars';
 import { getUser, serverComponentDb } from '@/db/supabase';
 import { cn } from '@/lib/utils';
-import { CornerRightUp } from 'lucide-react';
+import { IconCornerRightUp } from '@tabler/icons-react';
 import { Caveat } from 'next/font/google';
 
 const caveat = Caveat({
@@ -29,7 +29,7 @@ export default async function Home() {
           )}
         >
           <h1>Select your calendar</h1>
-          <CornerRightUp />
+          <IconCornerRightUp />
         </div>
       </div>
     </section>

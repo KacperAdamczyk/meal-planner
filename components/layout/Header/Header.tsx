@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 import { UserOptions } from '@/components/layout/UserOptions/UserOptions';
-import { Soup } from 'lucide-react';
+import { IconSoup } from '@tabler/icons-react';
 import Link from 'next/link';
 
 export const Header: FC<PropsWithChildren> = () => (
@@ -9,7 +9,7 @@ export const Header: FC<PropsWithChildren> = () => (
       <div className="flex grow items-center gap-1">
         <Link href="/" className="flex items-center gap-1">
           Meal Planner
-          <Soup />
+          <IconSoup />
         </Link>
       </div>
       <UserOptions />

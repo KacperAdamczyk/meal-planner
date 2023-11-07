@@ -1,7 +1,7 @@
 import { DashboardCalendar } from '@/components/layout/DashboardCalendar';
 import { SelectedDay } from '@/components/layout/SelectedDay';
 import { FC, Suspense } from 'react';
-import { PlusCircle } from 'lucide-react';
+import { IconSquareRoundedPlus } from '@tabler/icons-react';
 import { MealGroupPlaceholder } from '@/components/custom/MealGroup/MealGroupPlaceholder';
 import { CalendarPlaceholder } from '@/components/custom/CalendarPlaceholder';
 import { LinkButton } from '@/components/composite/LinkButton';
@@ -18,7 +18,7 @@ const Date: FC<{
     </div>
     <div className="col-start-2 justify-self-end">
       <LinkButton href={`/${calendarId}/${date}/new`} action>
-        <PlusCircle />
+        <IconSquareRoundedPlus />
       </LinkButton>
     </div>
     <div className="col-start-2 row-start-2 flex flex-col items-stretch">
