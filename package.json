@@ -35,7 +35,6 @@
     "drizzle-orm": "^0.28.6",
     "eslint": "8.52.0",
     "eslint-config-next": "14.0.1",
-    "lucide-react": "^0.292.0",
     "next": "14.0.1",
     "pg": "^8.11.3",
     "postcss": "^8.4.31",

@@ -5,7 +5,6 @@ import { groupMealsByDay } from '@/db/actions/helpers/groupMealsByDay';
 import { getUser, serverComponentDb } from '@/db/supabase';
 import { getMonth, getYear, parseISO } from 'date-fns';
 import { FC } from 'react';
-import { unstable_cache } from 'next/cache';
 
 interface Props {
   calendarId: string;
@@ -23,14 +22,10 @@ export const DashboardCalendar: FC<Props> = async ({
   const selectedMonth = getMonth(selectedDate);
 
   const user = await getUser(serverComponentDb);
-  const [days, mealTypes] = await unstable_cache(
-    () =>
-      Promise.all([
-        getMonthMeals(user, calendarId, selectedYear, selectedMonth),
-        getMealTypes(user, calendarId),
-      ]),
-    [user.id, calendarId, selectedYear.toString(), selectedMonth.toString()],
-  )();
+  const [days, mealTypes] = await Promise.all([
+    getMonthMeals(user, calendarId, selectedYear, selectedMonth),
+    getMealTypes(user, calendarId),
+  ]);
 
   const groupedDays = groupMealsByDay(days);
 

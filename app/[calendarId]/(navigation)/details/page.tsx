@@ -4,7 +4,7 @@ import { getCalendar } from '@/db/actions/getCalendar';
 import { getCalendarShares } from '@/db/actions/getCalendarShares';
 import { getUser as getOwner } from '@/db/actions/getUser';
 import { getUser, serverComponentDb } from '@/db/supabase';
-import { Pencil } from 'lucide-react';
+import { IconPencil } from '@tabler/icons-react';
 import { notFound } from 'next/navigation';
 import { FC } from 'react';
 
@@ -42,9 +42,10 @@ const ViewCalendar: FC<Props> = async ({ params: { calendarId } }) => {
           <LinkButton
             href={`/${calendarId}/edit`}
             variant="outline"
-            size="icon"
+            size="lg"
+            action
           >
-            <Pencil className="h-4 w-4" />
+            <IconPencil />
           </LinkButton>
         )}
       </Header>

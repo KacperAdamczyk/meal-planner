@@ -3,8 +3,7 @@
 import { LinkButton } from '@/components/composite/LinkButton';
 import { UserCalendar } from '@/db/actions/getUserCalendars';
 import { ComboboxData, Select, SelectProps } from '@mantine/core';
-import { IconEye } from '@tabler/icons-react';
-import { Plus, Share2 } from 'lucide-react';
+import { IconEye, IconPlus } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 import { FC, useCallback, useMemo } from 'react';
 
@@ -36,16 +35,15 @@ export const CalendarSelector: FC<Props> = ({
     () => [
       ...calendars.map(({ id, name }) => ({ label: name, value: id })),
       ...sharedCalendars.map(({ id, name }) => ({
-        label: name,
+        label: `${name} 🫂`,
         value: id,
-        icon: Share2,
       })),
     ],
     [calendars, sharedCalendars],
   );
 
   return (
-    <div className="flex gap-2 align-middle">
+    <div className="flex items-center gap-1">
       <Select
         value={selectedCalendarId}
         onChange={onChange}
@@ -54,12 +52,12 @@ export const CalendarSelector: FC<Props> = ({
         clearable
       />
       {selectedCalendarId && (
-        <LinkButton size="icon" href={`/${selectedCalendarId}/details`}>
-          <IconEye className="h-4 w-4" />
+        <LinkButton action size="lg" href={`/${selectedCalendarId}/details`}>
+          <IconEye />
         </LinkButton>
       )}
-      <LinkButton size="icon" href={'/new'}>
-        <Plus className="h-4 w-4" />
+      <LinkButton action size="lg" href={'/new'}>
+        <IconPlus />
       </LinkButton>
     </div>
   );

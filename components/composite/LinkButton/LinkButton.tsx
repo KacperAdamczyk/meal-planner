@@ -1,5 +1,5 @@
 'use client';
-import { Button, ButtonProps } from '@mantine/core';
+import { ActionIcon, Button, ButtonProps } from '@mantine/core';
 import Link, { LinkProps } from 'next/link';
 import { usePathname } from 'next/navigation';
 import { PropsWithChildren } from 'react';
@@ -10,6 +10,7 @@ interface Props<RouteType> {
   size?: ButtonProps['size'];
   variant?: ButtonProps['variant'];
   disabled?: ButtonProps['disabled'];
+  action?: boolean;
 }
 
 export const LinkButton = <RouteType,>({
@@ -19,20 +20,25 @@ export const LinkButton = <RouteType,>({
   disabled,
   children,
   isActive = (pathname, href) => pathname === href,
+  action,
 }: PropsWithChildren<Props<RouteType>>) => {
   const pathname = usePathname();
 
   const active = isActive(pathname, href as string);
 
+  const ButtonComponent: typeof ActionIcon | typeof Button = action
+    ? ActionIcon
+    : Button;
+
   return (
-    <Button
-      variant={variant ?? (active ? 'default' : 'ghost')}
+    <ButtonComponent
+      variant={variant ?? (active ? 'filled' : 'outline')}
       component={Link<RouteType>}
       href={href}
       size={size}
       disabled={disabled}
     >
       {children}
-    </Button>
+    </ButtonComponent>
   );
 };

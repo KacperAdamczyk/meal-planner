@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import { serverComponentDb } from '@/db/supabase/serverComponentDb';
 import { serverActionDb } from '@/db/supabase/serverActionDb';
 import { ModeToggle } from '@/components/composite/ModeToggle';
-import { ActionIcon } from '@mantine/core';
+import { ActionIcon, Avatar } from '@mantine/core';
 import { IconLogout } from '@tabler/icons-react';
 
 export const UserOptions: FC = async () => {
@@ -25,9 +25,10 @@ export const UserOptions: FC = async () => {
     <form action={handleSignOut} className="flex items-center gap-x-0.5">
       {!!user && (
         <>
+          <Avatar>{user.email?.at(0)?.toLocaleUpperCase()}</Avatar>
           <span className="hidden px-2 text-xs sm:inline">{user.email}</span>
           <ActionIcon variant="outline" size="lg" type="submit">
-            <IconLogout className="h-4 w-4" />
+            <IconLogout />
           </ActionIcon>
         </>
       )}
