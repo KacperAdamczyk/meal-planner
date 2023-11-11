@@ -1,16 +1,57 @@
-import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs';
-import { type NextRequest, NextResponse } from 'next/server';
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+import { createServerClient, type CookieOptions } from '@supabase/ssr';
+import { NextResponse, type NextRequest } from 'next/server';
 import { env } from '@/env';
 
 export async function middleware(request: NextRequest) {
-  const response = NextResponse.next();
-  const supabase = createMiddlewareClient(
-    { req: request, res: response },
-    {
-      supabaseUrl: env.SUPABASE_URL,
-      supabaseKey: env.SUPABASE_ANON_KEY,
+  let response = NextResponse.next({
+    request: {
+      headers: request.headers as Headers,
     },
-  );
+  });
+
+  const supabase = createServerClient(env.SUPABASE_URL, env.SUPABASE_ANON_KEY, {
+    cookies: {
+      get(name: string) {
+        return request.cookies.get(name)?.value;
+      },
+      set(name: string, value: string, options: CookieOptions) {
+        request.cookies.set({
+          name,
+          value,
+          ...options,
+        });
+        response = NextResponse.next({
+          request: {
+            headers: request.headers as Headers,
+          },
+        });
+        response.cookies.set({
+          name,
+          value,
+          ...options,
+        });
+      },
+      remove(name: string, options: CookieOptions) {
+        request.cookies.set({
+          name,
+          value: '',
+          ...options,
+        });
+        response = NextResponse.next({
+          request: {
+            headers: request.headers as Headers,
+          },
+        });
+        response.cookies.set({
+          name,
+          value: '',
+          ...options,
+        });
+      },
+    },
+  });
+
   const {
     data: { session },
   } = await supabase.auth.getSession();

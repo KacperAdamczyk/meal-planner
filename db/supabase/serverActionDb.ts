@@ -1,17 +1,22 @@
-import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import { env } from '@/env';
 
 export const serverActionDb = () => {
-  const cookiesStore = cookies();
+  const cookieStore = cookies();
 
-  return createServerActionClient(
-    {
-      cookies: () => cookiesStore,
+  return createServerClient(env.SUPABASE_URL, env.SUPABASE_ANON_KEY, {
+    cookies: {
+      get(name: string) {
+        return cookieStore.get(name)?.value;
+      },
+      set(name: string, value: string, options: CookieOptions) {
+        cookieStore.set({ name, value, ...options });
+      },
+      remove(name: string, options: CookieOptions) {
+        cookieStore.set({ name, value: '', ...options });
+      },
     },
-    {
-      supabaseUrl: env.SUPABASE_URL,
-      supabaseKey: env.SUPABASE_ANON_KEY,
-    },
-  );
+  });
 };
