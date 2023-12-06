@@ -2,7 +2,7 @@
 
 import { createServerAction } from '@/actions/helpers';
 import { updateCalendar } from '@/db/actions/updateCalendar';
-import { calendarSchema } from '@/schemas/calendarSchema';
+import { calendarSchema } from '@/validation/calendarSchema';
 
 export const updateCalendarAction = createServerAction(
   calendarSchema,

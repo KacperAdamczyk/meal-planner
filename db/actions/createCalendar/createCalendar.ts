@@ -1,12 +1,12 @@
 import { db } from '@/db';
 import {
-  Calendar,
-  User,
-  calendars,
-  mealTypes,
   sharedCalendars,
+  type Calendar,
+  type User,
+  mealTypes,
+  calendars,
 } from '@/db/schema';
-import { CalendarSchema } from '@/schemas/calendarSchema';
+import { CalendarSchema } from '@/validation/calendarSchema';
 
 export const createCalendar = (
   user: User,

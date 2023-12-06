@@ -4,7 +4,7 @@ import { createDayMealAction } from '@/actions/createDayMealAction';
 import { SelectField } from '@/components/fields';
 import { GetMealsResult } from '@/db/actions/getMeals';
 import { MealType } from '@/db/schema';
-import { CreateDayMeal } from '@/schemas/createDayMealSchema';
+import { CreateDayMeal } from '@/validation/createDayMealSchema';
 import { Button, ComboboxData } from '@mantine/core';
 import { useParams, useRouter } from 'next/navigation';
 import { FC, useMemo, useTransition } from 'react';

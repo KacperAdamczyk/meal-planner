@@ -1,25 +1,24 @@
 import { db } from '@/db';
-import { getCalendarHelper } from '@/db/actions/helpers';
-import {
-  MealType,
-  User,
-  calendars,
-  mealTypes,
-  sharedCalendars,
-} from '@/db/schema';
+import { getUserCalendar } from '@/db/actions/getUserCalendar';
+import { MealType, User, mealTypes } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
-export const getMealTypes = (
+export const getMealTypes = async (
   user: User,
   calendarId: string,
-): Promise<MealType[]> =>
-  db
-    .select({
-      id: mealTypes.id,
-      name: mealTypes.name,
-      calendarId: mealTypes.calendarId,
-    })
-    .from(calendars)
-    .leftJoin(sharedCalendars, eq(calendars.id, sharedCalendars.calendarId))
-    .where(getCalendarHelper(user, calendarId))
-    .innerJoin(mealTypes, eq(mealTypes.calendarId, calendars.id));
+): Promise<MealType[]> => {
+  const calendar = await getUserCalendar(user, calendarId);
+
+  if (!calendar) {
+    throw new Error(`Calendar with id: ${calendarId} not found`);
+  }
+
+  return db.query.mealTypes.findMany({
+    where: eq(mealTypes.calendarId, calendar.id),
+    columns: {
+      id: true,
+      name: true,
+      calendarId: true,
+    },
+  });
+};

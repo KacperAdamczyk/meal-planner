@@ -3,7 +3,7 @@
 import { createMealAction } from '@/actions/createMealAction/createMealAction';
 import { InputField, SelectField } from '@/components/fields';
 import { MealType } from '@/db/schema';
-import { CreateMeal } from '@/schemas/createMealSchema';
+import { CreateMeal } from '@/validation/createMealSchema';
 import { Button, ComboboxData } from '@mantine/core';
 import { useParams, useRouter } from 'next/navigation';
 import { FC, useMemo, useTransition } from 'react';

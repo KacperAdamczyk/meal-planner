@@ -1,7 +1,7 @@
 import { db } from '@/db';
-import { getCalendar } from '@/db/actions/getCalendar';
-import { DayMeal, User, dayMeals } from '@/db/schema';
-import { CreateDayMeal } from '@/schemas/createDayMealSchema';
+import { getUserCalendar } from '@/db/actions/getUserCalendar';
+import { type DayMeal, type User, dayMeals } from '@/db/schema';
+import { CreateDayMeal } from '@/validation/createDayMealSchema';
 
 export const createDayMeal = async (
   user: User,
@@ -9,7 +9,7 @@ export const createDayMeal = async (
   calendarId: string,
   date: string,
 ): Promise<DayMeal> => {
-  const calendar = await getCalendar(user, calendarId);
+  const calendar = await getUserCalendar(user, calendarId);
 
   if (!calendar) {
     throw new Error('Calendar not found');

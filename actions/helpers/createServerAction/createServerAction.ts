@@ -1,10 +1,10 @@
-import { User } from '@/db/schema';
+import { User } from '@/db/schema/users';
 import { getUser, serverActionDb } from '@/db/supabase';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { ZodSchema, z } from 'zod';
 
 export const createServerAction =
-  <Schema extends ZodSchema, Params extends unknown[], Return>(
+  <Schema extends ZodSchema<unknown>, Params extends unknown[], Return>(
     schema: Schema,
     action: (
       user: User,

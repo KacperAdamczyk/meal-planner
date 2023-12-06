@@ -1,4 +1,4 @@
-import { getCalendar } from '@/db/actions/getCalendar';
+import { getUserCalendar } from '@/db/actions/getUserCalendar';
 import { getMealTypes } from '@/db/actions/getMealTypes';
 import { groupMealsByType } from '@/db/actions/helpers/groupMealsByType';
 import { getUser, serverComponentDb } from '@/db/supabase';
@@ -16,7 +16,7 @@ interface Props {
 export const SelectedDay: FC<Props> = async ({ calendarId, date }) => {
   const currentDate = parseISO(date);
   const user = await getUser(serverComponentDb);
-  const calendar = await getCalendar(user, calendarId);
+  const calendar = await getUserCalendar(user, calendarId);
 
   if (!calendar) {
     notFound();
