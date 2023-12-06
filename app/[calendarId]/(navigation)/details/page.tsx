@@ -1,6 +1,6 @@
 import { LinkButton } from '@/components/composite/LinkButton';
 import { Header } from '@/components/custom/Header';
-import { getCalendar } from '@/db/actions/getCalendar';
+import { getUserCalendar } from '@/db/actions/getUserCalendar';
 import { getCalendarShares } from '@/db/actions/getCalendarShares';
 import { getUser as getOwner } from '@/db/actions/getUser';
 import { getUser, serverComponentDb } from '@/db/supabase';
@@ -17,7 +17,7 @@ interface Props {
 const ViewCalendar: FC<Props> = async ({ params: { calendarId } }) => {
   const user = await getUser(serverComponentDb);
   const [calendar, shares] = await Promise.all([
-    getCalendar(user, calendarId),
+    getUserCalendar(user, calendarId),
     getCalendarShares(calendarId),
   ]);
 

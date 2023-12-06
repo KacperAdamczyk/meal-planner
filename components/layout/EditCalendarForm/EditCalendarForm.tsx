@@ -1,7 +1,7 @@
 import { updateCalendarAction } from '@/actions/updateCalendarAction';
 import { Header } from '@/components/custom/Header';
 import { CalendarForm } from '@/components/layout/CalendarForm';
-import { getCalendar } from '@/db/actions/getCalendar';
+import { getUserCalendar } from '@/db/actions/getUserCalendar';
 import { getCalendarShares } from '@/db/actions/getCalendarShares';
 import { getSharableUsers } from '@/db/actions/getSharableUsers';
 import { getUser as getOwner } from '@/db/actions/getUser';
@@ -16,7 +16,7 @@ interface Props {
 export const EditCalendarForm: FC<Props> = async ({ calendarId }) => {
   const user = await getUser(serverComponentDb);
   const [calendar, shares, sharableUsers] = await Promise.all([
-    getCalendar(user, calendarId),
+    getUserCalendar(user, calendarId),
     getCalendarShares(calendarId),
     getSharableUsers(user, true),
   ]);

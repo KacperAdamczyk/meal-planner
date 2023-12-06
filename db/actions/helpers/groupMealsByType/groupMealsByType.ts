@@ -1,4 +1,4 @@
-import { MealType } from '@/db/supabase/schema/mealTypes';
+import { MealType } from '@/db/schema';
 
 export interface GroupedMealsByType<Meal> {
   type: string;

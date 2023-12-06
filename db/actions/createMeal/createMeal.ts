@@ -1,5 +1,5 @@
 import { db } from '@/db';
-import { getCalendar } from '@/db/actions/getCalendar';
+import { getUserCalendar } from '@/db/actions/getUserCalendar';
 import { Meal, User, meals } from '@/db/schema';
 import { CreateMeal } from '@/validation/createMealSchema';
 
@@ -8,7 +8,7 @@ export const createMeal = async (
   meal: CreateMeal,
   calendarId: string,
 ): Promise<Meal> => {
-  const calendar = await getCalendar(user, calendarId);
+  const calendar = await getUserCalendar(user, calendarId);
 
   if (!calendar) {
     throw new Error(`Calendar with id: ${calendarId} not found`);

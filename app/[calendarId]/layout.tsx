@@ -1,5 +1,5 @@
 import { CalendarSelector } from '@/components/layout/CalendarSelector';
-import { getCalendar } from '@/db/actions/getCalendar';
+import { getUserCalendar } from '@/db/actions/getUserCalendar';
 import { getUserCalendars } from '@/db/actions/getUserCalendars';
 import { getUser, serverComponentDb } from '@/db/supabase';
 import { notFound } from 'next/navigation';
@@ -18,7 +18,7 @@ const Layout = async ({
   const user = await getUser(serverComponentDb);
   const [{ calendars, sharedCalendars }, calendar] = await Promise.all([
     getUserCalendars(user),
-    getCalendar(user, calendarId),
+    getUserCalendar(user, calendarId),
   ]);
 
   if (!calendar) {

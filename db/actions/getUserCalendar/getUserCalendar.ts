@@ -1,7 +1,7 @@
 import { db } from '@/db';
 import { Calendar, User } from '@/db/schema';
 
-export const getCalendar = async (
+export const getUserCalendar = async (
   user: User,
   calendarId: string,
 ): Promise<Calendar | undefined> => {

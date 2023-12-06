@@ -1,21 +1,12 @@
-import { db } from '@/db';
-import { getCalendarHelper } from '@/db/actions/helpers';
-import {
-  DayMeal,
-  User,
-  calendars,
-  dayMeals,
-  meals,
-  sharedCalendars,
-} from '@/db/schema';
+import { getDayMealsInBetween } from '@/db/actions/getDayMealsInBetween';
+import { DayMeal, User } from '@/db/schema';
 import { formatISO, set } from 'date-fns';
-import { eq } from 'drizzle-orm';
 
 export interface DayMealWithName extends DayMeal {
   name: string;
 }
 
-export const getDayMeals = async (
+export const getDayMeals = (
   user: User,
   calendarId: string,
   year: number,
@@ -27,19 +18,7 @@ export const getDayMeals = async (
     month,
     date,
   });
+  const dayISO = formatISO(day, { representation: 'date' });
 
-  return db
-    .select({
-      date: dayMeals.date,
-      calendarId: dayMeals.calendarId,
-      mealId: dayMeals.mealId,
-      mealTypeId: dayMeals.mealTypeId,
-      name: meals.name,
-    })
-    .from(calendars)
-    .leftJoin(sharedCalendars, eq(calendars.id, sharedCalendars.calendarId))
-    .where(getCalendarHelper(user, calendarId))
-    .innerJoin(dayMeals, eq(dayMeals.calendarId, calendars.id))
-    .where(eq(dayMeals.date, formatISO(day, { representation: 'date' })))
-    .innerJoin(meals, eq(meals.id, dayMeals.mealId));
+  return getDayMealsInBetween(user, calendarId, dayISO, dayISO);
 };
