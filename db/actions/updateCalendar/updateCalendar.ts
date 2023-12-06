@@ -1,6 +1,6 @@
 import { db } from '@/db';
 import { User, calendars, sharedCalendars } from '@/db/schema';
-import { CalendarSchema } from '@/schemas/calendarSchema';
+import { CalendarSchema } from '@/validation/calendarSchema';
 import { eq, inArray } from 'drizzle-orm';
 
 export const updateCalendar = async (

@@ -1,5 +1,7 @@
 import { Db } from '@/db';
-import { User, calendars, sharedCalendars } from '@/db/schema';
+import { sharedCalendars } from '@/db/supabase/schema/sharedCalendars';
+import { calendars } from '@/db/calendars';
+import { User } from '@/db/supabase/schema/users';
 import { and, eq, or } from 'drizzle-orm';
 
 export const getCalendarHelper = (user: User, calendarId: string) =>

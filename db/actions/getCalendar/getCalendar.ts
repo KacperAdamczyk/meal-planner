@@ -1,23 +1,26 @@
 import { db } from '@/db';
-import { getCalendarHelper } from '@/db/actions/helpers';
-import { Calendar, User, calendars, sharedCalendars } from '@/db/schema';
-import { eq } from 'drizzle-orm';
+import { Calendar, User } from '@/db/schema';
 
 export const getCalendar = async (
   user: User,
   calendarId: string,
 ): Promise<Calendar | undefined> => {
-  const calendar = (
-    await db
-      .select({
-        id: calendars.id,
-        name: calendars.name,
-        userId: calendars.userId,
-      })
-      .from(calendars)
-      .leftJoin(sharedCalendars, eq(sharedCalendars.calendarId, calendars.id))
-      .where(getCalendarHelper(user, calendarId))
-  ).at(0);
+  const userSharedCalendars = await db.query.sharedCalendars.findMany({
+    where: (sharedCalendars, { eq, and }) =>
+      and(
+        eq(sharedCalendars.calendarId, calendarId),
+        eq(sharedCalendars.userId, user.id),
+      ),
+  });
 
-  return calendar;
+  return db.query.calendars.findFirst({
+    where: (calendars, { eq, or, inArray }) =>
+      or(
+        eq(calendars.id, calendarId),
+        inArray(
+          calendars.id,
+          userSharedCalendars.map(({ calendarId }) => calendarId),
+        ),
+      ),
+  });
 };

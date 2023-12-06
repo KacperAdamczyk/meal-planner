@@ -1,4 +1,4 @@
-import { User } from '@/db/schema';
+import { User } from '../schema/users';
 import {
   routeHandlerDb,
   serverActionDb,

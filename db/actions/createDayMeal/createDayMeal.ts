@@ -1,7 +1,7 @@
 import { db } from '@/db';
 import { getCalendar } from '@/db/actions/getCalendar';
-import { DayMeal, User, dayMeals } from '@/db/schema';
-import { CreateDayMeal } from '@/schemas/createDayMealSchema';
+import { type DayMeal, type User, dayMeals } from '@/db/schema';
+import { CreateDayMeal } from '@/validation/createDayMealSchema';
 
 export const createDayMeal = async (
   user: User,

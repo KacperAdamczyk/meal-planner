@@ -2,12 +2,12 @@ import { db } from '@/db';
 import { getCalendarHelper } from '@/db/actions/helpers';
 import {
   Meal,
-  User,
   calendars,
   mealTypes,
   meals,
   sharedCalendars,
 } from '@/db/schema';
+import { User } from '@supabase/supabase-js';
 import { eq } from 'drizzle-orm';
 
 export interface GetMealsResult extends Meal {
