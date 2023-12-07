@@ -8,7 +8,7 @@ export const calendars = pgTable('calendars', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: text('name').notNull(),
   userId: uuid('user_id')
-    .references(() => users.id)
+    .references(() => users.id, { onDelete: 'cascade' })
     .notNull(),
 });
 
