@@ -5,22 +5,21 @@ export const getUserCalendar = async (
   user: User,
   calendarId: string,
 ): Promise<Calendar | undefined> => {
-  const userSharedCalendars = await db.query.sharedCalendars.findMany({
-    where: (sharedCalendars, { eq, and }) =>
-      and(
-        eq(sharedCalendars.calendarId, calendarId),
-        eq(sharedCalendars.userId, user.id),
-      ),
+  const calendar = await db.query.calendars.findFirst({
+    where: (calendars, { eq }) => eq(calendars.id, calendarId),
+    with: {
+      sharedCalendars: {
+        where: (sharedCalendars, { eq }) => eq(sharedCalendars.userId, user.id),
+      },
+    },
   });
 
-  return db.query.calendars.findFirst({
-    where: (calendars, { eq, or, inArray }) =>
-      or(
-        eq(calendars.id, calendarId),
-        inArray(
-          calendars.id,
-          userSharedCalendars.map(({ calendarId }) => calendarId),
-        ),
-      ),
-  });
+  if (calendar?.userId !== user.id && !calendar?.sharedCalendars.length) {
+    return undefined;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { sharedCalendars, ...restCalendar } = calendar;
+
+  return restCalendar;
 };
