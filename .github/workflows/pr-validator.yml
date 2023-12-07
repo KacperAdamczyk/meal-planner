@@ -32,5 +32,3 @@ jobs:
       - run: bun lint
       - run: npm run format:check
       - run: bun test
-        env:
-          DATABASE_URL: postgres://postgres:test@postgres:5432/test-db
