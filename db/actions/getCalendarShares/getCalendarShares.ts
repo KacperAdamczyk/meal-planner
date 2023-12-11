@@ -1,6 +1,4 @@
 import { db } from '@/db';
-import { sharedCalendars } from '@/db/schema';
-import { eq } from 'drizzle-orm';
 
 export interface GetCalendarSharesResult {
   userId: string;
@@ -9,9 +7,10 @@ export interface GetCalendarSharesResult {
 export const getCalendarShares = (
   calendarId: string,
 ): Promise<GetCalendarSharesResult[]> =>
-  db
-    .select({
-      userId: sharedCalendars.userId,
-    })
-    .from(sharedCalendars)
-    .where(eq(sharedCalendars.calendarId, calendarId));
+  db.query.sharedCalendars.findMany({
+    where: (sharedCalendars, { eq }) =>
+      eq(sharedCalendars.calendarId, calendarId),
+    columns: {
+      userId: true,
+    },
+  });

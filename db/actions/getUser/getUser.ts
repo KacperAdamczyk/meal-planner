@@ -1,11 +1,7 @@
 import { db } from '@/db';
-import { User, users } from '@/db/schema';
-import { eq } from 'drizzle-orm';
+import { User } from '@/db/schema';
 
-export const getUser = async (userId: string): Promise<User | undefined> => {
-  const user = (await db.select().from(users).where(eq(users.id, userId))).at(
-    0,
-  );
-
-  return user;
-};
+export const getUser = (userId: string): Promise<User | undefined> =>
+  db.query.users.findFirst({
+    where: (user, { eq }) => eq(user.id, userId),
+  });

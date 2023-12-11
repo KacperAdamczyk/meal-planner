@@ -4,9 +4,9 @@ import { describe, expect, test } from 'bun:test';
 
 describe('getUserCalendars', () => {
   test('should return calendars for user', async () => {
-    const data = await getUserCalendars(user1);
+    const calendars = await getUserCalendars(user1);
 
-    expect(data).toEqual({
+    expect(calendars).toEqual({
       calendars: [
         {
           id: calendar1.id,

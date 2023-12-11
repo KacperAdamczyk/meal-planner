@@ -5,6 +5,7 @@ import { seed } from '@/db/seed-data';
 import { sql } from 'drizzle-orm';
 
 beforeAll(async () => {
+  console.log('Preparing test database...');
   await db.execute(sql`CREATE SCHEMA IF NOT EXISTS auth`);
   console.log('Migrating test database...');
   await migrate(db, { migrationsFolder: './drizzle' });
