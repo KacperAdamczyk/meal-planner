@@ -3,7 +3,7 @@ import { Provider } from '@supabase/supabase-js';
 import { redirect } from 'next/navigation';
 import { serverActionDb } from '@/db/supabase';
 import { headers } from 'next/headers';
-import { env } from '@/env';
+import { env } from '@/env.mjs';
 import { Button, Card, Divider, Text, TextInput } from '@mantine/core';
 
 export default function Login() {

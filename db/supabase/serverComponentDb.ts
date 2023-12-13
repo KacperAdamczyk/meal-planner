@@ -1,6 +1,6 @@
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
-import { env } from '@/env';
+import { env } from '@/env.mjs';
 
 export const serverComponentDb = () => {
   const cookieStore = cookies();

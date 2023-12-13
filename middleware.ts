@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
-import { env } from '@/env';
+import { env } from '@/env.mjs';
 
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({
     request: {
-      headers: request.headers as Headers,
+      headers: request.headers,
     },
   });
 
@@ -23,7 +23,7 @@ export async function middleware(request: NextRequest) {
         });
         response = NextResponse.next({
           request: {
-            headers: request.headers as Headers,
+            headers: request.headers,
           },
         });
         response.cookies.set({
@@ -40,7 +40,7 @@ export async function middleware(request: NextRequest) {
         });
         response = NextResponse.next({
           request: {
-            headers: request.headers as Headers,
+            headers: request.headers,
           },
         });
         response.cookies.set({
