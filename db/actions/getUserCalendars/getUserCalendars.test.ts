@@ -3,7 +3,7 @@ import { calendar1, calendar2, calendar3, user1 } from '@/db/seed-data';
 import { describe, expect, test } from 'bun:test';
 
 describe('getUserCalendars', () => {
-  test('should return calendars for user', async () => {
+  test('returns calendars for user', async () => {
     const calendars = await getUserCalendars(user1);
 
     expect(calendars).toEqual({
