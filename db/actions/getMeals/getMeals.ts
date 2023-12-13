@@ -14,7 +14,7 @@ export const getMeals = async (
   const calendar = await getUserCalendar(user, calendarId);
 
   if (!calendar) {
-    throw new Error(`Calendar with id: ${calendarId} not found`);
+    return [];
   }
 
   return (
