@@ -3,16 +3,13 @@ import { migrate } from 'drizzle-orm/node-postgres/migrator';
 import { afterAll, beforeAll } from 'bun:test';
 import { seed } from '@/db/seed-data';
 import { sql } from 'drizzle-orm';
-import {
-  PostgreSqlContainer,
-  StartedPostgreSqlContainer,
-} from '@testcontainers/postgresql';
+import { StartedPostgreSqlContainer } from '@testcontainers/postgresql';
 
 let container: StartedPostgreSqlContainer | undefined;
 
 beforeAll(async () => {
-  container = await new PostgreSqlContainer().withDatabase('test-db').start();
-  process.env.DATABASE_URL = container.getConnectionUri();
+  // container = await new PostgreSqlContainer().withDatabase('test-db').start();
+  // process.env.DATABASE_URL = container.getConnectionUri();
 
   console.log('Preparing test database...');
   await db.execute(sql`CREATE SCHEMA IF NOT EXISTS auth`);
