@@ -1,4 +1,4 @@
-import { getMeals } from '@/db/actions/getMeals';
+import { getMeals } from '@/db/queries/getMeals';
 import {
   calendar1,
   meal1,

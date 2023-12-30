@@ -1,5 +1,5 @@
 import { MealForm } from '@/components/layout/MealForm';
-import { getMealTypes } from '@/db/actions/getMealTypes';
+import { getMealTypes } from '@/db/queries/getMealTypes';
 import { getUser, serverComponentDb } from '@/db/supabase';
 import { FC } from 'react';
 

@@ -1,5 +1,5 @@
 import { db } from '@/db';
-import { getUserCalendar } from '@/db/actions/getUserCalendar';
+import { getUserCalendar } from '@/db/queries/getUserCalendar';
 import { DayMeal, User } from '@/db/schema';
 
 export interface DayMealWithName extends DayMeal {

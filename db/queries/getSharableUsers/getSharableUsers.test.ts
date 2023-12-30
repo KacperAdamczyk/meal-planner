@@ -1,4 +1,4 @@
-import { getSharableUsers } from '@/db/actions/getSharableUsers';
+import { getSharableUsers } from '@/db/queries/getSharableUsers';
 import { user1, user2 } from '@/db/seed-data';
 import { describe, expect, test } from 'bun:test';
 

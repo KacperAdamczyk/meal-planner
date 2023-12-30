@@ -1,6 +1,6 @@
 import { CalendarSelector } from '@/components/layout/CalendarSelector';
-import { getUserCalendar } from '@/db/actions/getUserCalendar';
-import { getUserCalendars } from '@/db/actions/getUserCalendars';
+import { getUserCalendar } from '@/db/queries/getUserCalendar';
+import { getUserCalendars } from '@/db/queries/getUserCalendars';
 import { getUser, serverComponentDb } from '@/db/supabase';
 import { notFound } from 'next/navigation';
 import { PropsWithChildren } from 'react';

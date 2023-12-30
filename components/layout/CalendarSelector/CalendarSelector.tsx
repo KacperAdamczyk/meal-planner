@@ -1,7 +1,7 @@
 'use client';
 
 import { LinkButton } from '@/components/composite/LinkButton';
-import { UserCalendar } from '@/db/actions/getUserCalendars';
+import { UserCalendar } from '@/db/queries/getUserCalendars';
 import { ComboboxData, Select, SelectProps } from '@mantine/core';
 import { IconEye, IconPlus } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';

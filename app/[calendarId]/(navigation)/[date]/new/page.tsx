@@ -1,6 +1,6 @@
 import { DayMealForm } from '@/components/layout/DayMealForm';
-import { getMealTypes } from '@/db/actions/getMealTypes';
-import { getMeals } from '@/db/actions/getMeals';
+import { getMealTypes } from '@/db/queries/getMealTypes';
+import { getMeals } from '@/db/queries/getMeals';
 import { getUser, serverComponentDb } from '@/db/supabase';
 import { FC } from 'react';
 

@@ -1,7 +1,7 @@
 import { createCalendarAction } from '@/actions/createCalendarAction';
 import { Header } from '@/components/custom/Header';
 import { CalendarForm } from '@/components/layout/CalendarForm';
-import { getSharableUsers } from '@/db/actions/getSharableUsers';
+import { getSharableUsers } from '@/db/queries/getSharableUsers';
 import { getUser, serverComponentDb } from '@/db/supabase';
 import { FC } from 'react';
 

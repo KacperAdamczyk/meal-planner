@@ -1,4 +1,4 @@
-import { getUserCalendar } from '@/db/actions/getUserCalendar';
+import { getUserCalendar } from '@/db/queries/getUserCalendar';
 import { calendar1, calendar3, user1, user2 } from '@/db/seed-data';
 import { describe, expect, test } from 'bun:test';
 

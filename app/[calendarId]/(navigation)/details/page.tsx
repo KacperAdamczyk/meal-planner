@@ -1,8 +1,8 @@
 import { LinkButton } from '@/components/composite/LinkButton';
 import { Header } from '@/components/custom/Header';
-import { getUserCalendar } from '@/db/actions/getUserCalendar';
-import { getCalendarShares } from '@/db/actions/getCalendarShares';
-import { getUser as getOwner } from '@/db/actions/getUser';
+import { getUserCalendar } from '@/db/queries/getUserCalendar';
+import { getCalendarShares } from '@/db/queries/getCalendarShares';
+import { getUser as getOwner } from '@/db/queries/getUser';
 import { getUser, serverComponentDb } from '@/db/supabase';
 import { IconPencil } from '@tabler/icons-react';
 import { notFound } from 'next/navigation';

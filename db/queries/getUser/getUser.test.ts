@@ -1,4 +1,4 @@
-import { getUser } from '@/db/actions/getUser';
+import { getUser } from '@/db/queries/getUser';
 import { user1 } from '@/db/seed-data';
 import { describe, expect, test } from 'bun:test';
 

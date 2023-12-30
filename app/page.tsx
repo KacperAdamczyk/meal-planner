@@ -1,5 +1,5 @@
 import { CalendarSelector } from '@/components/layout/CalendarSelector';
-import { getUserCalendars } from '@/db/actions/getUserCalendars';
+import { getUserCalendars } from '@/db/queries/getUserCalendars';
 import { getUser, serverComponentDb } from '@/db/supabase';
 import { cn } from '@/lib/utils';
 import { IconCornerRightUp } from '@tabler/icons-react';

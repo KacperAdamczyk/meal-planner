@@ -1,6 +1,6 @@
 import { MealGroupItem } from '@/components/custom/MealGroup/MealGroupItem';
-import { DayMealWithName } from '@/db/actions/getDayMeals';
-import { GroupedMealsByType } from '@/db/actions/helpers/groupMealsByType';
+import { DayMealWithName } from '@/db/queries/getDayMeals';
+import { GroupedMealsByType } from '@/db/helpers/groupMealsByType';
 import { Card, CardSection } from '@mantine/core';
 import { FC } from 'react';
 
