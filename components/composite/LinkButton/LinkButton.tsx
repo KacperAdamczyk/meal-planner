@@ -26,9 +26,7 @@ export const LinkButton = ({
 
   const active = isActive(pathname, href);
 
-  const ButtonComponent = action
-    ? ActionIcon
-    : Button;
+  const ButtonComponent = action ? ActionIcon : Button;
 
   return (
     <ButtonComponent
