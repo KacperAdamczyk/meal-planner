@@ -10,6 +10,8 @@ import {
   mealTypes,
   Meal,
   meals,
+  DayMeal,
+  dayMeals,
 } from '@/db/schema';
 
 export const unusedId = '4feddbe8-0af1-40a4-85aa-fc3aef1954d5';
@@ -85,12 +87,27 @@ export const meal3: Meal = {
   defaultMealTypeId: mealType3.id,
 };
 
+export const dayMeal1: DayMeal = {
+  calendarId: calendar1.id,
+  mealId: meal1.id,
+  mealTypeId: mealType1.id,
+  date: '2020-01-15',
+};
+
+export const dayMeal2: DayMeal = {
+  calendarId: calendar1.id,
+  mealId: meal1.id,
+  mealTypeId: mealType1.id,
+  date: '2020-01-20',
+};
+
 const operations = [
   [users, [user1, user2]],
   [calendars, [calendar1, calendar2, calendar3, calendar4]],
   [sharedCalendars, [sharedCalendar1]],
   [mealTypes, [mealType1, mealType2, mealType3]],
   [meals, [meal1, meal2, meal3]],
+  [dayMeals, [dayMeal1, dayMeal2]],
 ] as const;
 
 export const seed = async () => {
