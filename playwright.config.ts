@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 
-import { env } from './env';
+import { env } from './env.mjs';
 
 /**
  * Read environment variables from file.

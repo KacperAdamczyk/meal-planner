@@ -1,11 +1,11 @@
-import { getUserCalendar } from '@/db/actions/getUserCalendar';
-import { getMealTypes } from '@/db/actions/getMealTypes';
-import { groupMealsByType } from '@/db/actions/helpers/groupMealsByType';
+import { getUserCalendar } from '@/db/queries/getUserCalendar';
+import { getMealTypes } from '@/db/queries/getMealTypes';
+import { groupMealsByType } from '@/db//helpers/groupMealsByType';
 import { getUser, serverComponentDb } from '@/db/supabase';
 import { getDate, getMonth, getYear, parseISO } from 'date-fns';
 import { notFound } from 'next/navigation';
 import { FC } from 'react';
-import { getDayMeals } from '@/db/actions/getDayMeals';
+import { getDayMeals } from '@/db/queries/getDayMeals';
 import { MealGroup } from '@/components/custom/MealGroup';
 
 interface Props {

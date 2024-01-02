@@ -1,7 +1,7 @@
 import { MonthCalendar } from '@/components/layout/DashboardCalendar/MonthCalendar';
-import { getMonthMeals } from '@/db/actions/getMonthMeals';
-import { getMealTypes } from '@/db/actions/getMealTypes';
-import { groupMealsByDay } from '@/db/actions/helpers/groupMealsByDay';
+import { getMonthMeals } from '@/db/queries/getMonthMeals';
+import { getMealTypes } from '@/db/queries/getMealTypes';
+import { groupMealsByDay } from '@/db/helpers/groupMealsByDay';
 import { getUser, serverComponentDb } from '@/db/supabase';
 import { getMonth, getYear, parseISO } from 'date-fns';
 import { FC } from 'react';

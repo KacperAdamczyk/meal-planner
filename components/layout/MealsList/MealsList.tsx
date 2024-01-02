@@ -1,6 +1,6 @@
 'use client';
 import { LinkButton } from '@/components/composite/LinkButton';
-import { GetMealsResult } from '@/db/actions/getMeals';
+import { GetMealsResult } from '@/db/queries/getMeals';
 import { Table } from '@mantine/core';
 import { IconBaguette } from '@tabler/icons-react';
 import { FC } from 'react';

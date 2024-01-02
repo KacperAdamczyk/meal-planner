@@ -1,10 +1,7 @@
 import { db } from '@/db';
-import { getUserCalendar } from '@/db/actions/getUserCalendar';
-import { DayMeal, User } from '@/db/schema';
-
-export interface DayMealWithName extends DayMeal {
-  name: string;
-}
+import { DayMealWithName } from '@/db/queries/getDayMeals';
+import { getUserCalendar } from '@/db/queries/getUserCalendar';
+import { User } from '@/db/schema';
 
 export const getDayMealsInBetween = async (
   user: User,
@@ -15,7 +12,7 @@ export const getDayMealsInBetween = async (
   const calendar = await getUserCalendar(user, calendarId);
 
   if (!calendar) {
-    throw new Error(`Calendar with id: ${calendarId} not found`);
+    return [];
   }
 
   return (

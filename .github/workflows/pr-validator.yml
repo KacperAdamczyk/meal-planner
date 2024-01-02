@@ -7,8 +7,16 @@ on:
     branches: ['main']
 
 jobs:
-  lint:
+  validate:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: test-db
+        ports:
+          - 5432:5432
     steps:
       - uses: actions/checkout@v4
         name: Checkout

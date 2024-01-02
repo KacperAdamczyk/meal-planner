@@ -1,4 +1,4 @@
-import { getDayMealsInBetween } from '@/db/actions/getDayMealsInBetween';
+import { getDayMealsInBetween } from '@/db/queries/getDayMealsInBetween';
 import { DayMeal, User } from '@/db/schema';
 import { formatISO, set } from 'date-fns';
 

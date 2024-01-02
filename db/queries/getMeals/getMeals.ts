@@ -1,5 +1,5 @@
 import { db } from '@/db';
-import { getUserCalendar } from '@/db/actions/getUserCalendar';
+import { getUserCalendar } from '@/db/queries/getUserCalendar';
 import { Meal, User, meals } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
@@ -14,7 +14,7 @@ export const getMeals = async (
   const calendar = await getUserCalendar(user, calendarId);
 
   if (!calendar) {
-    throw new Error(`Calendar with id: ${calendarId} not found`);
+    return [];
   }
 
   return (

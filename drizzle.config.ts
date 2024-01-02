@@ -7,7 +7,7 @@ if (!databaseUrl) {
 }
 
 export default defineConfig({
-  schema: './db/schema.ts',
+  schema: './db/schema/index.ts',
   out: './drizzle',
   driver: 'pg',
   dbCredentials: {

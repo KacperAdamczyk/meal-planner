@@ -1,4 +1,4 @@
-import { env } from '../env';
+import { env } from '../env.mjs';
 import { test as setup, expect } from '@playwright/test';
 
 const authFile = 'playwright/.auth/user.json';

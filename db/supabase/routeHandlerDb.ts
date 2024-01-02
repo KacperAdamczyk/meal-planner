@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { cookies } from 'next/headers';
-import { env } from '@/env';
+import { env } from '@/env.mjs';
 
 export const routeHandlerDb = () => {
   const cookieStore = cookies();

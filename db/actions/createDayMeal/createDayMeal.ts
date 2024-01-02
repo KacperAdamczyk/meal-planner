@@ -1,5 +1,5 @@
 import { db } from '@/db';
-import { getUserCalendar } from '@/db/actions/getUserCalendar';
+import { getUserCalendar } from '@/db/queries/getUserCalendar';
 import { type DayMeal, type User, dayMeals } from '@/db/schema';
 import { CreateDayMeal } from '@/validation/createDayMealSchema';
 
