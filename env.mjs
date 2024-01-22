@@ -9,7 +9,6 @@ export const env = createEnv({
     E2E_BASE_URL: z.string().url().default('http://localhost:3000'),
     E2E_EMAIL: z.string().email().optional(),
     E2E_PASSWORD: z.string().optional(),
-    DEV_CREDENTIALS_LOGIN: z.enum(['true', 'false']).default('false'),
   },
   experimental__runtimeEnv: {},
   skipValidation: process.env.CI === 'true',
