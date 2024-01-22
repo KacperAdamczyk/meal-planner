@@ -39,6 +39,3 @@ next-env.d.ts
 /playwright-report/
 /playwright/.cache/
 /playwright/.auth/
-
-/storybook-static
-

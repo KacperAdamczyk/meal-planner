@@ -7,8 +7,6 @@
     "type-check": "tsc --noEmit --project .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
     "test:e2e": "playwright test"
   },
   "dependencies": {
@@ -45,20 +43,10 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.41.1",
-    "@storybook/addon-essentials": "^7.6.10",
-    "@storybook/addon-interactions": "^7.6.10",
-    "@storybook/addon-links": "^7.6.10",
-    "@storybook/addon-onboarding": "^1.0.10",
-    "@storybook/addon-styling-webpack": "^0.0.6",
-    "@storybook/blocks": "^7.6.10",
-    "@storybook/nextjs": "^7.6.10",
-    "@storybook/react": "^7.6.10",
-    "@storybook/testing-library": "^0.2.2",
     "@testcontainers/postgresql": "^10.6.0",
     "@types/pg": "^8.10.9",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "bun-types": "^1.0.25",
-    "css-loader": "^6.9.1",
     "drizzle-kit": "^0.20.13",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-storybook": "^0.6.15",
@@ -68,8 +56,6 @@
     "postcss-simple-vars": "^7.0.1",
     "prettier": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.11",
-    "storybook": "^7.6.10",
-    "style-loader": "^3.3.4",
     "testcontainers": "^10.6.0",
     "tsconfig-paths-webpack-plugin": "^4.1.0"
   }
