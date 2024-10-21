@@ -49,7 +49,7 @@
     "bun-types": "^1.0.25",
     "drizzle-kit": "^0.20.13",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-storybook": "^0.6.15",
+    "eslint-plugin-storybook": "^0.10.0",
     "eslint-plugin-tailwindcss": "^3.14.0",
     "postcss-loader": "^8.0.0",
     "postcss-preset-mantine": "^1.12.3",
